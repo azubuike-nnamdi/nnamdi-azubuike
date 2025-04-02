@@ -1,5 +1,5 @@
 
-import { HomeArticles } from '@/components/home-articles'
+import { HomeArticles } from '@/components/article/home-articles'
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {

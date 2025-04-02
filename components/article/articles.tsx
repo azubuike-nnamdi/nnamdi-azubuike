@@ -2,8 +2,8 @@
 
 import { ArticlesData } from "@/data";
 import Link from "next/link";
-import { Card, CardFooter, CardHeader, CardTitle } from "./ui/card";
-import { Button } from "./ui/button";
+import { Card, CardFooter, CardHeader, CardTitle } from "../ui/card";
+import { Button } from "../ui/button";
 
 const Articles = () => {
   return (
