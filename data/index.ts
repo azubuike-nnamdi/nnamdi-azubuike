@@ -1,4 +1,4 @@
-import { ARTICLE_URL, PROJECT_URL, RESUME_URL, LINKEDIN_URL, GITHUB_URL, TWITTER_URL } from "@/config/routes";
+import { ARTICLE_URL, GITHUB_URL, LINKEDIN_URL, PROJECT_URL, RESUME_URL, TWITTER_URL } from "@/config/routes";
 import { ArticlesDataType, FooterItemType, NavLinks, PortfolioItem, ProjectDataType } from "@/lib/definitions";
 
 export const NavData: NavLinks[] = [
@@ -53,6 +53,14 @@ export const ProjectData: ProjectDataType[] = [
   },
   {
     id: 2,
+    name: "Weavii",
+    desc: "Weavii is a platform that connect and collaborate with other artists, discover gigs and opportunities, portray your artistic world & more.",
+    action: "View Project",
+    uri: "https://www.weavii.com/",
+    technologies: ["React", "Next.js", "Tailwind CSS", "TypeScript", "Node.js", "MongoDB"],
+  },
+  {
+    id: 3,
     name: "MTN Bulk SMS",
     desc: "MTN Bulk SMS is a platform that allows MTN customers to send bulk SMS to their customers.",
     action: "View Project",
@@ -60,7 +68,15 @@ export const ProjectData: ProjectDataType[] = [
     technologies: ["React", "Next.js", "Tailwind CSS", "TypeScript", "Node.js", "MongoDB"],
   },
   {
-    id: 3,
+    id: 4,
+    name: 'Hyeameha',
+    desc: 'Hyeameha is designed to make your travel experience seamless, enjoyable, and unforgettable by offering a wide range of services tailored to meet all your travel needs',
+    action: 'View Project',
+    uri: 'https://www.hyeameha.com/',
+    technologies: ['Next.js', 'Tailwind CSS', 'shadcn', 'TypeScript', 'Node.js', 'MongoDB'],
+  },
+  {
+    id: 5,
     name: "Clouder",
     desc: "Clouder is Nigeria's first e-portfolio platform for students in the health sciences and health care practitioners. ",
     action: "View Project",
@@ -68,7 +84,7 @@ export const ProjectData: ProjectDataType[] = [
     technologies: ["React", "Next.js", "Tailwind CSS", "TypeScript", "Python", "MongoDB"],
   },
   {
-    id: 4,
+    id: 6,
     name: "Triple R Salon",
     desc: "Triple R is a renowned full- service beauty salon that is synonymous with exceptional quality and unparalleled luxury.",
     action: "View Project",
@@ -76,7 +92,7 @@ export const ProjectData: ProjectDataType[] = [
     technologies: ["Next.js", "Tailwind CSS", "TypeScript", "Node.js"],
   },
   {
-    id: 5,
+    id: 7,
     name: "Hostelpaddy",
     desc: "Your No.1 Solution for hostel accommodation An innovating way to relieve you of the hassle of hostel- hunting.",
     action: "View Project",
