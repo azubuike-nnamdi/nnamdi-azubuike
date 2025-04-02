@@ -35,6 +35,11 @@ export const PortfolioData: PortfolioItem[] = [
     name: "LinkedIn",
     uri: "https://www.linkedin.com/in/nnamdi-azubuike/",
   },
+  {
+    id: 4,
+    name: "Resume/CV",
+    uri: "https://drive.google.com/file/d/1-_9000000000000000000000000000000000000000/view?usp=sharing",
+  },
 ];
 
 export const ProjectData: ProjectDataType[] = [
