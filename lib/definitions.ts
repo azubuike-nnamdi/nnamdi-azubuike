@@ -10,6 +10,7 @@ type ProjectDataType = {
   desc: string;
   action: string;
   uri: string;
+  technologies: string[];
 };
 
 type NavLinks = {

@@ -49,6 +49,7 @@ export const ProjectData: ProjectDataType[] = [
     desc: "MTN Self-Service Portal is a platform that allows MTN customers to manage services. Services include: airtime top-up, data purchase, bill payment, and account information.",
     action: "View Project",
     uri: "https://selfservice.mtn.ng/",
+    technologies: ["React", "Next.js", "Tailwind CSS", "TypeScript", "Node.js", "Express", "MongoDB"],
   },
   {
     id: 2,
@@ -56,6 +57,7 @@ export const ProjectData: ProjectDataType[] = [
     desc: "MTN Bulk SMS is a platform that allows MTN customers to send bulk SMS to their customers.",
     action: "View Project",
     uri: "https://bulksms.mtn.ng/",
+    technologies: ["React", "Next.js", "Tailwind CSS", "TypeScript", "Node.js", "MongoDB"],
   },
   {
     id: 3,
@@ -63,6 +65,7 @@ export const ProjectData: ProjectDataType[] = [
     desc: "Clouder is Nigeria's first e-portfolio platform for students in the health sciences and health care practitioners. ",
     action: "View Project",
     uri: "https://clouder-nu.vercel.app/",
+    technologies: ["React", "Next.js", "Tailwind CSS", "TypeScript", "Python", "MongoDB"],
   },
   {
     id: 4,
@@ -70,6 +73,7 @@ export const ProjectData: ProjectDataType[] = [
     desc: "Triple R is a renowned full- service beauty salon that is synonymous with exceptional quality and unparalleled luxury.",
     action: "View Project",
     uri: "https://www.triplerunisexsalon.com/",
+    technologies: ["Next.js", "Tailwind CSS", "TypeScript", "Node.js"],
   },
   {
     id: 5,
@@ -77,6 +81,7 @@ export const ProjectData: ProjectDataType[] = [
     desc: "Your No.1 Solution for hostel accommodation An innovating way to relieve you of the hassle of hostel- hunting.",
     action: "View Project",
     uri: "https://hostelpaddy.netlify.app/",
+    technologies: ["React", "Next.js", "Tailwind CSS", "TypeScript", "Node.js", "Express", "MongoDB"],
   },
 ];
 
