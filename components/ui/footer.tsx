@@ -11,7 +11,7 @@ const Footer = () => {
         {FooterData.map((footer) => (
           <section key={footer.id} className='py-5'>
             <div className="flex flex-col">
-              <h3 className='text-white font-bold mb-2'>{footer.title}</h3>
+              <h3 className='text-white font-bold mb-2 text-xl'>{footer.title}</h3>
               <ul className='text-sm'>
                 {Object.keys(footer).map((key) => {
                   if (key !== 'id' && key !== 'title') {
