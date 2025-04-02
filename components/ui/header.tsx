@@ -4,7 +4,6 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { usePathname } from "next/navigation";
-import clsx from "clsx";
 import { NavData } from "@/data";
 import { AnimatedLink } from "./animated-link";
 

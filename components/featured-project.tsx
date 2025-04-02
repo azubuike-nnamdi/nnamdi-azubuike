@@ -4,7 +4,6 @@ import React from 'react'
 import { Button } from './ui/button'
 import { ProjectData } from '@/data'
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from './ui/card'
-import { AnimatedLink } from './ui/animated-link'
 import { PROJECT_URL } from '@/config/routes'
 
 

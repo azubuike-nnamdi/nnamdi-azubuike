@@ -1,5 +1,4 @@
 import { FooterData } from '@/data';
-import Link from 'next/link';
 import React from 'react';
 import { AnimatedLink } from './animated-link';
 import { getCurrentYear } from '@/lib/helper';
