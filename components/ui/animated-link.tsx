@@ -9,7 +9,7 @@ export const AnimatedLink: React.FC<AnimatedLinkProps> = ({
   href,
   isActive = false,
   className,
-  target = "_blank"
+  target = ""
 }) => {
   return (
     <Link
