@@ -14,5 +14,22 @@
       "oklch",
       "roboto",
       "shadcn"
-   ]
+   ],
+   "editor.codeActionsOnSave": {
+      "source.fixAll": "explicit",
+      "source.organizeImports": "explicit"
+   },
+   "editor.defaultFormatter": "esbenp.prettier-vscode",
+   "editor.formatOnPaste": true,
+   "editor.formatOnSave": true,
+   "editor.inlineSuggest.showToolbar": "always",
+   "editor.quickSuggestions": {
+      "strings": true
+   },
+   "eslint.workingDirectories": [
+      {
+         "mode": "auto"
+      }
+   ],
+   "prettier.useEditorConfig": true
 }
