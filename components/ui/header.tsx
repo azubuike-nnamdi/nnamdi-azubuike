@@ -7,14 +7,14 @@ import { usePathname } from "next/navigation";
 import { NavData } from "@/data";
 import { AnimatedLink } from "./animated-link";
 import { ModeToggle } from "@/components/theme-toggle";
-
+import { NnamdiLogo } from "@/components/common/svg";
 const Header = () => {
   const pathname = usePathname();
 
   return (
     <header className=" bg-background flex justify-between items-center md:p-8 p-4 fixed top-0 left-0 right-0 z-10 bg-opacity-70">
       <Link href={"/"} className="cursor-pointer">
-        <Image src="/nnamdi.svg" alt="logo" width={100} height={250} className="text-foreground dark:text-white" />
+        <NnamdiLogo />
       </Link>
       <div className="flex items-center gap-4">
         <nav className="md:grid grid-cols-3 md:gap-6 gap-3 cursor-pointer">
