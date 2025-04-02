@@ -18,16 +18,20 @@ type NavLinks = {
   href: string;
 };
 
-type ArticlesDataType = {
+type Article = {
   id: number;
   date: string;
   readTime: string;
   title: string;
   desc?: string;
+  category: string;
   readMore?: string;
   uri: string;
   image?: string;
+  views?: number;
 };
+
+type ArticlesDataType = Article;
 
 type FooterItemType = {
   id: number;
@@ -43,4 +47,4 @@ type AnimatedLinkProps = {
   target?: string;
 }
 
-export type { PortfolioItem, ProjectDataType, NavLinks, ArticlesDataType, FooterItemType, AnimatedLinkProps };
+export type { PortfolioItem, ProjectDataType, NavLinks, ArticlesDataType, FooterItemType, AnimatedLinkProps, Article };
