@@ -35,4 +35,12 @@ type FooterItemType = {
   [key: string]: string | number | undefined; // Allow any string key with string or number value
 };
 
-export type { PortfolioItem, ProjectDataType, NavLinks, ArticlesDataType, FooterItemType };
+type AnimatedLinkProps = {
+  children: React.ReactNode;
+  href: string;
+  isActive?: boolean;
+  className?: string;
+  target?: string;
+}
+
+export type { PortfolioItem, ProjectDataType, NavLinks, ArticlesDataType, FooterItemType, AnimatedLinkProps };
