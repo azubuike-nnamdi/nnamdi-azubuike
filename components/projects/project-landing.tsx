@@ -2,19 +2,10 @@
 
 import { ProjectData } from "@/data";
 import Link from "next/link";
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "../ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import { Badge } from "../ui/badge";
-import { ArrowUpRight, ExternalLink, Github } from "lucide-react";
+import { ExternalLink } from "lucide-react";
 import { useState } from "react";
-
-type ProjectDataType = {
-  id: number;
-  name: string;
-  desc: string;
-  action: string;
-  uri: string;
-  technologies: string[];
-};
 
 export default function ProjectLanding() {
   const [hoveredProject, setHoveredProject] = useState<number | null>(null);
@@ -24,7 +15,7 @@ export default function ProjectLanding() {
       {/* Section Header */}
       <div className="mb-10">
         <h2 className="text-3xl font-bold mb-3 text-black dark:text-white">Featured Projects</h2>
-        <p className="text-muted-foreground max-w-2xl">A collection of projects I've worked on, showcasing my expertise in web development and user experience design.</p>
+        <p className="text-muted-foreground max-w-2xl">A collection of projects I&apos;ve worked on, showcasing my expertise in web development and user experience design.</p>
         <div className="h-1 w-24 bg-primary mt-4"></div>
       </div>
 
@@ -88,16 +79,6 @@ export default function ProjectLanding() {
                   )}
                 </div>
               </CardContent>
-
-              {/* <CardFooter className="absolute bottom-0 left-0 right-0 px-6 py-4 border-t border-gray-100 dark:border-gray-800 bg-white dark:bg-card">
-                <div className="flex items-center justify-between w-full">
-                  <span className="font-medium text-sm text-primary group-hover:underline transition-all">
-                    {project.action}
-                  </span>
-                  <ArrowUpRight className={`ml-1 h-4 w-4 text-primary transform transition-all duration-300 ${hoveredProject === project.id ? "translate-x-1 -translate-y-1" : ""
-                    }`} />
-                </div>
-              </CardFooter> */}
             </Card>
           </Link>
         ))}
