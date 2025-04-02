@@ -3,7 +3,7 @@ import { PortfolioData } from '@/data'
 import React from 'react'
 import { AnimatedLink } from './ui/animated-link'
 import FeatureProject from './featured-project'
-import Articles from './articles'
+import Articles from './article/articles'
 import { ModeToggle } from './theme-toggle'
 
 export default function LandingPage() {
