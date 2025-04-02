@@ -11,7 +11,7 @@ const Footer = () => {
         {FooterData.map((footer) => (
           <section key={footer.id} className='py-5'>
             <div className="flex flex-col">
-              <h3 className='text-white font-bold mb-2 text-xl'>{footer.title}</h3>
+              <h3 className='dark:text-white text-black font-bold mb-2 text-xl'>{footer.title}</h3>
               <ul className='text-sm'>
                 {Object.keys(footer).map((key) => {
                   if (key !== 'id' && key !== 'title') {
@@ -43,8 +43,8 @@ const Footer = () => {
         ))}
       </footer>
       <p className='flex items-center justify-center text-gray-400 text-sm'>
-        Copyright &copy; {getCurrentYear()} Nnamdi | Designed by <AnimatedLink href={"https://phantom-portfolio.webflow.io/webflow-home"}>
-          Phantom</AnimatedLink>
+        Copyright &copy; {getCurrentYear()} Nnamdi | Designed by {" "} <AnimatedLink href={"https://phantom-portfolio.webflow.io/webflow-home"} target=''>
+          Phantom </AnimatedLink>
       </p>
     </main>
   )
