@@ -6,83 +6,130 @@ import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import { Badge } from "../ui/badge";
 import { ExternalLink } from "lucide-react";
 import { useState } from "react";
+import { motion } from "framer-motion";
 
 export default function ProjectLanding() {
   const [hoveredProject, setHoveredProject] = useState<number | null>(null);
 
+  const container = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1
+      }
+    }
+  };
+
+  const item = {
+    hidden: { opacity: 0, y: 20 },
+    show: { opacity: 1, y: 0 }
+  };
+
   return (
-    <main className="mx-auto py-12 px-4 md:px-8">
+    <motion.main
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+      className="mx-auto py-12 px-4 md:px-8"
+    >
       {/* Section Header */}
-      <div className="mb-10">
+      <motion.div
+        initial={{ y: 20, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.5 }}
+        className="mb-10"
+      >
         <h2 className="text-3xl font-bold mb-3 text-black dark:text-white">Featured Projects</h2>
         <p className="text-muted-foreground max-w-2xl">A collection of projects I&apos;ve worked on, showcasing my expertise in web development and user experience design.</p>
         <div className="h-1 w-24 bg-primary mt-4"></div>
-      </div>
+      </motion.div>
 
       {/* Project Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <motion.div
+        variants={container}
+        initial="hidden"
+        animate="show"
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+      >
         {ProjectData.map((project) => (
-          <Link
-            href={project.uri}
-            target="_blank"
+          <motion.div
             key={project.id}
-            onMouseEnter={() => setHoveredProject(project.id)}
-            onMouseLeave={() => setHoveredProject(null)}
-            className="group"
+            variants={item}
+            whileHover={{ y: -8 }}
+            transition={{ type: "spring", stiffness: 300 }}
           >
-            <Card className={`relative h-[320px] overflow-hidden border border-gray-200 dark:border-gray-800 transition-all duration-500 ${hoveredProject === project.id ? "shadow-xl transform -translate-y-2" : "shadow-md"
-              }`}>
-              {/* Project Color Accent - Unique per project */}
-              <div
-                className={`absolute top-0 left-0 w-full h-1 transition-all duration-300 ${hoveredProject === project.id ? "opacity-100" : "opacity-80"
-                  }`}
-                style={{
-                  background: `hsl(${(project.id * 60) % 360}, 80%, 60%)`
-                }}
-              ></div>
+            <Link
+              href={project.uri}
+              target="_blank"
+              onMouseEnter={() => setHoveredProject(project.id)}
+              onMouseLeave={() => setHoveredProject(null)}
+              className="group block"
+            >
+              <Card className={`relative h-[320px] overflow-hidden border border-gray-200 dark:border-gray-800 transition-all duration-500 ${hoveredProject === project.id ? "shadow-xl" : "shadow-md"
+                }`}>
+                {/* Project Color Accent - Unique per project */}
+                <motion.div
+                  className="absolute top-0 left-0 w-full h-1"
+                  initial={{ opacity: 0.8 }}
+                  whileHover={{ opacity: 1 }}
+                  transition={{ duration: 0.3 }}
+                  style={{
+                    background: `hsl(${(project.id * 60) % 360}, 80%, 60%)`
+                  }}
+                />
 
-              <CardHeader className="p-6">
-                <div className="flex justify-between items-start mb-2">
-                  <CardTitle className="text-xl font-bold text-black dark:text-white">
-                    {project.name}
-                  </CardTitle>
-                  <div className={`rounded-full p-2 bg-gray-100 dark:bg-gray-800 transform transition-all duration-300 ${hoveredProject === project.id ? "rotate-12" : ""
-                    }`}>
-                    <ExternalLink className="h-4 w-4 text-primary" />
+                <CardHeader className="p-6">
+                  <div className="flex justify-between items-start mb-2">
+                    <CardTitle className="text-xl font-bold text-black dark:text-white">
+                      {project.name}
+                    </CardTitle>
+                    <motion.div
+                      className="rounded-full p-2 bg-gray-100 dark:bg-gray-800"
+                      whileHover={{ rotate: 12 }}
+                      transition={{ type: "spring", stiffness: 300 }}
+                    >
+                      <ExternalLink className="h-4 w-4 text-primary" />
+                    </motion.div>
                   </div>
-                </div>
-              </CardHeader>
+                </CardHeader>
 
-              <CardContent className="px-6">
-                <p className="text-gray-700 dark:text-gray-300 mb-6 line-clamp-3">
-                  {project.desc}
-                </p>
+                <CardContent className="px-6">
+                  <p className="text-gray-700 dark:text-gray-300 mb-6 line-clamp-3">
+                    {project.desc}
+                  </p>
 
-                <div className="flex flex-wrap gap-2 mt-auto">
-                  {project.technologies.slice(0, 4).map((tech, index) => (
-                    <Badge
-                      key={index}
-                      variant="outline"
-                      className={`text-xs py-1 px-2 bg-gray-50 dark:bg-gray-800 text-gray-700 dark:text-gray-300 border-gray-200 dark:border-gray-700 transition-all duration-300 ${hoveredProject === project.id ? "border-primary" : ""
-                        }`}
-                    >
-                      {tech}
-                    </Badge>
-                  ))}
-                  {project.technologies.length > 4 && (
-                    <Badge
-                      variant="outline"
-                      className="text-xs py-1 px-2 bg-gray-50 dark:bg-gray-800 text-gray-700 dark:text-gray-300"
-                    >
-                      +{project.technologies.length - 4}
-                    </Badge>
-                  )}
-                </div>
-              </CardContent>
-            </Card>
-          </Link>
+                  <div className="flex flex-wrap gap-2 mt-auto">
+                    {project.technologies.slice(0, 4).map((tech, index) => (
+                      <motion.div
+                        key={index}
+                        whileHover={{ scale: 1.05 }}
+                        transition={{ type: "spring", stiffness: 300 }}
+                      >
+                        <Badge
+                          variant="outline"
+                          className={`text-xs py-1 px-2 bg-gray-50 dark:bg-gray-800 text-gray-700 dark:text-gray-300 border-gray-200 dark:border-gray-700 transition-all duration-300 ${hoveredProject === project.id ? "border-primary" : ""
+                            }`}
+                        >
+                          {tech}
+                        </Badge>
+                      </motion.div>
+                    ))}
+                    {project.technologies.length > 4 && (
+                      <Badge
+                        variant="outline"
+                        className="text-xs py-1 px-2 bg-gray-50 dark:bg-gray-800 text-gray-700 dark:text-gray-300"
+                      >
+                        +{project.technologies.length - 4}
+                      </Badge>
+                    )}
+                  </div>
+                </CardContent>
+              </Card>
+            </Link>
+          </motion.div>
         ))}
-      </div>
-    </main>
+      </motion.div>
+    </motion.main>
   );
 }
