@@ -56,7 +56,7 @@ export const ProjectData: ProjectDataType[] = [
     name: "Weavii",
     desc: "Weavii is a platform that connect and collaborate with other artists, discover gigs and opportunities, portray your artistic world & more.",
     action: "View Project",
-    uri: "https://www.weavii.com/",
+    uri: "https://weavii.io/",
     technologies: ["React", "Next.js", "Tailwind CSS", "TypeScript", "Node.js", "MongoDB"],
   },
   {
