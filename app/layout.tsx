@@ -1,7 +1,7 @@
+import { ThemeProvider } from "@/components/ui/theme-provider";
 import type { Metadata } from "next";
 import { Open_Sans, Roboto_Mono } from "next/font/google";
 import "./globals.css";
-import { ThemeProvider } from "@/components/ui/theme-provider";
 
 const openSans = Open_Sans({
   variable: "--font-open-sans",
@@ -39,6 +39,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <meta name="google-site-verification" content="ZnbKzL4y7SZDMOuyp5S-FGRdAlkQ_xE6rzyx8jWpXgA" />
+      </head>
       <body
         className={`${robotoMono.variable} ${openSans.variable} font-sans antialiased`}
       >
