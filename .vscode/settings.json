@@ -15,6 +15,7 @@
       "oklch",
       "roboto",
       "shadcn",
+      "turbopack",
       "Weavii"
    ],
    "editor.codeActionsOnSave": {
