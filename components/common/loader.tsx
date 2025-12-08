@@ -9,6 +9,14 @@ export default function PageLoader() {
   const [progress, setProgress] = useState(0)
   const [isComplete, setIsComplete] = useState(false)
 
+  // Generate random values once for animation bars (lazy initialization)
+  const [barAnimations] = useState(() =>
+    Array.from({ length: 8 }, () => ({
+      scaleY: 1.5 + Math.random(),
+      duration: 1 + Math.random() * 2,
+    })),
+  )
+
   // Simulate loading progress
   useEffect(() => {
     // Fast initial progress up to 70%
@@ -193,13 +201,13 @@ export default function PageLoader() {
               key={i}
               className="h-1 bg-gray-700 rounded-full"
               animate={{
-                scaleY: [1, 1.5 + Math.random(), 1],
+                scaleY: [1, barAnimations[i].scaleY, 1],
                 opacity: [0.5, 0.8, 0.5],
                 backgroundColor: i % 2 === 0 ? ["#333", "#555", "#333"] : ["#444", "#666", "#444"],
               }}
               transition={{
                 repeat: Number.POSITIVE_INFINITY,
-                duration: 1 + Math.random() * 2,
+                duration: barAnimations[i].duration,
                 delay: i * 0.1,
               }}
             />
