@@ -1,5 +1,9 @@
 import ProjectLanding from '@/components/projects/project-landing'
-import React from 'react'
+
+export const metadata = {
+  title: 'Projects - Nnamdi Azubuike',
+  description: 'Projects - Nnamdi Azubuike',
+}
 
 export default function Page() {
   return (
