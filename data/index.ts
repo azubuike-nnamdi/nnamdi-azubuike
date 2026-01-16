@@ -45,6 +45,22 @@ export const PortfolioData: PortfolioItem[] = [
 export const ProjectData: ProjectDataType[] = [
   {
     id: 1,
+    name: "Numoni ",
+    desc: "Numoni Web is a modern, high-performance merchant portal built with Next.js 15+ and React 19. It provides merchants with a comprehensive dashboard to manage branches, track transactions, and configure business settings with a premium UI/UX.",
+    action: "View Project",
+    uri: "https://merchant.numoni.io/",
+    technologies: ["Zustand", "Next.js", "Tailwind CSS", "TanStack Query", "TypeScript", "React", "shadcn"],
+  },
+  {
+    id: 2,
+    name: "MTN FibreX Portal",
+    desc: "MTN FibreX Portal provides a seamless platform where customers can top up, upgrade their fibre data plans, and make payments with a premium UI/UX.",
+    action: "View Project",
+    uri: "https://fibrex.mtn.ng/",
+    technologies: ["Zustand", "Next.js", "Tailwind CSS", "TanStack Query", "TypeScript", "React", "shadcn"],
+  },
+  {
+    id: 3,
     name: "MTN Self-Service Portal",
     desc: "MTN Self-Service Portal is a platform that allows MTN customers to manage services. Services include: airtime top-up, data purchase, bill payment, and account information.",
     action: "View Project",
@@ -52,7 +68,7 @@ export const ProjectData: ProjectDataType[] = [
     technologies: ["React", "Next.js", "Tailwind CSS", "TypeScript", "Node.js", "Express", "MongoDB"],
   },
   {
-    id: 2,
+    id: 4,
     name: "Weavii",
     desc: "Weavii is a platform that connect and collaborate with other artists, discover gigs and opportunities, portray your artistic world & more.",
     action: "View Project",
@@ -60,7 +76,7 @@ export const ProjectData: ProjectDataType[] = [
     technologies: ["React", "Next.js", "Tailwind CSS", "TypeScript", "Node.js", "MongoDB"],
   },
   {
-    id: 3,
+    id: 5,
     name: "MTN Bulk SMS",
     desc: "MTN Bulk SMS is a platform that allows MTN customers to send bulk SMS to their customers.",
     action: "View Project",
@@ -68,7 +84,7 @@ export const ProjectData: ProjectDataType[] = [
     technologies: ["React", "Next.js", "Tailwind CSS", "TypeScript", "Node.js", "MongoDB"],
   },
   {
-    id: 4,
+    id: 6,
     name: 'Hyeameha',
     desc: 'Hyeameha is designed to make your travel experience seamless, enjoyable, and unforgettable by offering a wide range of services tailored to meet all your travel needs',
     action: 'View Project',
@@ -76,7 +92,7 @@ export const ProjectData: ProjectDataType[] = [
     technologies: ['Next.js', 'Tailwind CSS', 'shadcn', 'TypeScript', 'Node.js', 'MongoDB'],
   },
   {
-    id: 5,
+    id: 7,
     name: "Clouder",
     desc: "Clouder is Nigeria's first e-portfolio platform for students in the health sciences and health care practitioners. ",
     action: "View Project",
@@ -84,7 +100,7 @@ export const ProjectData: ProjectDataType[] = [
     technologies: ["React", "Next.js", "Tailwind CSS", "TypeScript", "Python", "MongoDB"],
   },
   {
-    id: 6,
+    id: 8,
     name: "Triple R Salon",
     desc: "Triple R is a renowned full- service beauty salon that is synonymous with exceptional quality and unparalleled luxury.",
     action: "View Project",
@@ -92,7 +108,7 @@ export const ProjectData: ProjectDataType[] = [
     technologies: ["Next.js", "Tailwind CSS", "TypeScript", "Node.js"],
   },
   {
-    id: 7,
+    id: 9,
     name: "Hostelpaddy",
     desc: "Your No.1 Solution for hostel accommodation An innovating way to relieve you of the hassle of hostel- hunting.",
     action: "View Project",
