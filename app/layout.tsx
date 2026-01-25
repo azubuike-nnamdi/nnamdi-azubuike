@@ -1,17 +1,70 @@
+import Footer from "@/components/ui/footer";
+import Header from "@/components/ui/header";
 import { ThemeProvider } from "@/components/ui/theme-provider";
 import type { Metadata } from "next";
-import { Open_Sans, Roboto_Mono } from "next/font/google";
+import { Open_Sans } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
+
 
 const openSans = Open_Sans({
   variable: "--font-open-sans",
   subsets: ["latin"],
 });
 
-const robotoMono = Roboto_Mono({
-  variable: "--font-roboto-mono",
-  subsets: ["latin"],
-});
+const caveat = localFont({
+  variable: '--caveat',
+  src: [
+    {
+      path: './fonts/Caveat-Regular.ttf',
+      weight: '400',
+      style: 'normal',
+    },
+    {
+      path: './fonts/Caveat-Medium.ttf',
+      weight: '600',
+      style: 'normal',
+    },
+    {
+      path: './fonts/Caveat-SemiBold.ttf',
+      weight: '600',
+      style: 'normal',
+    },
+    {
+      path: './fonts/Caveat-Bold.ttf',
+      weight: '700',
+      style: 'normal',
+    },
+  ],
+})
+
+const dancingScript = localFont({
+  variable: '--dancing-script',
+  src: [
+    {
+      path: './fonts/DancingScript-Regular.ttf',
+      weight: '400',
+      style: 'normal',
+    },
+    {
+      path: './fonts/DancingScript-Medium.ttf',
+      weight: '600',
+      style: 'normal',
+    },
+    {
+      path: './fonts/DancingScript-SemiBold.ttf',
+      weight: '600',
+      style: 'normal',
+    },
+    {
+      path: './fonts/DancingScript-Bold.ttf',
+      weight: '700',
+      style: 'normal',
+    },
+  ],
+})
+
+
 
 export const metadata: Metadata = {
   title: {
@@ -43,15 +96,19 @@ export default function RootLayout({
         <meta name="google-site-verification" content="ZnbKzL4y7SZDMOuyp5S-FGRdAlkQ_xE6rzyx8jWpXgA" />
       </head>
       <body
-        className={`${robotoMono.variable} ${openSans.variable} font-sans antialiased`}
+        className={`${caveat.variable} ${openSans.variable} ${dancingScript.variable} font-sans antialiased md:px-28 md:py-12 `}
       >
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
+          defaultTheme="dark"
           enableSystem
           disableTransitionOnChange
         >
-          {children}
+          <Header />
+          <section className="py-12">
+            {children}
+          </section>
+          <Footer />
         </ThemeProvider>
       </body>
     </html>
