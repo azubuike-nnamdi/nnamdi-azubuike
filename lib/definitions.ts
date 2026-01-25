@@ -25,14 +25,14 @@ type Article = {
   readTime: string;
   title: string;
   desc?: string;
-  category: string;
+  category: string[];
   readMore?: string;
   uri: string;
   image?: string;
   views?: number;
 };
 
-type ArticlesDataType = Article;
+
 
 type FooterItemType = {
   id: number;
@@ -48,4 +48,5 @@ type AnimatedLinkProps = {
   target?: string;
 }
 
-export type { PortfolioItem, ProjectDataType, NavLinks, ArticlesDataType, FooterItemType, AnimatedLinkProps, Article };
+export type { AnimatedLinkProps, Article, FooterItemType, NavLinks, PortfolioItem, ProjectDataType };
+

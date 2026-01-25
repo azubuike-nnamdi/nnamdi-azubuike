@@ -1,12 +1,12 @@
 'use client'
 
 import { ProjectData } from "@/data";
-import Link from "next/link";
-import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
-import { Badge } from "../ui/badge";
-import { ExternalLink } from "lucide-react";
-import { useState } from "react";
 import { motion } from "framer-motion";
+import { ExternalLink } from "lucide-react";
+import Link from "next/link";
+import { useState } from "react";
+import { Badge } from "../ui/badge";
+import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 
 export default function ProjectLanding() {
   const [hoveredProject, setHoveredProject] = useState<number | null>(null);
@@ -31,7 +31,7 @@ export default function ProjectLanding() {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
-      className="mx-auto py-12 px-4 md:px-8"
+
     >
       {/* Section Header */}
       <motion.div
@@ -40,8 +40,8 @@ export default function ProjectLanding() {
         transition={{ duration: 0.5 }}
         className="mb-10"
       >
-        <h2 className="text-3xl font-bold mb-3 text-black dark:text-white">Featured Projects</h2>
-        <p className="text-muted-foreground max-w-2xl">A collection of projects I&apos;ve worked on, showcasing my expertise in web development and user experience design.</p>
+        <h2 className="text-3xl font-bold mb-3 text-black dark:text-white font-dancing-script">Featured Projects</h2>
+        <p className="text-muted-foreground max-w-2xl ">A collection of projects I&apos;ve worked on, showcasing my expertise in web development and user experience design.</p>
         <div className="h-1 w-24 bg-primary mt-4"></div>
       </motion.div>
 
@@ -81,7 +81,7 @@ export default function ProjectLanding() {
 
                 <CardHeader className="p-6">
                   <div className="flex justify-between items-start mb-2">
-                    <CardTitle className="text-xl font-bold text-black dark:text-white">
+                    <CardTitle className="text-xl font-bold text-black dark:text-white font-dancing-script">
                       {project.name}
                     </CardTitle>
                     <motion.div

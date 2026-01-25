@@ -1,13 +1,12 @@
 import { FooterData } from '@/data';
-import React from 'react';
-import { AnimatedLink } from './animated-link';
 import { getCurrentYear } from '@/lib/helper';
+import { AnimatedLink } from './animated-link';
 
 const Footer = () => {
   return (
     <main>
       <hr />
-      <footer className='grid md:grid-cols-3 grid-cols-2 gap-6 md:gap-96 items-center md:px-8 px-3 md:pt-8 '>
+      <footer className='grid md:grid-cols-3 grid-cols-2 gap-6 md:gap-96 items-center md:px-8 px-3 md:pt-8  '>
         {FooterData.map((footer) => (
           <section key={footer.id} className='py-5'>
             <div className="flex flex-col">

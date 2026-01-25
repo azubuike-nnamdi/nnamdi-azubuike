@@ -1,5 +1,5 @@
 import { ARTICLE_URL, GITHUB_URL, LINKEDIN_URL, PROJECT_URL, RESUME_URL, TWITTER_URL } from "@/config/routes";
-import { ArticlesDataType, FooterItemType, NavLinks, PortfolioItem, ProjectDataType } from "@/lib/definitions";
+import { Article, FooterItemType, NavLinks, PortfolioItem, ProjectDataType } from "@/lib/definitions";
 
 export const NavData: NavLinks[] = [
   {
@@ -117,9 +117,20 @@ export const ProjectData: ProjectDataType[] = [
   },
 ];
 
-export const ArticlesData: ArticlesDataType[] = [
+export const ArticlesData: Article[] = [
   {
     id: 1,
+    date: "January 1, 2026",
+    readTime: "7",
+    title: "Setting Up ESLint, Prettier, Husky, and Commitlint in Your Expo React Native Project: A Complete Guide",
+    desc: "Setting up ESLint, Prettier, Husky, and Commitlint in your Expo React Native project is a crucial step towards maintaining code quality and consistency across your development team. These tools help enforce coding standards, catch potential errors early, and ensure that your codebase remains clean and maintainable as your project grows.",
+    readMore: "Read Articles",
+    uri: "https://medium.com/@nnamdi-azubuike/setting-up-eslint-prettier-husky-and-commitlint-in-your-expo-react-native-project-a-complete-550bd225f879",
+    image: "https://miro.medium.com/v2/resize:fit:1400/format:webp/0*E2x-uNjCNzkMEUot.png",
+    category: ['mobile', 'development', 'security']
+  },
+  {
+    id: 2,
     date: "February, 22, 2023",
     readTime: "10",
     title: "Version Control System -  Introduction to Git & GitHub for beginners",
@@ -127,10 +138,10 @@ export const ArticlesData: ArticlesDataType[] = [
     readMore: "Read Articles",
     uri: "https://iamclement.hashnode.dev/version-control-system-introduction-to-git-github-for-beginners",
     image: "https://cdn.hashnode.com/res/hashnode/image/upload/v1677067733526/9596f4ef-a1f5-4e8b-9923-1a75f7825e9f.png?w=1600&h=840&fit=crop&crop=entropy&auto=compress,format&format=webp",
-    category: "Development"
+    category: ["Development"]
   },
   {
-    id: 2,
+    id: 3,
     date: "February, 16, 2023",
     readTime: "2",
     title: "Firebase Cloud Storage",
@@ -138,10 +149,10 @@ export const ArticlesData: ArticlesDataType[] = [
     readMore: "Read Articles",
     uri: "https://iamclement.hashnode.dev/firebase-cloud-storage",
     image: "https://cdn.hashnode.com/res/hashnode/image/upload/v1676491396712/58d4f90e-7e04-4263-a693-193ead1dcd64.png?w=1600&h=840&fit=crop&crop=entropy&auto=compress,format&format=webp",
-    category: "Firebase"
+    category: ["Firebase"]
   },
   {
-    id: 3,
+    id: 4,
     date: "February, 14, 2023",
     readTime: "3",
     title: "Firebase Authentication",
@@ -149,59 +160,59 @@ export const ArticlesData: ArticlesDataType[] = [
     desc: "Google Firebase is a Google - backed application development software that enables developers to develop iOS, Android, and Web apps.",
     uri: "https://iamclement.hashnode.dev/firebase-google-authentication-in-react",
     image: "https://cdn.hashnode.com/res/hashnode/image/upload/v1676374457613/22ef4d3a-ce0a-4713-9672-08635781c99b.png?w=1600&h=840&fit=crop&crop=entropy&auto=compress,format&format=webp",
-    category: "Firebase"
+    category: ["Firebase"]
   },
   {
-    id: 4,
+    id: 5,
     date: "October, 15 2022",
     readTime: "1",
     title: "How to send bearer token in header with Axios",
     uri: "https://iamclement.hashnode.dev/how-to-send-bearer-token-in-a-header-with-axios",
     image: "https://cdn.hashnode.com/res/hashnode/image/upload/v1665831450916/fMX8AtuCK.png?w=1600&h=840&fit=crop&crop=entropy&auto=compress,format&format=webp",
-    category: "API"
+    category: ["API"]
   },
   {
-    id: 5,
+    id: 6,
     date: "August, 27 2022",
     readTime: "3",
     title: "Deploy a Full-Stack Application with AWS",
     uri: "https://iamclement.hashnode.dev/deploy-a-full-stack-react-application-aws",
     image: "https://cdn.hashnode.com/res/hashnode/image/upload/v1661595560452/0SwqaZg_j.png?w=1600&h=840&fit=crop&crop=entropy&auto=compress,format&format=webp",
-    category: "DevOps"
+    category: ["DevOps"]
   },
   {
-    id: 6,
+    id: 7,
     date: "August, 4 2022",
     readTime: "4",
     title: "Javascript Variable",
     uri: "https://iamclement.hashnode.dev/javascript-variables",
     image: "https://cdn.hashnode.com/res/hashnode/image/upload/v1661168848738/CHspYHa_l.png?w=1600&h=840&fit=crop&crop=entropy&auto=compress,format&format=webp",
-    category: "JavaScript"
+    category: ["JavaScript"]
   },
   {
-    id: 7,
+    id: 8,
     date: "May, 21 2022",
     readTime: "4",
     title: "HTML, and why it is a must for every website",
     uri: "https://iamclement.hashnode.dev/html-and-why-it-is-a-must-for-every-website",
     image: "https://cdn.hashnode.com/res/hashnode/image/upload/v1653134833768/2nusBVtgN.jpg?w=1600&h=840&fit=crop&crop=entropy&auto=compress,format&format=webp",
-    category: "HTML"
+    category: ["HTML"]
   },
   {
-    id: 8,
+    id: 9,
     date: "May, 13 2022",
     readTime: "4",
     title: "Axios for API Call",
     uri: "https://iamclement.hashnode.dev/axios-for-api-call",
     image: "https://cdn.hashnode.com/res/hashnode/image/upload/v1652430698141/spGdpbGem.jpg?w=1600&h=840&fit=crop&crop=entropy&auto=compress,format&format=webp",
-    category: "API"
+    category: ["API"]
   }
 ];
 
 export const FooterData: FooterItemType[] = [
   {
     id: 1,
-    title: "Where To Find Me",
+    title: "Find Me Here",
     github: "GitHub",
     githubUri: "https://github.com/iamclement1",
     linkedIn: "LinkedIn",
