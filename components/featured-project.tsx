@@ -1,39 +1,40 @@
-import Link from 'next/link'
-import React from 'react'
+'use client'
 
-import { Button } from './ui/button'
-import { ProjectData } from '@/data'
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from './ui/card'
+import { ArrowRight } from 'lucide-react'
+import Link from 'next/link'
+
 import { PROJECT_URL } from '@/config/routes'
+import { ProjectData } from '@/data'
 
 
 const FeatureProject = () => {
   return (
-    <main className='text-gray-600 dark:text-gray-400'>
-      <h1 className='text-2xl font-bold'>Featured Projects</h1>
-      {
-        ProjectData.slice(0, 3).map((project) => (
-          <Link href={project.uri} target='_blank' key={project.id} className="text-gray-600 dark:text-gray-400">
-            <Card className='bg-white dark:bg-[#181810] text-gray-600 dark:text-gray-400 my-3 hover:bg-gray-100 dark:hover:bg-[#2A2B27] transition-all duration-300'>
-              <CardHeader>
-                <CardTitle>{project?.name}</CardTitle>
-              </CardHeader>
-              <CardContent className='text-gray-600 dark:text-gray-400 text-md my-2'>
-                <p>{project?.desc}</p>
-              </CardContent>
-              <CardFooter>
-                <span className='underline text-sm'>{project?.action}</span>
-              </CardFooter>
-            </Card>
-          </Link>
-        ))
-      }
-      <Button className='my-4 underline bg-white dark:bg-[#181810] text-[#D3BD44] hover:bg-gray-100 dark:hover:bg-[#2A2B27]'>
-        <Link href={PROJECT_URL}>
-          View More Projects
+    <section className='text-gray-600 dark:text-gray-400 mt-12'>
+      <h2 className='text-2xl font-bold font-dancing-script underline decoration-1 underline-offset-8 mb-8'>Featured Work</h2>
+      <div className='grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-10'>
+        {
+          ProjectData.slice(0, 4).map((project) => (
+            <Link href={project.uri} target='_blank' key={project.id} className="group block">
+              <h3 className="text-lg font-medium text-gray-900 dark:text-gray-200 group-hover:text-black dark:group-hover:text-white transition-colors">
+                {project?.name}
+              </h3>
+              <p className="text-sm text-gray-600 dark:text-gray-400 mt-1 leading-relaxed">
+                {project?.desc}
+              </p>
+            </Link>
+          ))
+        }
+      </div>
+      <div className='mt-12 flex'>
+        <Link
+          href={PROJECT_URL}
+          className="group flex items-center gap-2 text-sm font-medium text-gray-500 hover:text-black dark:text-gray-500 dark:hover:text-white transition-colors border-b border-transparent hover:border-black dark:hover:border-white pb-0.5"
+        >
+          View all projects
+          <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
         </Link>
-      </Button>
-    </main>
+      </div>
+    </section>
   )
 }
 
