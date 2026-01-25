@@ -72,6 +72,23 @@ export const metadata: Metadata = {
     template: "%s | Nnamdi Azubuike",
   },
   description: "Nnamdi Azubuike's Portfolio, a software engineer focused on building scalable and efficient applications",
+  openGraph: {
+    title: 'Nnamdi Azubuike',
+    description: 'Nnamdi Azubuike is a software engineer focused on building scalable and efficient applications.',
+    url: 'https://www.nnamdiazubuike.dev/',
+    siteName: 'Nnamdi Azubuike',
+    images: [
+      {
+        url: 'https://www.nnamdiazubuike.dev/',
+        width: 800,
+        height: 600,
+        alt: 'Nnamdi Azubuike',
+      },
+    ],
+    locale: 'en_US',
+    type: 'website',
+
+  },
   icons: [
     {
       rel: "icon",
