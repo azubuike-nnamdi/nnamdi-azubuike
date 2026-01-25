@@ -14,6 +14,12 @@ const nextConfig: NextConfig = {
         port: '',
         pathname: '/res/hashnode/image/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'miro.medium.com',
+        port: '',
+        pathname: '/v2/resize:fit:1400/**'
+      }
     ],
   },
 };
