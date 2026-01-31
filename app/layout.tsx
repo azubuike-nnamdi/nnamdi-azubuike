@@ -129,20 +129,21 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${caveat.variable} ${openSans.variable} ${dancingScript.variable} font-sans antialiased md:px-28 md:py-12 `}
+        className={`${caveat.variable} ${openSans.variable} ${dancingScript.variable} font-sans antialiased`}
       >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="dark"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <Header />
-          <section className="py-12">
-            {children}
-          </section>
-          <Footer />
-        </ThemeProvider>
+        <div className="md:px-28 md:py-12">
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="dark"
+            disableTransitionOnChange
+          >
+            <Header />
+            <section className="py-12">
+              {children}
+            </section>
+            <Footer />
+          </ThemeProvider>
+        </div>
       </body>
     </html>
   );

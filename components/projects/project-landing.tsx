@@ -3,8 +3,8 @@
 import { ProjectData } from "@/data";
 import { motion } from "framer-motion";
 import { ExternalLink } from "lucide-react";
-import Link from "next/link";
 import { useState } from "react";
+import ProjectDetailsSheet from "../project-details-sheet";
 import { Badge } from "../ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 
@@ -59,74 +59,74 @@ export default function ProjectLanding() {
             whileHover={{ y: -8 }}
             transition={{ type: "spring", stiffness: 300 }}
           >
-            <Link
-              href={project.uri}
-              target="_blank"
-              onMouseEnter={() => setHoveredProject(project.id)}
-              onMouseLeave={() => setHoveredProject(null)}
-              className="group block"
-            >
-              <Card className={`relative h-[320px] overflow-hidden border border-gray-200 dark:border-gray-800 transition-all duration-500 ${hoveredProject === project.id ? "shadow-xl" : "shadow-md"
-                }`}>
-                {/* Project Color Accent - Unique per project */}
-                <motion.div
-                  className="absolute top-0 left-0 w-full h-1"
-                  initial={{ opacity: 0.8 }}
-                  whileHover={{ opacity: 1 }}
-                  transition={{ duration: 0.3 }}
-                  style={{
-                    background: `hsl(${(project.id * 60) % 360}, 80%, 60%)`
-                  }}
-                />
+            <ProjectDetailsSheet project={project}>
+              <button
+                onMouseEnter={() => setHoveredProject(project.id)}
+                onMouseLeave={() => setHoveredProject(null)}
+                className="group block w-full text-left cursor-pointer h-full"
+              >
+                <Card className={`relative h-[320px] overflow-hidden border border-gray-200 dark:border-gray-800 transition-all duration-500 ${hoveredProject === project.id ? "shadow-xl" : "shadow-md"
+                  }`}>
+                  {/* Project Color Accent - Unique per project */}
+                  <motion.div
+                    className="absolute top-0 left-0 w-full h-1"
+                    initial={{ opacity: 0.8 }}
+                    whileHover={{ opacity: 1 }}
+                    transition={{ duration: 0.3 }}
+                    style={{
+                      background: `hsl(${(project.id * 60) % 360}, 80%, 60%)`
+                    }}
+                  />
 
-                <CardHeader className="p-6">
-                  <div className="flex justify-between items-start mb-2">
-                    <CardTitle className="text-xl font-bold text-black dark:text-white font-dancing-script">
-                      {project.name}
-                    </CardTitle>
-                    <motion.div
-                      className="rounded-full p-2 bg-gray-100 dark:bg-gray-800"
-                      whileHover={{ rotate: 12 }}
-                      transition={{ type: "spring", stiffness: 300 }}
-                    >
-                      <ExternalLink className="h-4 w-4 text-primary" />
-                    </motion.div>
-                  </div>
-                </CardHeader>
-
-                <CardContent className="px-6">
-                  <p className="text-gray-700 dark:text-gray-300 mb-6 line-clamp-3">
-                    {project.desc}
-                  </p>
-
-                  <div className="flex flex-wrap gap-2 mt-auto">
-                    {project.technologies.slice(0, 4).map((tech, index) => (
+                  <CardHeader className="p-4 sm:p-6">
+                    <div className="flex justify-between items-start mb-2">
+                      <CardTitle className="text-xl font-bold text-black dark:text-white font-dancing-script">
+                        {project.name}
+                      </CardTitle>
                       <motion.div
-                        key={index}
-                        whileHover={{ scale: 1.05 }}
+                        className="rounded-full p-2 bg-gray-100 dark:bg-gray-800"
+                        whileHover={{ rotate: 12 }}
                         transition={{ type: "spring", stiffness: 300 }}
                       >
+                        <ExternalLink className="h-4 w-4 text-primary" />
+                      </motion.div>
+                    </div>
+                  </CardHeader>
+
+                  <CardContent className="px-4 sm:px-6">
+                    <p className="text-gray-700 dark:text-gray-300 mb-6 line-clamp-3">
+                      {project.desc}
+                    </p>
+
+                    <div className="flex flex-wrap gap-2 mt-auto">
+                      {project.technologies.slice(0, 4).map((tech) => (
+                        <motion.div
+                          key={tech}
+                          whileHover={{ scale: 1.05 }}
+                          transition={{ type: "spring", stiffness: 300 }}
+                        >
+                          <Badge
+                            variant="outline"
+                            className={`text-xs py-1 px-2 bg-gray-50 dark:bg-gray-800 text-gray-700 dark:text-gray-300 border-gray-200 dark:border-gray-700 transition-all duration-300 ${hoveredProject === project.id ? "border-primary" : ""
+                              }`}
+                          >
+                            {tech}
+                          </Badge>
+                        </motion.div>
+                      ))}
+                      {project.technologies.length > 4 && (
                         <Badge
                           variant="outline"
-                          className={`text-xs py-1 px-2 bg-gray-50 dark:bg-gray-800 text-gray-700 dark:text-gray-300 border-gray-200 dark:border-gray-700 transition-all duration-300 ${hoveredProject === project.id ? "border-primary" : ""
-                            }`}
+                          className="text-xs py-1 px-2 bg-gray-50 dark:bg-gray-800 text-gray-700 dark:text-gray-300"
                         >
-                          {tech}
+                          +{project.technologies.length - 4}
                         </Badge>
-                      </motion.div>
-                    ))}
-                    {project.technologies.length > 4 && (
-                      <Badge
-                        variant="outline"
-                        className="text-xs py-1 px-2 bg-gray-50 dark:bg-gray-800 text-gray-700 dark:text-gray-300"
-                      >
-                        +{project.technologies.length - 4}
-                      </Badge>
-                    )}
-                  </div>
-                </CardContent>
-              </Card>
-            </Link>
+                      )}
+                    </div>
+                  </CardContent>
+                </Card>
+              </button>
+            </ProjectDetailsSheet>
           </motion.div>
         ))}
       </motion.div>

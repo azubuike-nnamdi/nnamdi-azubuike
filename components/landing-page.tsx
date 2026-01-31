@@ -14,7 +14,7 @@ export default function LandingPage() {
         initial={{ x: 50, opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
         transition={{ duration: 0.5, delay: 0.2 }}
-        className=""
+        className="px-6 md:px-0"
       >
         <div>
           <motion.p
