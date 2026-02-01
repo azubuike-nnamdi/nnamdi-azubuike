@@ -19,6 +19,12 @@ const nextConfig: NextConfig = {
         hostname: 'miro.medium.com',
         port: '',
         pathname: '/v2/resize:fit:1400/**'
+      },
+      {
+        protocol: 'https',
+        hostname: 'api.microlink.io',
+        port: '',
+        pathname: '/**'
       }
     ],
   },
