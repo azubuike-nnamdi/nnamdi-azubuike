@@ -5,6 +5,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { ExternalLink } from 'lucide-react'
 import { Badge } from './ui/badge'
 import { Button } from './ui/button'
+import { LinkPreview } from './ui/link-preview'
 import {
   Sheet,
   SheetContent,
@@ -37,6 +38,7 @@ export default function ProjectDetailsSheet({
         <SheetHeader>
           <SheetTitle className="text-3xl font-bold font-dancing-script text-white">
             {project.name}
+
           </SheetTitle>
           <SheetDescription className="sr-only">
             Project details for {project.name}
@@ -53,9 +55,11 @@ export default function ProjectDetailsSheet({
               transition={{ delay: 0.1 }}
               className="space-y-3"
             >
-              <h3 className="text-sm font-semibold uppercase tracking-wider text-gray-400">
-                About This Project
-              </h3>
+              <LinkPreview url={project.uri}>
+                <h3 className="text-sm font-semibold uppercase tracking-wider text-gray-400">
+                  About This Project
+                </h3>
+              </LinkPreview>
               <p className="text-base leading-relaxed text-white">
                 {project.desc}
               </p>
@@ -134,22 +138,25 @@ export default function ProjectDetailsSheet({
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5 }}
           >
-            <Button
-              onClick={handleViewProject}
-              className="w-full group relative overflow-hidden bg-white text-black hover:bg-gray-200 transition-all duration-300"
-              size="lg"
+            <LinkPreview url={project.uri}
             >
-              <span className="relative z-10 flex items-center justify-center gap-2">
-                View Live Project
-                <ExternalLink className="w-4 h-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
-              </span>
-              <motion.div
-                className="absolute inset-0 bg-linear-to-r from-transparent via-white/10 to-transparent"
-                initial={{ x: '-100%' }}
-                whileHover={{ x: '100%' }}
-                transition={{ duration: 0.5 }}
-              />
-            </Button>
+              <Button
+                onClick={handleViewProject}
+                className="w-full group relative overflow-hidden bg-white text-black hover:bg-gray-200 transition-all duration-300"
+                size="lg"
+              >
+                <span className="relative z-10 flex items-center justify-center gap-2">
+                  View Live Project
+                  <ExternalLink className="w-4 h-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
+                </span>
+                <motion.div
+                  className="absolute inset-0 bg-linear-to-r from-transparent via-white/10 to-transparent"
+                  initial={{ x: '-100%' }}
+                  whileHover={{ x: '100%' }}
+                  transition={{ duration: 0.5 }}
+                />
+              </Button>
+            </LinkPreview>
           </motion.div>
         </div>
 
