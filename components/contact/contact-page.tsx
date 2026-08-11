@@ -6,42 +6,61 @@ import {
   RESUME_URL,
   TWITTER_URL,
 } from '@/config/routes'
+import { MessageCircle } from 'lucide-react'
 import Link from 'next/link'
 
-const channels = [
-  {
-    label: 'Email',
-    detail: EMAIL,
-    href: EMAIL_URL,
-    external: false,
-  },
-  {
-    label: 'LinkedIn',
-    detail: 'nnamdi-azubuike',
-    href: LINKEDIN_URL,
-    external: true,
-  },
-  {
-    label: 'GitHub',
-    detail: 'azubuike-nnamdi',
-    href: GITHUB_URL,
-    external: true,
-  },
-  {
-    label: 'Twitter',
-    detail: '@_iamclement_',
-    href: TWITTER_URL,
-    external: true,
-  },
-  {
-    label: 'Resume',
-    detail: 'View CV',
-    href: RESUME_URL,
-    external: true,
-  },
-] as const
+type ContactPageProps = {
+  whatsappUrl?: string
+  whatsappPhone?: string
+}
 
-export default function ContactPage() {
+export default function ContactPage({
+  whatsappUrl = '',
+  whatsappPhone = '',
+}: ContactPageProps) {
+  const channels = [
+    {
+      label: 'Email',
+      detail: EMAIL,
+      href: EMAIL_URL,
+      external: false,
+    },
+    ...(whatsappUrl
+      ? [
+          {
+            label: 'WhatsApp',
+            detail: whatsappPhone ? `+${whatsappPhone.replace(/\D/g, '')}` : 'Chat on WhatsApp',
+            href: whatsappUrl,
+            external: true,
+          },
+        ]
+      : []),
+    {
+      label: 'LinkedIn',
+      detail: 'nnamdi-azubuike',
+      href: LINKEDIN_URL,
+      external: true,
+    },
+    {
+      label: 'GitHub',
+      detail: 'azubuike-nnamdi',
+      href: GITHUB_URL,
+      external: true,
+    },
+    {
+      label: 'Twitter',
+      detail: '@_iamclement_',
+      href: TWITTER_URL,
+      external: true,
+    },
+    {
+      label: 'Resume',
+      detail: 'View CV',
+      href: RESUME_URL,
+      external: true,
+    },
+  ]
+
   return (
     <div className="fade-up space-y-10">
       <header className="space-y-3">
@@ -61,6 +80,17 @@ export default function ContactPage() {
         >
           Email me
         </Link>
+        {whatsappUrl ? (
+          <Link
+            href={whatsappUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="nav-chip inline-flex items-center gap-1.5"
+          >
+            <MessageCircle className="size-3.5" aria-hidden />
+            WhatsApp
+          </Link>
+        ) : null}
         <Link
           href={LINKEDIN_URL}
           target="_blank"
