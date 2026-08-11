@@ -1,11 +1,19 @@
+import { CONTACT_URL } from "@/config/routes";
 import { getCurrentYear } from "@/lib/helper";
-import type { FooterColumn, PortfolioItem } from "@/lib/definitions";
+import type { FooterColumn, FooterLink, PortfolioItem } from "@/lib/definitions";
 import Link from "next/link";
 
 type FooterProps = {
   columns: FooterColumn[];
   socialLinks?: PortfolioItem[];
 };
+
+function withContactRoute(links: FooterLink[]): FooterLink[] {
+  const hasContact = links.some((link) => link.url === CONTACT_URL);
+  if (hasContact) return links;
+
+  return [...links, { id: "contact", label: "Contact", url: CONTACT_URL }];
+}
 
 const Footer = ({ columns, socialLinks = [] }: FooterProps) => {
   const elsewhere =
@@ -21,10 +29,11 @@ const Footer = ({ columns, socialLinks = [] }: FooterProps) => {
             uri: link.url,
           }));
 
-  const routes =
+  const routes = withContactRoute(
     columns.find((column) => column.title.toLowerCase().includes("quick"))?.links ??
-    columns[columns.length - 1]?.links ??
-    [];
+      columns[columns.length - 1]?.links ??
+      [],
+  );
 
   return (
     <footer className="mt-20 border-t border-border pt-10">
