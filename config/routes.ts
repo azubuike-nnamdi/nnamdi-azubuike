@@ -13,10 +13,32 @@ const TWITTER_URL: string = 'https://twitter.com/_iamclement_'
 const MEDIUM_URL: string = 'https://medium.com/@nnamdi_azubuike'
 const HASHNODE_URL: string = 'https://iamclement.hashnode.dev/'
 
+const DEFAULT_WHATSAPP_MESSAGE =
+  'Hello Nnamdi, I came from your website and would like to talk.'
+
+function normalizeWhatsAppPhone(phone: string): string {
+  return phone.replace(/\D/g, '')
+}
+
+function buildWhatsAppUrl(phone: string, message = DEFAULT_WHATSAPP_MESSAGE): string {
+  const digits = normalizeWhatsAppPhone(phone)
+  if (!digits) return ''
+
+  const query = [
+    `phone=${encodeURIComponent(digits)}`,
+    `text=${encodeURIComponent(message)}`,
+    'type=phone_number',
+    'app_absent=0',
+  ].join('&')
+
+  return `https://api.whatsapp.com/send/?${query}`
+}
+
 export {
   ABOUT_URL,
   ARTICLE_URL,
   CONTACT_URL,
+  DEFAULT_WHATSAPP_MESSAGE,
   EMAIL,
   EMAIL_URL,
   GITHUB_URL,
@@ -27,5 +49,6 @@ export {
   RESUME_URL,
   TALK_URL,
   TWITTER_URL,
+  buildWhatsAppUrl,
+  normalizeWhatsAppPhone,
 }
-

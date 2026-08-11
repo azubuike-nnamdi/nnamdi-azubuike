@@ -7,10 +7,20 @@ type PortfolioItem = {
 type ProjectDataType = {
   id: string | number
   name: string
-  desc: string
+  slug?: string | null
+  proof?: string | null
+  problem?: string | null
+  role?: string | null
+  outcome?: string | null
+  desc?: string | null
   action: string
   uri: string
+  image?: string | null
+  imageUrl?: string | null
+  seoDescription?: string | null
   technologies: string[]
+  order?: number
+  featured?: boolean
 }
 
 type NavLinks = {
@@ -25,6 +35,7 @@ type Article = {
   readTime: string
   title: string
   desc?: string
+  summary?: string | null
   category: string[]
   readMore?: string
   uri?: string

@@ -1,10 +1,20 @@
 'use client'
 
 import type { ProjectDataType } from '@/lib/definitions'
-import ProjectDetailsSheet from '../project-details-sheet'
+import { projectHref } from '@/lib/project'
+import Link from 'next/link'
 
 type ProjectLandingProps = {
   projects: ProjectDataType[]
+}
+
+function listBlurb(project: ProjectDataType) {
+  return (
+    project.proof?.trim() ||
+    project.outcome?.trim() ||
+    project.desc?.trim() ||
+    'View case study'
+  )
 }
 
 export default function ProjectLanding({ projects }: ProjectLandingProps) {
@@ -15,35 +25,36 @@ export default function ProjectLanding({ projects }: ProjectLandingProps) {
           Projects
         </h1>
         <p className="max-w-xl text-base leading-7 text-muted-foreground">
-          Products and platforms I&apos;ve helped design and ship.
+          Products and platforms I&apos;ve helped design and ship — with role, outcome, and stack.
         </p>
       </header>
 
       <ul className="space-y-6">
         {projects.map((project) => (
           <li key={project.id}>
-            <ProjectDetailsSheet project={project}>
-              <button className="group grid w-full cursor-pointer grid-cols-1 gap-2 text-left sm:grid-cols-[minmax(8rem,12rem)_1fr] sm:gap-5">
-                <span className="font-display text-lg font-semibold text-highlight transition-colors group-hover:text-glow">
-                  {project.name.trim()}
+            <Link
+              href={projectHref(project)}
+              className="group grid w-full grid-cols-1 gap-2 text-left sm:grid-cols-[minmax(8rem,12rem)_1fr] sm:gap-5"
+            >
+              <span className="font-display text-lg font-semibold text-highlight transition-colors group-hover:text-glow">
+                {project.name.trim()}
+              </span>
+              <span>
+                <span className="block text-[0.95rem] leading-7 text-muted-foreground transition-colors group-hover:text-foreground/85">
+                  {listBlurb(project)}
                 </span>
-                <span>
-                  <span className="block text-[0.95rem] leading-7 text-muted-foreground transition-colors group-hover:text-foreground/85">
-                    {project.desc}
-                  </span>
-                  <span className="mt-3 flex flex-wrap gap-2">
-                    {project.technologies.slice(0, 5).map((tech) => (
-                      <span
-                        key={tech}
-                        className="rounded-full border border-border px-2 py-0.5 text-xs text-muted-foreground"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </span>
+                <span className="mt-3 flex flex-wrap gap-2">
+                  {project.technologies.slice(0, 5).map((tech) => (
+                    <span
+                      key={tech}
+                      className="rounded-full border border-border px-2 py-0.5 text-xs text-muted-foreground"
+                    >
+                      {tech}
+                    </span>
+                  ))}
                 </span>
-              </button>
-            </ProjectDetailsSheet>
+              </span>
+            </Link>
           </li>
         ))}
       </ul>

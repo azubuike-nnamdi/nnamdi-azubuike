@@ -17,9 +17,30 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     return { title: 'Article not found' }
   }
 
+  const description =
+    article.summary?.trim() ||
+    article.desc?.trim() ||
+    `${article.title} — article by Nnamdi Azubuike`
+  const images = article.image
+    ? [{ url: article.image, width: 1200, height: 630, alt: article.title }]
+    : [{ url: '/og.png', width: 1200, height: 630, alt: article.title }]
+
   return {
     title: article.title,
-    description: article.summary || undefined,
+    description,
+    openGraph: {
+      title: article.title,
+      description,
+      url: `https://www.nnamdiazubuike.dev/articles/${article.slug}`,
+      type: 'article',
+      images,
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: article.title,
+      description,
+      images: images.map((image) => image.url),
+    },
   }
 }
 
