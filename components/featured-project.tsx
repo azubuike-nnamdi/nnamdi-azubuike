@@ -1,47 +1,48 @@
 'use client'
 
-import { motion } from 'framer-motion'
-import { ArrowRight } from 'lucide-react'
+import { PROJECT_URL } from '@/config/routes'
+import type { ProjectDataType } from '@/lib/definitions'
+import ProjectDetailsSheet from './project-details-sheet'
 import Link from 'next/link'
 
-import { PROJECT_URL } from '@/config/routes'
-import { ProjectData } from '@/data'
-import ProjectDetailsSheet from './project-details-sheet'
+type FeatureProjectProps = {
+  projects: ProjectDataType[]
+}
 
+function shortDesc(desc: string) {
+  const cleaned = desc.trim()
+  if (cleaned.length <= 72) return cleaned
+  const sentence = cleaned.split(/(?<=[.!?])\s+/)[0]
+  if (sentence && sentence.length <= 88) return sentence
+  return `${cleaned.slice(0, 70).trimEnd()}...`
+}
 
-const FeatureProject = () => {
+const FeatureProject = ({ projects }: FeatureProjectProps) => {
   return (
-    <section className='text-gray-600 dark:text-gray-400 mt-12'>
-      <h2 className='text-2xl font-bold font-dancing-script underline decoration-1 underline-offset-8 mb-8'>Featured Work</h2>
-      <div className='grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-x-12 md:gap-y-10'>
-        {
-          ProjectData.slice(0, 4).map((project) => (
-            <ProjectDetailsSheet key={project.id} project={project}>
-              <motion.button
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                className="group block text-left w-full cursor-pointer h-full p-4 -mx-4 rounded-xl transition-colors hover:bg-gray-50 dark:hover:bg-gray-800/50"
-              >
-                <h3 className="text-lg font-medium text-gray-900 dark:text-gray-200 group-hover:text-white dark:group-hover:text-white transition-colors">
-                  {project?.name}
-                </h3>
-                <p className="text-sm text-gray-600 dark:text-gray-400 mt-1 leading-relaxed">
-                  {project?.desc}
-                </p>
-              </motion.button>
-            </ProjectDetailsSheet>
-          ))
-        }
-      </div>
-      <div className='mt-12 flex'>
-        <Link
-          href={PROJECT_URL}
-          className="group flex items-center gap-2 text-sm font-medium text-gray-500 hover:text-black dark:text-gray-500 dark:hover:text-white transition-colors border-b border-transparent hover:border-black dark:hover:border-white pb-0.5"
-        >
-          View all projects
-          <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+    <section className="fade-up" style={{ animationDelay: '140ms' }}>
+      <div className="mb-5 flex items-baseline justify-between gap-4">
+        <h2 className="section-label">featured work</h2>
+        <Link href={PROJECT_URL} className="text-sm text-muted-foreground transition-colors hover:text-highlight">
+          see all
         </Link>
       </div>
+
+      <ul className="space-y-4">
+        {projects.map((project) => (
+          <li key={project.id}>
+            <ProjectDetailsSheet project={project}>
+              <button className="group grid w-full cursor-pointer grid-cols-1 gap-1 text-left sm:grid-cols-[minmax(7rem,11rem)_1fr] sm:items-baseline sm:gap-4">
+                <span className="font-display text-base font-semibold text-highlight transition-colors group-hover:text-glow sm:text-lg">
+                  {project.name.trim()}
+                </span>
+                <span className="text-[0.95rem] leading-7 text-muted-foreground transition-colors group-hover:text-foreground/85">
+                  {shortDesc(project.desc)}
+                </span>
+              </button>
+            </ProjectDetailsSheet>
+          </li>
+        ))}
+      </ul>
     </section>
   )
 }
