@@ -1,9 +1,9 @@
-import { RichText } from '@payloadcms/richtext-lexical/react'
 import { getArticleBySlug } from '@/lib/cms'
-import { notFound } from 'next/navigation'
+import { RichText } from '@payloadcms/richtext-lexical/react'
 import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
+import { notFound } from 'next/navigation'
 
 type PageProps = {
   params: Promise<{ slug: string }>
@@ -52,7 +52,7 @@ export default async function ArticlePage({ params }: PageProps) {
       </header>
 
       {article.image ? (
-        <div className="relative mb-10 aspect-[16/9] overflow-hidden rounded-xl border border-border">
+        <div className="relative mb-10 aspect-video overflow-hidden rounded-xl border border-border">
           <Image src={article.image} alt={article.title} fill className="object-cover" priority />
         </div>
       ) : null}
