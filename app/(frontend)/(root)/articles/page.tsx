@@ -1,5 +1,5 @@
-
 import { HomeArticles } from '@/components/article/home-articles'
+import { getArticles } from '@/lib/cms'
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -7,10 +7,12 @@ export const metadata: Metadata = {
   description: 'Articles',
 }
 
-export default function Page() {
+export default async function Page() {
+  const articles = await getArticles()
+
   return (
     <div>
-      <HomeArticles />
+      <HomeArticles articles={articles} />
     </div>
   )
 }
