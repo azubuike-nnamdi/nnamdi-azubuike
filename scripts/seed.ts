@@ -46,6 +46,24 @@ async function seed() {
   await payload.updateGlobal({
     slug: 'site-settings',
     data: {
+      about: {
+        role: 'Frontend Lead',
+        title: 'Software Engineer',
+        intro:
+          'I build and scale frontend platforms that hold up in production — React, Next.js, and Node.js systems focused on performance, reliability, and maintainable architecture.',
+        body:
+          'At MTN, I help ship self-service products used by over 1 million people across payments, data, and messaging — from delivery through production support. Outside work, I [[write|/articles]], mentor, and volunteer in communities that shaped me.',
+        highlights: [
+          { term: 'React' },
+          { term: 'Next.js' },
+          { term: 'Node.js' },
+        ],
+      },
+      contact: {
+        whatsappPhone: '2347034947199',
+        whatsappMessage:
+          'Hello Nnamdi, I came from your website and would like to talk.',
+      },
       navLinks: NavData.map((item) => ({
         name: item.name,
         href: item.href,
@@ -96,9 +114,15 @@ async function seed() {
       collection: 'projects',
       data: {
         name: project.name.trim(),
+        slug: project.slug || project.name.trim().toLowerCase().replace(/\s+/g, '-'),
+        proof: project.proof,
+        problem: project.problem,
+        role: project.role,
+        outcome: project.outcome,
         desc: project.desc,
         action: project.action,
         uri: project.uri,
+        seoDescription: project.seoDescription || project.proof,
         technologies: project.technologies.map((name) => ({ name })),
         order: index + 1,
         featured: index < 4,

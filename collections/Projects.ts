@@ -1,5 +1,13 @@
 import type { CollectionConfig } from 'payload'
 
+function slugify(value: string): string {
+  return value
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+}
+
 export const Projects: CollectionConfig = {
   slug: 'projects',
   admin: {
@@ -9,6 +17,17 @@ export const Projects: CollectionConfig = {
   access: {
     read: () => true,
   },
+  hooks: {
+    beforeValidate: [
+      ({ data }) => {
+        if (!data) return data
+        if (!data.slug && typeof data.name === 'string') {
+          data.slug = slugify(data.name)
+        }
+        return data
+      },
+    ],
+  },
   fields: [
     {
       name: 'name',
@@ -16,9 +35,52 @@ export const Projects: CollectionConfig = {
       required: true,
     },
     {
+      name: 'slug',
+      type: 'text',
+      unique: true,
+      index: true,
+      admin: {
+        position: 'sidebar',
+        description: 'URL slug for /projects/[slug]. Auto-generated from name if left empty.',
+      },
+    },
+    {
+      name: 'proof',
+      type: 'textarea',
+      label: 'Proof (short)',
+      admin: {
+        description: 'One-line outcome shown on the homepage and project list.',
+      },
+    },
+    {
+      name: 'problem',
+      type: 'textarea',
+      admin: {
+        description: 'What problem did this solve?',
+      },
+    },
+    {
+      name: 'role',
+      type: 'textarea',
+      label: 'Your role',
+      admin: {
+        description: 'What you owned on this project.',
+      },
+    },
+    {
+      name: 'outcome',
+      type: 'textarea',
+      admin: {
+        description: 'Measurable or concrete result.',
+      },
+    },
+    {
       name: 'desc',
       type: 'textarea',
-      required: true,
+      label: 'Additional notes',
+      admin: {
+        description: 'Optional longer context. Prefer problem / role / outcome above.',
+      },
     },
     {
       name: 'action',
@@ -30,7 +92,21 @@ export const Projects: CollectionConfig = {
       name: 'uri',
       type: 'text',
       required: true,
-      label: 'Project URL',
+      label: 'Live URL',
+    },
+    {
+      name: 'image',
+      type: 'upload',
+      relationTo: 'media',
+      label: 'Screenshot',
+    },
+    {
+      name: 'seoDescription',
+      type: 'textarea',
+      label: 'SEO / social description',
+      admin: {
+        description: 'Overrides proof for Open Graph and meta description when set.',
+      },
     },
     {
       name: 'technologies',

@@ -176,9 +176,37 @@ export interface Media {
 export interface Project {
   id: number;
   name: string;
-  desc: string;
+  /**
+   * URL slug for /projects/[slug]. Auto-generated from name if left empty.
+   */
+  slug?: string | null;
+  /**
+   * One-line outcome shown on the homepage and project list.
+   */
+  proof?: string | null;
+  /**
+   * What problem did this solve?
+   */
+  problem?: string | null;
+  /**
+   * What you owned on this project.
+   */
+  role?: string | null;
+  /**
+   * Measurable or concrete result.
+   */
+  outcome?: string | null;
+  /**
+   * Optional longer context. Prefer problem / role / outcome above.
+   */
+  desc?: string | null;
   action: string;
   uri: string;
+  image?: (number | null) | Media;
+  /**
+   * Overrides proof for Open Graph and meta description when set.
+   */
+  seoDescription?: string | null;
   technologies: {
     name: string;
     id?: string | null;
@@ -368,9 +396,16 @@ export interface MediaSelect<T extends boolean = true> {
  */
 export interface ProjectsSelect<T extends boolean = true> {
   name?: T;
+  slug?: T;
+  proof?: T;
+  problem?: T;
+  role?: T;
+  outcome?: T;
   desc?: T;
   action?: T;
   uri?: T;
+  image?: T;
+  seoDescription?: T;
   technologies?:
     | T
     | {
@@ -453,6 +488,43 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
  */
 export interface SiteSetting {
   id: number;
+  /**
+   * Homepage intro under your name.
+   */
+  about?: {
+    role?: string | null;
+    title?: string | null;
+    /**
+     * First paragraph. Highlighted terms below are emphasized automatically.
+     */
+    intro?: string | null;
+    /**
+     * Second paragraph. Add links with [[label|/path]], e.g. [[write|/articles]].
+     */
+    body?: string | null;
+    /**
+     * Words or phrases to emphasize in the intro paragraph.
+     */
+    highlights?:
+      | {
+          term: string;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  /**
+   * WhatsApp and other direct contact options.
+   */
+  contact?: {
+    /**
+     * Digits only with country code (no + or spaces). Example: 2348012345678.
+     */
+    whatsappPhone?: string | null;
+    /**
+     * Prefill message when someone opens WhatsApp.
+     */
+    whatsappMessage?: string | null;
+  };
   navLinks?:
     | {
         name: string;
@@ -489,6 +561,26 @@ export interface SiteSetting {
  * via the `definition` "site-settings_select".
  */
 export interface SiteSettingsSelect<T extends boolean = true> {
+  about?:
+    | T
+    | {
+        role?: T;
+        title?: T;
+        intro?: T;
+        body?: T;
+        highlights?:
+          | T
+          | {
+              term?: T;
+              id?: T;
+            };
+      };
+  contact?:
+    | T
+    | {
+        whatsappPhone?: T;
+        whatsappMessage?: T;
+      };
   navLinks?:
     | T
     | {
