@@ -1,5 +1,11 @@
 import { ARTICLE_URL, GITHUB_URL, LINKEDIN_URL, PROJECT_URL, RESUME_URL, TWITTER_URL } from "@/config/routes";
-import { Article, FooterItemType, NavLinks, PortfolioItem, ProjectDataType } from "@/lib/definitions";
+import type { Article, NavLinks, PortfolioItem, ProjectDataType } from "@/lib/definitions";
+
+type SeedFooterItem = {
+  id: number
+  title: string
+  [key: string]: string | number | undefined
+}
 
 export const NavData: NavLinks[] = [
   {
@@ -209,7 +215,7 @@ export const ArticlesData: Article[] = [
   }
 ];
 
-export const FooterData: FooterItemType[] = [
+export const FooterData: SeedFooterItem[] = [
   {
     id: 1,
     title: "Find Me Here",

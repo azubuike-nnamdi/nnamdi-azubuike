@@ -1,33 +1,26 @@
-import type { NextConfig } from "next";
-import withPWA from 'next-pwa';
+import type { NextConfig } from 'next'
+import { withPayload } from '@payloadcms/next/withPayload'
+
 const nextConfig: NextConfig = {
-  ...withPWA({
-    dest: "public",
-    register: true,
-    skipWaiting: true,
-  }),
   images: {
     remotePatterns: [
       {
         protocol: 'https',
         hostname: 'cdn.hashnode.com',
-        port: '',
         pathname: '/res/hashnode/image/**',
       },
       {
         protocol: 'https',
         hostname: 'miro.medium.com',
-        port: '',
-        pathname: '/v2/resize:fit:1400/**'
+        pathname: '/v2/resize:fit:1400/**',
       },
       {
         protocol: 'https',
         hostname: 'api.microlink.io',
-        port: '',
-        pathname: '/**'
-      }
+        pathname: '/**',
+      },
     ],
   },
-};
+}
 
-export default nextConfig;
+export default withPayload(nextConfig)

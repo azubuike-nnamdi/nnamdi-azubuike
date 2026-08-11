@@ -1,62 +1,76 @@
-"use client";
+'use client'
 
-import { ArticlesData } from "@/data";
-import { motion } from "framer-motion";
-import { ArrowRight, Calendar, Clock } from "lucide-react";
-import Link from "next/link";
-import { AnimatedLink } from "../ui/animated-link";
+import type { Article } from '@/lib/definitions'
+import Link from 'next/link'
 
-const Articles = () => {
+type ArticlesProps = {
+  articles: Article[]
+}
+
+function formatShortDate(date: string) {
+  const parsed = new Date(date)
+  if (Number.isNaN(parsed.getTime())) return date
+  return parsed.toLocaleDateString('en-GB', {
+    day: '2-digit',
+    month: 'short',
+    year: 'numeric',
+  })
+}
+
+const Articles = ({ articles }: ArticlesProps) => {
   return (
-    <section className="text-gray-600 dark:text-gray-400 mt-16 mb-12">
-      <h2 className="text-2xl font-bold font-dancing-script underline decoration-1 underline-offset-8 mb-8">Recent Posts</h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-x-12 md:gap-y-12">
-        {ArticlesData.slice(0, 4).map((article) => (
-          <motion.div
-            key={article.id}
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-            className="transition-all"
-          >
-            <Link href={article.uri} target="_blank" className="group block p-4 -mx-4 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
-              <div className="flex items-center gap-4 text-[11px] font-medium text-gray-500 dark:text-gray-500 mb-2 uppercase tracking-wider">
-                <span className="flex items-center gap-1">
-                  <Clock className="w-3 h-3" />
-                  {article.readTime} min read
-                </span>
-                <span className="flex items-center gap-1">
-                  <Calendar className="w-3 h-3" />
-                  {article.date}
-                </span>
-              </div>
-
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-200 group-hover:text-black dark:group-hover:text-white transition-colors lowercase">
-                {article.title}
-              </h3>
-
-              <p className="text-sm text-gray-600 dark:text-gray-400 mt-2 leading-relaxed">
-                {article.desc}
-              </p>
-
-              <div className="mt-4 flex items-center gap-3 text-[11px] font-medium">
-                {/* <span className="text-gray-500 italic">#{article.category?.map() || 'dev'}</span> */}
-
-              </div>
-            </Link>
-          </motion.div>
-        ))}
+    <section className="fade-up" style={{ animationDelay: '220ms' }}>
+      <div className="mb-5 flex items-baseline justify-between gap-4">
+        <h2 className="section-label">recent posts</h2>
+        <Link href="/articles" className="text-sm text-muted-foreground transition-colors hover:text-highlight">
+          see all
+        </Link>
       </div>
-      <div className="mt-12 flex">
-        <AnimatedLink
-          href="/articles"
-          className="group flex items-center gap-2 text-sm font-medium text-gray-500 hover:text-black dark:text-gray-500 dark:hover:text-white transition-colors border-b border-transparent hover:border-black dark:hover:border-white pb-0.5"
-        >
-          Read all posts
-          <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-        </AnimatedLink>
-      </div>
+
+      <ul className="space-y-7">
+        {articles.map((article) => {
+          const href = article.href || article.uri || '#'
+          const isExternal = article.kind !== 'full'
+          const categories = article.category ?? []
+
+          return (
+            <li key={article.id}>
+              <Link
+                href={href}
+                target={isExternal ? '_blank' : undefined}
+                rel={isExternal ? 'noopener noreferrer' : undefined}
+                className="group block"
+              >
+                <div className="mb-1.5 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-muted-foreground">
+                  <span>{article.readTime} min read</span>
+                  <span className="opacity-40">|</span>
+                  <span>{formatShortDate(article.date)}</span>
+                </div>
+
+                <h3 className="font-display text-lg font-semibold tracking-tight text-foreground transition-colors group-hover:text-highlight sm:text-xl">
+                  {article.title}
+                </h3>
+
+                {article.desc ? (
+                  <p className="mt-1.5 max-w-2xl text-[0.95rem] leading-7 text-muted-foreground">
+                    {article.desc}
+                  </p>
+                ) : null}
+
+                {categories.length > 0 ? (
+                  <div className="mt-2 flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-glow/90">
+                    {categories.slice(0, 3).map((category) => (
+                      <span key={category}>#{category.toLowerCase()}</span>
+                    ))}
+                  </div>
+                ) : null}
+              </Link>
+            </li>
+          )
+        })}
+      </ul>
     </section>
-  );
-};
+  )
+}
 
-export default Articles;
+export default Articles

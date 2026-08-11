@@ -1,52 +1,67 @@
 type PortfolioItem = {
-  id: number;
-  name: string;
-  uri: string;
-};
-
-type ProjectDataType = {
-  id: number;
-  name: string;
-  desc: string;
-  action: string;
-  uri: string;
-  technologies: string[];
-};
-
-type NavLinks = {
-  id: number;
-  name: string;
-  href: string;
-};
-
-type Article = {
-  id: number;
-  date: string;
-  readTime: string;
-  title: string;
-  desc?: string;
-  category: string[];
-  readMore?: string;
-  uri: string;
-  image?: string;
-  views?: number;
-};
-
-
-
-type FooterItemType = {
-  id: number;
-  title: string;
-  [key: string]: string | number | undefined; // Allow any string key with string or number value
-};
-
-type AnimatedLinkProps = {
-  children: React.ReactNode;
-  href: string;
-  isActive?: boolean;
-  className?: string;
-  target?: string;
+  id: string | number
+  name: string
+  uri: string
 }
 
-export type { AnimatedLinkProps, Article, FooterItemType, NavLinks, PortfolioItem, ProjectDataType };
+type ProjectDataType = {
+  id: string | number
+  name: string
+  desc: string
+  action: string
+  uri: string
+  technologies: string[]
+}
 
+type NavLinks = {
+  id: string | number
+  name: string
+  href: string
+}
+
+type Article = {
+  id: string | number
+  date: string
+  readTime: string
+  title: string
+  desc?: string
+  category: string[]
+  readMore?: string
+  uri?: string
+  href?: string
+  image?: string
+  views?: number
+  kind?: 'external' | 'full'
+  slug?: string | null
+}
+
+type FooterLink = {
+  id: string | number
+  label: string
+  url: string
+  isEmail?: boolean | null
+}
+
+type FooterColumn = {
+  id: string | number
+  title: string
+  links: FooterLink[]
+}
+
+type AnimatedLinkProps = {
+  children: React.ReactNode
+  href: string
+  isActive?: boolean
+  className?: string
+  target?: string
+}
+
+export type {
+  AnimatedLinkProps,
+  Article,
+  FooterColumn,
+  FooterLink,
+  NavLinks,
+  PortfolioItem,
+  ProjectDataType,
+}

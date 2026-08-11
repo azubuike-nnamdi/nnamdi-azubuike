@@ -1,22 +1,34 @@
 'use client'
 
-import { useState } from "react";
-import { ArticlesData } from "@/data";
+import { useState } from 'react'
+import type { Article } from '@/lib/definitions'
+import { Button } from '@/components/ui/button'
+import { ChevronDown } from 'lucide-react'
+import { ArticleCard } from './article-card'
+import Link from 'next/link'
 
-import { Button } from "@/components/ui/button";
-import { ChevronDown } from "lucide-react";
-import { ArticleCard } from "./article-card";
+type ArticlesGridProps = {
+  articles: Article[]
+}
 
-export const ArticlesGrid = () => {
-  const [visibleCount, setVisibleCount] = useState<number>(3);
+export const ArticlesGrid = ({ articles }: ArticlesGridProps) => {
+  const [visibleCount, setVisibleCount] = useState<number>(3)
 
   const handleViewMore = () => {
-    setVisibleCount((prevCount) => prevCount + 3);
-  };
+    setVisibleCount((prevCount) => prevCount + 3)
+  }
 
-  const featuredArticle = ArticlesData[0];
-  const secondaryArticles = ArticlesData.slice(1, 3);
-  const remainingArticles = ArticlesData.slice(3, 3 + visibleCount);
+  const featuredArticle = articles[0]
+  const secondaryArticles = articles.slice(1, 3)
+  const remainingArticles = articles.slice(3, 3 + visibleCount)
+
+  if (!featuredArticle) {
+    return (
+      <div className="mx-auto px-4 py-12 text-center text-muted-foreground">
+        No articles published yet.
+      </div>
+    )
+  }
 
   return (
     <div className=" mx-auto px-4 py-12">
@@ -29,19 +41,26 @@ export const ArticlesGrid = () => {
 
       <section className="mb-16">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-          {/* Featured Article */}
           <div className="lg:col-span-7">
-            <a href={featuredArticle.uri} className="block h-full">
+            <Link
+              href={featuredArticle.href || featuredArticle.uri || '#'}
+              target={featuredArticle.kind !== 'full' ? '_blank' : undefined}
+              className="block h-full"
+            >
               <ArticleCard article={featuredArticle} variant="featured" className="h-full" />
-            </a>
+            </Link>
           </div>
 
-          {/* Secondary Articles */}
           <div className="lg:col-span-5 grid grid-cols-1 gap-6">
-            {secondaryArticles.map(article => (
-              <a href={article.uri} key={article.id} className="block">
+            {secondaryArticles.map((article) => (
+              <Link
+                href={article.href || article.uri || '#'}
+                key={article.id}
+                target={article.kind !== 'full' ? '_blank' : undefined}
+                className="block"
+              >
                 <ArticleCard article={article} variant="compact" />
-              </a>
+              </Link>
             ))}
           </div>
         </div>
@@ -49,23 +68,23 @@ export const ArticlesGrid = () => {
 
       <hr className="my-12 border-t border-border/50" />
 
-      {/* More Articles */}
       <section>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {remainingArticles.map(article => (
-            <a href={article.uri} key={article.id} className="block">
+          {remainingArticles.map((article) => (
+            <Link
+              href={article.href || article.uri || '#'}
+              key={article.id}
+              target={article.kind !== 'full' ? '_blank' : undefined}
+              className="block"
+            >
               <ArticleCard article={article} variant="regular" />
-            </a>
+            </Link>
           ))}
         </div>
 
-        {visibleCount < ArticlesData.length - 3 && (
+        {visibleCount < articles.length - 3 && (
           <div className="text-center mt-12">
-            <Button
-              onClick={handleViewMore}
-              variant="outline"
-              className="group"
-            >
+            <Button onClick={handleViewMore} variant="outline" className="group">
               View More Articles
               <ChevronDown className="ml-2 h-4 w-4 transition-transform group-hover:translate-y-1" />
             </Button>
@@ -73,5 +92,5 @@ export const ArticlesGrid = () => {
         )}
       </section>
     </div>
-  );
-};
+  )
+}

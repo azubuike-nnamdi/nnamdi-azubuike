@@ -34,11 +34,10 @@ export default function ProjectDetailsSheet({
       <SheetTrigger asChild>
         {children}
       </SheetTrigger>
-      <SheetContent className="w-full sm:max-w-md flex flex-col bg-black border-none">
+      <SheetContent className="flex w-full flex-col border-border bg-background sm:max-w-md">
         <SheetHeader>
-          <SheetTitle className="text-3xl font-bold font-dancing-script text-white">
+          <SheetTitle className="font-display text-3xl font-bold text-highlight">
             {project.name}
-
           </SheetTitle>
           <SheetDescription className="sr-only">
             Project details for {project.name}
@@ -56,11 +55,11 @@ export default function ProjectDetailsSheet({
               className="space-y-3"
             >
               <LinkPreview url={project.uri}>
-                <h3 className="text-sm font-semibold uppercase tracking-wider text-gray-400">
+                <h3 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground">
                   About This Project
                 </h3>
               </LinkPreview>
-              <p className="text-base leading-relaxed text-white">
+              <p className="text-base leading-relaxed text-foreground">
                 {project.desc}
               </p>
             </motion.div>
@@ -72,7 +71,7 @@ export default function ProjectDetailsSheet({
               transition={{ delay: 0.2 }}
               className="space-y-4"
             >
-              <h3 className="text-sm font-semibold uppercase tracking-wider text-gray-400">
+              <h3 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground">
                 Technologies Used
               </h3>
               <div className="flex flex-wrap gap-2">
@@ -87,7 +86,7 @@ export default function ProjectDetailsSheet({
                     >
                       <Badge
                         variant="outline"
-                        className="text-sm py-1.5 px-3 bg-gray-900 text-white border-gray-700 hover:border-white transition-colors"
+                        className="border-border bg-secondary px-3 py-1.5 text-sm text-foreground transition-colors hover:border-highlight"
                       >
                         {tech}
                       </Badge>
@@ -104,25 +103,25 @@ export default function ProjectDetailsSheet({
               transition={{ delay: 0.4 }}
               className="space-y-3"
             >
-              <h3 className="text-sm font-semibold uppercase tracking-wider text-gray-400">
+              <h3 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground">
                 My Contribution
               </h3>
               <div className="space-y-2">
                 <div className="flex items-start gap-2">
-                  <div className="w-1.5 h-1.5 rounded-full bg-white mt-2 shrink-0" />
-                  <p className="text-sm text-gray-300">
+                  <div className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-highlight" />
+                  <p className="text-sm text-muted-foreground">
                     Frontend architecture and implementation
                   </p>
                 </div>
                 <div className="flex items-start gap-2">
-                  <div className="w-1.5 h-1.5 rounded-full bg-white mt-2 shrink-0" />
-                  <p className="text-sm text-gray-300">
+                  <div className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-highlight" />
+                  <p className="text-sm text-muted-foreground">
                     UI/UX component development
                   </p>
                 </div>
                 <div className="flex items-start gap-2">
-                  <div className="w-1.5 h-1.5 rounded-full bg-white mt-2 shrink-0" />
-                  <p className="text-sm text-gray-300">
+                  <div className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-highlight" />
+                  <p className="text-sm text-muted-foreground">
                     Performance optimization and testing
                   </p>
                 </div>
@@ -132,29 +131,22 @@ export default function ProjectDetailsSheet({
         </div>
 
         {/* Footer with CTA Button */}
-        <div className="border-t border-gray-800 pt-4 px-4">
+        <div className="border-t border-border px-4 pt-4">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5 }}
           >
-            <LinkPreview url={project.uri}
-            >
+            <LinkPreview url={project.uri}>
               <Button
                 onClick={handleViewProject}
-                className="w-full group relative overflow-hidden bg-white text-black hover:bg-gray-200 transition-all duration-300"
+                className="group relative w-full overflow-hidden bg-highlight text-[#0b0e0b] transition-all duration-300 hover:bg-glow"
                 size="lg"
               >
                 <span className="relative z-10 flex items-center justify-center gap-2">
                   View Live Project
-                  <ExternalLink className="w-4 h-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
+                  <ExternalLink className="h-4 w-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
                 </span>
-                <motion.div
-                  className="absolute inset-0 bg-linear-to-r from-transparent via-white/10 to-transparent"
-                  initial={{ x: '-100%' }}
-                  whileHover={{ x: '100%' }}
-                  transition={{ duration: 0.5 }}
-                />
               </Button>
             </LinkPreview>
           </motion.div>

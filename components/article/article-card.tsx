@@ -31,7 +31,9 @@ export const ArticleCard = ({ article, variant = "regular", className }: Article
         <div className="relative aspect-[16/9] bg-gradient-to-t from-black/70 to-transparent" />
 
         <div className="absolute bottom-0 left-0 p-4 w-full">
-          <Badge className="bg-primary hover:bg-primary/90 mb-2">{article.category}</Badge>
+          <Badge className="bg-primary hover:bg-primary/90 mb-2">
+            {Array.isArray(article.category) ? article.category[0] : article.category}
+          </Badge>
           <h2 className={cn(
             "text-white font-bold leading-tight mb-2 transition-colors",
             isFeatured ? "text-3xl" : isCompact ? "text-lg" : "text-xl"

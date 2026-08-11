@@ -1,52 +1,66 @@
-import { FooterData } from '@/data';
-import { getCurrentYear } from '@/lib/helper';
-import { AnimatedLink } from './animated-link';
+import { getCurrentYear } from "@/lib/helper";
+import type { FooterColumn, PortfolioItem } from "@/lib/definitions";
+import Link from "next/link";
 
-const Footer = () => {
+type FooterProps = {
+  columns: FooterColumn[];
+  socialLinks?: PortfolioItem[];
+};
+
+const Footer = ({ columns, socialLinks = [] }: FooterProps) => {
+  const elsewhere =
+    socialLinks.length > 0
+      ? socialLinks
+      : columns
+          .flatMap((column) => column.links)
+          .filter((link) => !link.isEmail)
+          .slice(0, 4)
+          .map((link) => ({
+            id: Number(link.id) || 0,
+            name: link.label,
+            uri: link.url,
+          }));
+
+  const routes =
+    columns.find((column) => column.title.toLowerCase().includes("quick"))?.links ??
+    columns[columns.length - 1]?.links ??
+    [];
+
   return (
-    <main>
-      <hr />
-      <footer className='grid md:grid-cols-3 grid-cols-2 gap-6 md:gap-96 items-center md:px-8 px-3 md:pt-8  '>
-        {FooterData.map((footer) => (
-          <section key={footer.id} className='py-5'>
-            <div className="flex flex-col">
-              <h3 className='dark:text-white text-black font-bold mb-2 text-xl'>{footer.title}</h3>
-              <ul className='text-sm'>
-                {Object.keys(footer).map((key) => {
-                  if (key !== 'id' && key !== 'title') {
-                    const uri = footer[key + 'Uri'];
-                    const value = footer[key];
+    <footer className="mt-20 border-t border-border pt-10">
+      <div className="grid gap-10 sm:grid-cols-2">
+        <section>
+          <h2 className="section-label mb-4">Find me elsewhere</h2>
+          <ul className="flex flex-wrap gap-x-4 gap-y-2 text-sm">
+            {elsewhere.map((link) => (
+              <li key={link.id}>
+                <Link href={link.uri} target="_blank" rel="noopener noreferrer" className="soft-link">
+                  {link.name.toLowerCase()}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </section>
 
-                    if (typeof uri === 'string') {
-                      if (key === 'email') {
-                        // If the key is 'email', render a mailto: link
-                        return (
-                          <li key={key} className='py-2 pr-4'>
-                            <a href={`mailto:${uri}`} className='text-gray-400 hover:text-white'>{value}</a>
-                          </li>
-                        );
-                      } else {
-                        return (
-                          <li key={key} className='py-2 pr-4'>
-                            <AnimatedLink href={uri} className='text-gray-400'>{value}</AnimatedLink>
-                          </li>
-                        );
-                      }
-                    }
-                  }
-                  return null;
-                })}
-              </ul>
-            </div>
-          </section>
-        ))}
-      </footer>
-      <p className='flex items-center justify-center text-gray-400 text-sm'>
-        Copyright &copy; {getCurrentYear()} Nnamdi | Designed by {" "} <AnimatedLink href={"https://phantom-portfolio.webflow.io/webflow-home"} target=''>
-          Phantom </AnimatedLink>
+        <section>
+          <h2 className="section-label mb-4">Routes</h2>
+          <ul className="flex flex-wrap gap-x-4 gap-y-2 text-sm">
+            {routes.map((link) => (
+              <li key={link.id}>
+                <Link href={link.url} className="soft-link">
+                  {link.label.toLowerCase()}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </section>
+      </div>
+
+      <p className="mt-10 text-sm text-muted-foreground">
+        Nnamdi © 2020 - {getCurrentYear()}
       </p>
-    </main>
-  )
-}
+    </footer>
+  );
+};
 
 export default Footer;
