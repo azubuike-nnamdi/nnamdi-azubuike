@@ -51,10 +51,10 @@ export const metadata: Metadata = {
     siteName: "Nnamdi Azubuike",
     images: [
       {
-        url: "/nnamdi.svg",
+        url: "/og.png",
         width: 1200,
         height: 630,
-        alt: "Nnamdi Azubuike",
+        alt: "Nnamdi Azubuike — Software Engineer, Frontend Lead, and Product Builder",
       },
     ],
     locale: "en_US",
@@ -65,7 +65,7 @@ export const metadata: Metadata = {
     title: "Nnamdi Azubuike",
     description:
       "Software Engineer, Frontend Lead, and Product Builder. Building thoughtful interfaces and solid systems.",
-    images: ["/nnamdi.svg"],
+    images: ["/og.png"],
   },
   icons: [
     {
