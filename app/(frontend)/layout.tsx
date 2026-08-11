@@ -19,14 +19,16 @@ const syne = Syne({
   weight: ["500", "600", "700", "800"],
 });
 
+const siteDescription =
+  "Software Engineer who builds and scales frontend apps, backend services, and production systems with React, Next.js, Node.js, and NestJS — focused on performance, reliability, and maintainable architecture.";
+
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.nnamdiazubuike.dev"),
   title: {
     default: "Nnamdi Azubuike",
     template: "%s | Nnamdi Azubuike",
   },
-  description:
-    "Software Engineer, Frontend Lead, and Product Builder. Nnamdi Azubuike builds thoughtful interfaces and solid systems — exploring algorithms, functional programming, and AI.",
+  description: siteDescription,
   keywords: [
     "Nnamdi Azubuike",
     "Software Engineer",
@@ -45,8 +47,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "Nnamdi Azubuike",
-    description:
-      "Software Engineer, Frontend Lead, and Product Builder. Building thoughtful interfaces and solid systems.",
+    description: siteDescription,
     url: "https://www.nnamdiazubuike.dev/",
     siteName: "Nnamdi Azubuike",
     images: [
@@ -63,8 +64,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Nnamdi Azubuike",
-    description:
-      "Software Engineer, Frontend Lead, and Product Builder. Building thoughtful interfaces and solid systems.",
+    description: siteDescription,
     images: ["/og.png"],
   },
   icons: [
