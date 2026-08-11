@@ -26,11 +26,12 @@ export const metadata: Metadata = {
     template: "%s | Nnamdi Azubuike",
   },
   description:
-    "Nnamdi Azubuike's Portfolio, a software engineer focused on building scalable and efficient applications",
+    "Software Engineer, Frontend Lead, and Product Builder. Nnamdi Azubuike builds thoughtful interfaces and solid systems — exploring algorithms, functional programming, and AI.",
   keywords: [
     "Nnamdi Azubuike",
     "Software Engineer",
-    "Frontend Developer",
+    "Frontend Lead",
+    "Product Builder",
     "Next.js",
     "React",
     "Portfolio",
@@ -45,7 +46,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Nnamdi Azubuike",
     description:
-      "Nnamdi Azubuike is a software engineer focused on building scalable and efficient applications.",
+      "Software Engineer, Frontend Lead, and Product Builder. Building thoughtful interfaces and solid systems.",
     url: "https://www.nnamdiazubuike.dev/",
     siteName: "Nnamdi Azubuike",
     images: [
@@ -63,18 +64,18 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Nnamdi Azubuike",
     description:
-      "Nnamdi Azubuike is a software engineer focused on building scalable and efficient applications.",
+      "Software Engineer, Frontend Lead, and Product Builder. Building thoughtful interfaces and solid systems.",
     images: ["/nnamdi.svg"],
   },
   icons: [
     {
       rel: "icon",
       type: "image/svg+xml",
-      url: "/icon-192x192.png",
+      url: "/img/favicon.svg",
     },
     {
       rel: "apple-touch-icon",
-      url: "/icon-192x192.png",
+      url: "/img/favicon.svg",
     },
   ],
   manifest: "/manifest.json",

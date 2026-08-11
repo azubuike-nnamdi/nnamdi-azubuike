@@ -7,7 +7,16 @@ import globals from "globals";
 
 export default [
   {
-    ignores: [".next/**", "node_modules/**", "out/**", "build/**", "dist/**", "public/**"],
+    ignores: [
+      ".next/**",
+      "node_modules/**",
+      "out/**",
+      "build/**",
+      "dist/**",
+      "public/**",
+      "payload-types.ts",
+      "media/**",
+    ],
   },
   js.configs.recommended,
   {

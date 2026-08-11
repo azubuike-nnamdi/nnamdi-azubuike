@@ -14,7 +14,7 @@ Portfolio site powered by **Next.js** and **Payload CMS**. Projects, articles, a
 ### 1. Database (Neon)
 
 1. Create a project at [console.neon.tech](https://console.neon.tech)
-2. Copy the **pooled** connection string (`...-pooler...`, with `sslmode=require`)
+2. Copy the **pooled** connection string (`...-pooler...`, with `sslmode=verify-full`)
 3. Use it as `DATABASE_URL` locally and in Vercel
 
 ### 2. Environment
