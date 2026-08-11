@@ -1,5 +1,6 @@
 const PROJECT_URL: string = '/projects'
 const ARTICLE_URL: string = '/articles'
+const EXPERIENCE_URL: string = '/experience'
 const TALK_URL: string = '/talks'
 const ABOUT_URL: string = '/about'
 const CONTACT_URL: string = '/contact'
@@ -41,6 +42,7 @@ export {
   DEFAULT_WHATSAPP_MESSAGE,
   EMAIL,
   EMAIL_URL,
+  EXPERIENCE_URL,
   GITHUB_URL,
   HASHNODE_URL,
   LINKEDIN_URL,

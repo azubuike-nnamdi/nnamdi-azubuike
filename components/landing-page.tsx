@@ -1,6 +1,7 @@
 'use client'
 
 import Articles from './article/articles'
+import Experience from './experience'
 import FeatureProject from './featured-project'
 import { CONTACT_URL, PROJECT_URL } from '@/config/routes'
 import {
@@ -9,6 +10,7 @@ import {
   renderLinkedText,
   type CmsAbout,
 } from '@/lib/about'
+import type { CmsExperienceItem } from '@/lib/experience'
 import type { Article, ProjectDataType } from '@/lib/definitions'
 import Link from 'next/link'
 
@@ -16,6 +18,7 @@ type LandingPageProps = {
   projects: ProjectDataType[]
   articles: Article[]
   about?: CmsAbout
+  experience?: CmsExperienceItem[]
   whatsappUrl?: string
 }
 
@@ -23,6 +26,7 @@ export default function LandingPage({
   projects,
   articles,
   about = defaultAbout,
+  experience = [],
   whatsappUrl = '',
 }: LandingPageProps) {
   return (
@@ -67,6 +71,7 @@ export default function LandingPage({
       </section>
 
       <FeatureProject projects={projects} />
+      <Experience experience={experience} limit={1} showViewMore />
       <Articles articles={articles} />
     </div>
   )

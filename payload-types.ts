@@ -197,6 +197,20 @@ export interface Project {
    */
   outcome?: string | null;
   /**
+   * What you chose (and why) — state, data fetching, architecture, etc.
+   */
+  decisions?: string | null;
+  /**
+   * Short proof points (e.g. Monthly users / 1M+). Prefer real numbers.
+   */
+  metrics?:
+    | {
+        label: string;
+        value: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
    * Optional longer context. Prefer problem / role / outcome above.
    */
   desc?: string | null;
@@ -405,6 +419,14 @@ export interface ProjectsSelect<T extends boolean = true> {
   problem?: T;
   role?: T;
   outcome?: T;
+  decisions?: T;
+  metrics?:
+    | T
+    | {
+        label?: T;
+        value?: T;
+        id?: T;
+      };
   desc?: T;
   action?: T;
   uri?: T;
@@ -530,6 +552,30 @@ export interface SiteSetting {
      */
     whatsappMessage?: string | null;
   };
+  /**
+   * Selective roles shown on the homepage (impact over job history).
+   */
+  experience?:
+    | {
+        company: string;
+        role: string;
+        /**
+         * e.g. 2023 — Present
+         */
+        period?: string | null;
+        /**
+         * One-line scope for the role.
+         */
+        summary?: string | null;
+        highlights?:
+          | {
+              text: string;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
   navLinks?:
     | {
         name: string;
@@ -585,6 +631,21 @@ export interface SiteSettingsSelect<T extends boolean = true> {
     | {
         whatsappPhone?: T;
         whatsappMessage?: T;
+      };
+  experience?:
+    | T
+    | {
+        company?: T;
+        role?: T;
+        period?: T;
+        summary?: T;
+        highlights?:
+          | T
+          | {
+              text?: T;
+              id?: T;
+            };
+        id?: T;
       };
   navLinks?:
     | T

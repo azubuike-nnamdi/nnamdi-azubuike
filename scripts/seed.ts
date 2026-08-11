@@ -15,6 +15,7 @@ import {
   RESUME_URL,
   TWITTER_URL,
 } from '../config/routes'
+import { defaultExperience } from '../lib/experience'
 
 function parseLooseDate(value: string): string {
   const normalized = value
@@ -47,12 +48,12 @@ async function seed() {
     slug: 'site-settings',
     data: {
       about: {
-        role: 'Frontend Lead',
-        title: 'Software Engineer',
+        role: 'Team Lead',
+        title: 'Senior Frontend Engineer',
         intro:
           'I build and scale frontend platforms that hold up in production — React, Next.js, and Node.js systems focused on performance, reliability, and maintainable architecture.',
         body:
-          'At MTN, I help ship self-service products used by over 1 million people across payments, data, and messaging — from delivery through production support. Outside work, I [[write|/articles]], mentor, and volunteer in communities that shaped me.',
+          'At MTN, I lead frontend delivery for self-service products used by over 1 million people across payments, data, and messaging — from delivery through production support. Outside work, I [[write|/articles]], mentor, and volunteer in communities that shaped me.',
         highlights: [
           { term: 'React' },
           { term: 'Next.js' },
@@ -64,6 +65,13 @@ async function seed() {
         whatsappMessage:
           'Hello Nnamdi, I came from your website and would like to talk.',
       },
+      experience: defaultExperience.map((item) => ({
+        company: item.company,
+        role: item.role,
+        period: item.period,
+        summary: item.summary,
+        highlights: item.highlights.map((text) => ({ text })),
+      })),
       navLinks: NavData.map((item) => ({
         name: item.name,
         href: item.href,
@@ -119,6 +127,8 @@ async function seed() {
         problem: project.problem,
         role: project.role,
         outcome: project.outcome,
+        decisions: project.decisions,
+        metrics: project.metrics,
         desc: project.desc,
         action: project.action,
         uri: project.uri,

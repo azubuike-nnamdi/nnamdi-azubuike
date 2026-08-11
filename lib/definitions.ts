@@ -4,6 +4,11 @@ type PortfolioItem = {
   uri: string
 }
 
+type ProjectMetric = {
+  label: string
+  value: string
+}
+
 type ProjectDataType = {
   id: string | number
   name: string
@@ -12,6 +17,8 @@ type ProjectDataType = {
   problem?: string | null
   role?: string | null
   outcome?: string | null
+  decisions?: string | null
+  metrics?: ProjectMetric[]
   desc?: string | null
   action: string
   uri: string
@@ -75,4 +82,5 @@ export type {
   NavLinks,
   PortfolioItem,
   ProjectDataType,
+  ProjectMetric,
 }

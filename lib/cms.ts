@@ -3,6 +3,7 @@ import config from '@payload-config'
 import { defaultAbout, type CmsAbout } from '@/lib/about'
 import { DEFAULT_WHATSAPP_MESSAGE, buildWhatsAppUrl } from '@/config/routes'
 import { projectScreenshotFromUrl } from '@/lib/project'
+import { defaultExperience, type CmsExperienceItem } from '@/lib/experience'
 
 export type CmsProject = {
   id: string
@@ -12,6 +13,8 @@ export type CmsProject = {
   problem?: string | null
   role?: string | null
   outcome?: string | null
+  decisions?: string | null
+  metrics: Array<{ label: string; value: string }>
   desc?: string | null
   action: string
   uri: string
@@ -54,6 +57,7 @@ export type CmsFooterColumn = {
 }
 
 export type { CmsAbout }
+export type { CmsExperienceItem }
 
 export type CmsContact = {
   whatsappPhone: string
@@ -64,6 +68,7 @@ export type CmsContact = {
 export type CmsSiteSettings = {
   about: CmsAbout
   contact: CmsContact
+  experience: CmsExperienceItem[]
   navLinks: Array<{ id: string; name: string; href: string }>
   socialLinks: Array<{ id: string; name: string; uri: string }>
   footerColumns: CmsFooterColumn[]
@@ -77,6 +82,8 @@ type ProjectDoc = {
   problem?: string | null
   role?: string | null
   outcome?: string | null
+  decisions?: string | null
+  metrics?: Array<{ label: string; value: string }> | null
   desc?: string | null
   action: string
   uri: string
@@ -120,6 +127,14 @@ type SiteSettingsDoc = {
     whatsappPhone?: string | null
     whatsappMessage?: string | null
   } | null
+  experience?: Array<{
+    id?: string | null
+    company: string
+    role: string
+    period?: string | null
+    summary?: string | null
+    highlights?: Array<{ id?: string | null; text: string }> | null
+  }> | null
   navLinks?: Array<{ id?: string | null; name: string; href: string }> | null
   socialLinks?: Array<{ id?: string | null; name: string; uri: string }> | null
   footerColumns?: Array<{
@@ -162,6 +177,13 @@ function mapProject(doc: ProjectDoc): CmsProject {
     problem: doc.problem,
     role: doc.role,
     outcome: doc.outcome,
+    decisions: doc.decisions,
+    metrics: (doc.metrics ?? [])
+      .map((metric) => ({
+        label: metric.label.trim(),
+        value: metric.value.trim(),
+      }))
+      .filter((metric) => metric.label && metric.value),
     desc: doc.desc,
     action: doc.action,
     uri: doc.uri,
@@ -221,6 +243,18 @@ function mapSiteSettings(doc: SiteSettingsDoc): CmsSiteSettings {
   const whatsappPhone = doc.contact?.whatsappPhone?.trim() || ''
   const whatsappUrl = buildWhatsAppUrl(whatsappPhone, whatsappMessage)
 
+  const experienceFromCms = (doc.experience ?? [])
+    .map((item) => ({
+      company: item.company.trim(),
+      role: item.role.trim(),
+      period: item.period?.trim() || undefined,
+      summary: item.summary?.trim() || undefined,
+      highlights: (item.highlights ?? [])
+        .map((highlight) => highlight.text.trim())
+        .filter(Boolean),
+    }))
+    .filter((item) => item.company && item.role)
+
   return {
     about: {
       role: about?.role?.trim() || defaultAbout.role,
@@ -234,6 +268,7 @@ function mapSiteSettings(doc: SiteSettingsDoc): CmsSiteSettings {
       whatsappMessage,
       whatsappUrl,
     },
+    experience: experienceFromCms.length > 0 ? experienceFromCms : defaultExperience,
     navLinks: (doc.navLinks ?? []).map((link, index) => ({
       id: link.id ?? String(index),
       name: link.name,
