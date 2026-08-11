@@ -18,12 +18,12 @@ export const SiteSettings: GlobalConfig = {
         {
           name: 'role',
           type: 'text',
-          defaultValue: 'Frontend Lead',
+          defaultValue: 'Team Lead',
         },
         {
           name: 'title',
           type: 'text',
-          defaultValue: 'Software Engineer',
+          defaultValue: 'Senior Frontend Engineer',
         },
         {
           name: 'intro',
@@ -84,6 +84,59 @@ export const SiteSettings: GlobalConfig = {
           admin: {
             description: 'Prefill message when someone opens WhatsApp.',
           },
+        },
+      ],
+    },
+    {
+      name: 'experience',
+      type: 'array',
+      label: 'Experience',
+      labels: {
+        singular: 'Role',
+        plural: 'Roles',
+      },
+      admin: {
+        description: 'Selective roles shown on the homepage (impact over job history).',
+      },
+      fields: [
+        {
+          name: 'company',
+          type: 'text',
+          required: true,
+        },
+        {
+          name: 'role',
+          type: 'text',
+          required: true,
+        },
+        {
+          name: 'period',
+          type: 'text',
+          admin: {
+            description: 'e.g. 2023 — Present',
+          },
+        },
+        {
+          name: 'summary',
+          type: 'textarea',
+          admin: {
+            description: 'One-line scope for the role.',
+          },
+        },
+        {
+          name: 'highlights',
+          type: 'array',
+          labels: {
+            singular: 'Highlight',
+            plural: 'Highlights',
+          },
+          fields: [
+            {
+              name: 'text',
+              type: 'text',
+              required: true,
+            },
+          ],
         },
       ],
     },

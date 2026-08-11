@@ -10,12 +10,12 @@ export type CmsAbout = {
 }
 
 export const defaultAbout: CmsAbout = {
-  role: 'Frontend Lead',
-  title: 'Software Engineer',
+  role: 'Team Lead',
+  title: 'Senior Frontend Engineer',
   intro:
     'I build and scale frontend platforms that hold up in production — React, Next.js, and Node.js systems focused on performance, reliability, and maintainable architecture.',
   body:
-    'At MTN, I help ship self-service products used by over 1 million people across payments, data, and messaging — from delivery through production support. Outside work, I [[write|/articles]], mentor, and volunteer in communities that shaped me.',
+    'At MTN, I lead frontend delivery for self-service products used by over 1 million people across payments, data, and messaging — from delivery through production support. Outside work, I [[write|/articles]], mentor, and volunteer in communities that shaped me.',
   highlights: ['React', 'Next.js', 'Node.js'],
 }
 

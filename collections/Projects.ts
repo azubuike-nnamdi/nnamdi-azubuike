@@ -75,6 +75,38 @@ export const Projects: CollectionConfig = {
       },
     },
     {
+      name: 'decisions',
+      type: 'textarea',
+      label: 'Decisions / tradeoffs',
+      admin: {
+        description: 'What you chose (and why) — state, data fetching, architecture, etc.',
+      },
+    },
+    {
+      name: 'metrics',
+      type: 'array',
+      label: 'Metrics',
+      labels: {
+        singular: 'Metric',
+        plural: 'Metrics',
+      },
+      admin: {
+        description: 'Short proof points (e.g. Monthly users / 1M+). Prefer real numbers.',
+      },
+      fields: [
+        {
+          name: 'label',
+          type: 'text',
+          required: true,
+        },
+        {
+          name: 'value',
+          type: 'text',
+          required: true,
+        },
+      ],
+    },
+    {
       name: 'desc',
       type: 'textarea',
       label: 'Additional notes',

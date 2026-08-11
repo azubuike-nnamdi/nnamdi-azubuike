@@ -26,6 +26,7 @@ function Section({
 
 export default function ProjectCaseStudy({ project }: ProjectCaseStudyProps) {
   const hasCaseStudy = Boolean(project.problem || project.role || project.outcome)
+  const metrics = project.metrics ?? []
 
   return (
     <div className="space-y-8">
@@ -45,6 +46,24 @@ export default function ProjectCaseStudy({ project }: ProjectCaseStudyProps) {
             <Section label="problem">{project.problem}</Section>
           ) : null}
           {project.role ? <Section label="role">{project.role}</Section> : null}
+          {project.decisions ? (
+            <Section label="decisions">{project.decisions}</Section>
+          ) : null}
+          {metrics.length > 0 ? (
+            <Section label="metrics">
+              <ul className="space-y-2">
+                {metrics.map((metric) => (
+                  <li
+                    key={`${metric.label}-${metric.value}`}
+                    className="grid grid-cols-[minmax(7rem,11rem)_1fr] gap-3 sm:gap-4"
+                  >
+                    <span className="text-muted-foreground">{metric.label}</span>
+                    <span className="font-medium text-foreground">{metric.value}</span>
+                  </li>
+                ))}
+              </ul>
+            </Section>
+          ) : null}
           {project.outcome ? (
             <Section label="outcome">{project.outcome}</Section>
           ) : null}

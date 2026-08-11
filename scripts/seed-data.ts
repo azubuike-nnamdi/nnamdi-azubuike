@@ -69,6 +69,12 @@ export const ProjectData: ProjectDataType[] = [
     role: 'Architected and built the Next.js merchant portal, including state management, data fetching, and the core dashboard UX.',
     outcome:
       'A production merchant portal used for day-to-day operations across branches and transactions.',
+    decisions:
+      'Chose Next.js with TanStack Query for server state and Zustand for local UI state — keeping remote data out of a global store so dashboard screens stay cacheable and easy to invalidate after mutations.',
+    metrics: [
+      { label: 'Surface', value: 'Merchant portal' },
+      { label: 'Stack focus', value: 'Next.js · TanStack Query · Zustand' },
+    ],
     desc: 'Built with Next.js, React, Zustand, TanStack Query, Tailwind CSS, and shadcn.',
     action: 'View Project',
     uri: 'https://merchant.numoni.io/',
@@ -92,6 +98,13 @@ export const ProjectData: ProjectDataType[] = [
     role: 'Senior Frontend Engineer and team lead — built the self-service UI, payment flows, and supported SIT/UAT/production environments.',
     outcome:
       'A live self-service fibre portal serving thousands of customers for plan management and payments.',
+    decisions:
+      'Led with a shared Next.js + Zustand + TanStack Query stack so plan and payment flows stayed consistent under team ownership. Prioritized responsive self-service journeys over assisted channels, with environment support across SIT, UAT, and production.',
+    metrics: [
+      { label: 'Customers', value: 'Thousands (self-service)' },
+      { label: 'Team', value: 'Led 6 frontend engineers' },
+      { label: 'Environments', value: 'SIT · UAT · Production' },
+    ],
     desc: 'Led a team of 6 while shipping responsive Next.js interfaces with Zustand and TanStack Query.',
     action: 'View Project',
     uri: 'https://fibrex.mtn.ng/',
@@ -115,6 +128,13 @@ export const ProjectData: ProjectDataType[] = [
     role: 'Led frontend development, design-system adoption, and production support across SIT, UAT, and live environments.',
     outcome:
       'A large-scale React/Next.js portal serving 1M+ monthly users with measurable reliability expectations.',
+    decisions:
+      'Standardized on React/Next.js with a design-system-first approach so high-traffic journeys (airtime, data, bills, account) stayed consistent. Mixed Redux Toolkit and Zustand where each fit — shared app state vs localized UI — and kept production support in the same ownership loop as delivery.',
+    metrics: [
+      { label: 'Monthly users', value: '1M+' },
+      { label: 'Scope', value: 'Airtime · data · bills · account' },
+      { label: 'Environments', value: 'SIT · UAT · Production' },
+    ],
     desc: 'Collaborated with backend teams on maintainable, accessible delivery for high-traffic journeys.',
     action: 'View Project',
     uri: 'https://selfservice.mtn.ng/',
@@ -138,6 +158,12 @@ export const ProjectData: ProjectDataType[] = [
     role: 'Senior Frontend Engineer — built reusable UI systems and feature flows with test coverage for critical paths.',
     outcome:
       'Shipped social media features and reusable component frameworks that improved maintainability and delivery speed.',
+    decisions:
+      'Invested in reusable UI systems and Jest/React Testing Library coverage on critical social paths (upload, like, comment, reshare) so feature velocity did not outrun regression risk.',
+    metrics: [
+      { label: 'Focus', value: 'Social + video features' },
+      { label: 'Quality', value: 'Jest · React Testing Library' },
+    ],
     desc: 'Included Jest and React Testing Library coverage for regressions in key user flows.',
     action: 'View Project',
     uri: 'https://weavii.io/',

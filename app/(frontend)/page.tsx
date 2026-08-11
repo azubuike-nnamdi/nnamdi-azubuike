@@ -16,6 +16,7 @@ export default async function Page() {
       projects={featuredProjects}
       articles={articles}
       about={siteSettings.about}
+      experience={siteSettings.experience}
       whatsappUrl={siteSettings.contact.whatsappUrl}
     />
   )
