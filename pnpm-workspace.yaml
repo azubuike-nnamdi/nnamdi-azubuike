@@ -1,7 +1,7 @@
 packages:
   - "."
 
-# Fresh dependency bumps from pnpm up trip the default release-age gate during husky.
+# Keep in sync with package.json#pnpm.overrides (pnpm 9 reads package.json; 10+ reads this file).
 minimumReleaseAge: 0
 
 allowBuilds:
