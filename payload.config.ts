@@ -1,7 +1,7 @@
 import { postgresAdapter } from '@payloadcms/db-postgres'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import path from 'path'
-import { buildConfig } from 'payload'
+import { buildConfig, type SharpDependency } from 'payload'
 import { fileURLToPath } from 'url'
 import sharp from 'sharp'
 
@@ -13,6 +13,24 @@ import { SiteSettings } from './globals/SiteSettings'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
+
+/** Keep current Node pg SSL behavior; avoid deprecation of sslmode=require as verify-full alias. */
+function postgresConnectionString(url: string): string {
+  if (!url) return url
+
+  try {
+    const parsed = new URL(url)
+    const sslmode = parsed.searchParams.get('sslmode')
+
+    if (sslmode === 'require' || sslmode === 'prefer' || sslmode === 'verify-ca') {
+      parsed.searchParams.set('sslmode', 'verify-full')
+    }
+
+    return parsed.toString()
+  } catch {
+    return url
+  }
+}
 
 export default buildConfig({
   admin: {
@@ -30,8 +48,9 @@ export default buildConfig({
   },
   db: postgresAdapter({
     pool: {
-      connectionString: process.env.DATABASE_URL || '',
+      connectionString: postgresConnectionString(process.env.DATABASE_URL || ''),
     },
   }),
-  sharp,
+  // Payload types target sharp@0.32; runtime uses 0.35+ for libvips security fixes
+  sharp: sharp as unknown as SharpDependency,
 })
