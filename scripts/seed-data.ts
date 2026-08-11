@@ -1,4 +1,13 @@
-import { ARTICLE_URL, GITHUB_URL, LINKEDIN_URL, PROJECT_URL, RESUME_URL, TWITTER_URL } from "@/config/routes";
+import {
+  ARTICLE_URL,
+  CONTACT_URL,
+  EMAIL_URL,
+  GITHUB_URL,
+  LINKEDIN_URL,
+  PROJECT_URL,
+  RESUME_URL,
+  TWITTER_URL,
+} from "@/config/routes";
 import type { Article, NavLinks, PortfolioItem, ProjectDataType } from "@/lib/definitions";
 
 type SeedFooterItem = {
@@ -18,11 +27,11 @@ export const NavData: NavLinks[] = [
     name: "Articles",
     href: ARTICLE_URL,
   },
-  // {
-  //   id: 3,
-  //   name: "Talks",
-  //   href: "/talks",
-  // },
+  {
+    id: 3,
+    name: "Contact",
+    href: CONTACT_URL,
+  },
 ];
 
 export const PortfolioData: PortfolioItem[] = [
@@ -226,7 +235,7 @@ export const FooterData: SeedFooterItem[] = [
     twitter: "Twitter",
     twitterUri: "https://twitter.com/_iamclement_",
     email: "Email",
-    emailUri: "acu.nnamdi@gmail.com",
+    emailUri: EMAIL_URL,
   },
   {
     id: 2,
@@ -249,5 +258,7 @@ export const FooterData: SeedFooterItem[] = [
     projectsUri: PROJECT_URL,
     articles: "Articles",
     articlesUri: ARTICLE_URL,
+    contact: "Contact",
+    contactUri: CONTACT_URL,
   },
 ];

@@ -2,6 +2,7 @@
 
 import Articles from './article/articles'
 import FeatureProject from './featured-project'
+import { CONTACT_URL, PROJECT_URL } from '@/config/routes'
 import type { Article, ProjectDataType } from '@/lib/definitions'
 import Link from 'next/link'
 
@@ -39,6 +40,18 @@ export default function LandingPage({ projects, articles }: LandingPageProps) {
             , ship side projects, and volunteer in communities that shaped me — giving back where I
             can.
           </p>
+        </div>
+
+        <div className="mt-8 flex flex-wrap gap-3">
+          <Link
+            href={CONTACT_URL}
+            className="inline-flex items-center rounded-full border border-highlight bg-highlight/10 px-4 py-2 text-sm font-medium text-highlight transition-colors hover:bg-highlight/20"
+          >
+            Get in touch
+          </Link>
+          <Link href={PROJECT_URL} className="nav-chip">
+            /projects
+          </Link>
         </div>
       </section>
 
