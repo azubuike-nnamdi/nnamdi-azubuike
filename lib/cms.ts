@@ -2,6 +2,7 @@ import { getPayload } from 'payload'
 import config from '@payload-config'
 import { defaultAbout, type CmsAbout } from '@/lib/about'
 import { DEFAULT_WHATSAPP_MESSAGE, buildWhatsAppUrl } from '@/config/routes'
+import { projectScreenshotFromUrl } from '@/lib/project'
 
 export type CmsProject = {
   id: string
@@ -80,6 +81,7 @@ type ProjectDoc = {
   action: string
   uri: string
   image?: number | string | MediaDoc | null
+  imageUrl?: string | null
   seoDescription?: string | null
   technologies?: Array<{ name: string }> | null
   order?: number | null
@@ -163,7 +165,11 @@ function mapProject(doc: ProjectDoc): CmsProject {
     desc: doc.desc,
     action: doc.action,
     uri: doc.uri,
-    image: imageFromUpload || null,
+    image:
+      imageFromUpload ||
+      doc.imageUrl?.trim() ||
+      projectScreenshotFromUrl(doc.uri) ||
+      null,
     seoDescription: doc.seoDescription,
     technologies: (doc.technologies ?? []).map((tech) => tech.name),
     order: doc.order ?? 0,

@@ -101,6 +101,15 @@ export const Projects: CollectionConfig = {
       label: 'Screenshot',
     },
     {
+      name: 'imageUrl',
+      type: 'text',
+      label: 'Screenshot URL',
+      admin: {
+        description:
+          'Optional override. If empty, a live screenshot is generated from the project Live URL.',
+      },
+    },
+    {
       name: 'seoDescription',
       type: 'textarea',
       label: 'SEO / social description',

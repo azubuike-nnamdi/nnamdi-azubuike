@@ -16,6 +16,7 @@ type ProjectDataType = {
   action: string
   uri: string
   image?: string | null
+  imageUrl?: string | null
   seoDescription?: string | null
   technologies: string[]
   order?: number

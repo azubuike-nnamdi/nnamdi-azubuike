@@ -1,9 +1,9 @@
 import type { ProjectDataType } from '@/lib/definitions'
 import { ExternalLink } from 'lucide-react'
-import Image from 'next/image'
 import Link from 'next/link'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
+import ProjectScreenshot from '@/components/projects/project-screenshot'
 
 type ProjectCaseStudyProps = {
   project: ProjectDataType
@@ -36,15 +36,7 @@ export default function ProjectCaseStudy({ project }: ProjectCaseStudyProps) {
       ) : null}
 
       {project.image ? (
-        <div className="relative aspect-video overflow-hidden rounded-xl border border-border">
-          <Image
-            src={project.image}
-            alt={`${project.name} screenshot`}
-            fill
-            className="object-cover"
-            sizes="(max-width: 768px) 100vw, 42rem"
-          />
-        </div>
+        <ProjectScreenshot src={project.image} alt={`${project.name} screenshot`} />
       ) : null}
 
       {hasCaseStudy ? (

@@ -31,6 +31,8 @@ async function main() {
       desc: project.desc,
       action: project.action,
       uri: project.uri,
+      // Clear static overrides so live URL screenshots are used by default.
+      imageUrl: project.imageUrl ?? null,
       seoDescription: project.seoDescription || project.proof,
       technologies: project.technologies.map((techName) => ({ name: techName })),
       order: index + 1,

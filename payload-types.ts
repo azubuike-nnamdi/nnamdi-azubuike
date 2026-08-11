@@ -204,6 +204,10 @@ export interface Project {
   uri: string;
   image?: (number | null) | Media;
   /**
+   * Optional override. If empty, a live screenshot is generated from the project Live URL.
+   */
+  imageUrl?: string | null;
+  /**
    * Overrides proof for Open Graph and meta description when set.
    */
   seoDescription?: string | null;
@@ -405,6 +409,7 @@ export interface ProjectsSelect<T extends boolean = true> {
   action?: T;
   uri?: T;
   image?: T;
+  imageUrl?: T;
   seoDescription?: T;
   technologies?:
     | T

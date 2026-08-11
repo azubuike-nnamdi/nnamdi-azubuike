@@ -123,6 +123,7 @@ async function seed() {
         action: project.action,
         uri: project.uri,
         seoDescription: project.seoDescription || project.proof,
+        imageUrl: project.imageUrl,
         technologies: project.technologies.map((name) => ({ name })),
         order: index + 1,
         featured: index < 4,
