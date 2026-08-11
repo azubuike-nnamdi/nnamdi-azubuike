@@ -1,0 +1,210 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+   --color-background: var(--background);
+   --color-foreground: var(--foreground);
+   --font-sans: var(--font-body);
+   --font-display: var(--font-syne);
+   --font-mono: var(--font-body);
+   --color-sidebar-ring: var(--sidebar-ring);
+   --color-sidebar-border: var(--sidebar-border);
+   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+   --color-sidebar-accent: var(--sidebar-accent);
+   --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+   --color-sidebar-primary: var(--sidebar-primary);
+   --color-sidebar-foreground: var(--sidebar-foreground);
+   --color-sidebar: var(--sidebar);
+   --color-chart-5: var(--chart-5);
+   --color-chart-4: var(--chart-4);
+   --color-chart-3: var(--chart-3);
+   --color-chart-2: var(--chart-2);
+   --color-chart-1: var(--chart-1);
+   --color-ring: var(--ring);
+   --color-input: var(--input);
+   --color-border: var(--border);
+   --color-destructive: var(--destructive);
+   --color-accent-foreground: var(--accent-foreground);
+   --color-accent: var(--accent);
+   --color-muted-foreground: var(--muted-foreground);
+   --color-muted: var(--muted);
+   --color-secondary-foreground: var(--secondary-foreground);
+   --color-secondary: var(--secondary);
+   --color-primary-foreground: var(--primary-foreground);
+   --color-primary: var(--primary);
+   --color-popover-foreground: var(--popover-foreground);
+   --color-popover: var(--popover);
+   --color-card-foreground: var(--card-foreground);
+   --color-card: var(--card);
+   --color-highlight: var(--highlight);
+   --color-glow: var(--glow);
+   --radius-sm: calc(var(--radius) - 4px);
+   --radius-md: calc(var(--radius) - 2px);
+   --radius-lg: var(--radius);
+   --radius-xl: calc(var(--radius) + 4px);
+}
+
+@layer base {
+   :root {
+      --background: #eef2ec;
+      --foreground: #141916;
+      --card: #eef2ec;
+      --card-foreground: #141916;
+      --popover: #eef2ec;
+      --popover-foreground: #141916;
+      --primary: #141916;
+      --primary-foreground: #eef2ec;
+      --secondary: #dfe6db;
+      --secondary-foreground: #141916;
+      --muted: #dfe6db;
+      --muted-foreground: #556055;
+      --accent: #dfe6db;
+      --accent-foreground: #141916;
+      --destructive: #b42318;
+      --border: #c5cec1;
+      --input: #c5cec1;
+      --ring: #141916;
+      --radius: 0.75rem;
+      --highlight: #4f6b12;
+      --glow: #6f8618;
+      --chart-1: #4f6b12;
+      --chart-2: #6f8618;
+      --chart-3: #3d4a38;
+      --chart-4: #2f6f57;
+      --chart-5: #2f3a2c;
+      --sidebar: #eef2ec;
+      --sidebar-foreground: #141916;
+      --sidebar-primary: #141916;
+      --sidebar-primary-foreground: #eef2ec;
+      --sidebar-accent: #dfe6db;
+      --sidebar-accent-foreground: #141916;
+      --sidebar-border: #c5cec1;
+      --sidebar-ring: #141916;
+   }
+
+   .dark {
+      --background: #0b0e0b;
+      --foreground: #e8ebe4;
+      --card: #0b0e0b;
+      --card-foreground: #e8ebe4;
+      --popover: #121612;
+      --popover-foreground: #e8ebe4;
+      --primary: #e8ebe4;
+      --primary-foreground: #0b0e0b;
+      --secondary: #171c17;
+      --secondary-foreground: #e8ebe4;
+      --muted: #171c17;
+      --muted-foreground: #97a093;
+      --accent: #171c17;
+      --accent-foreground: #e8ebe4;
+      --destructive: #f97066;
+      --border: #232a23;
+      --input: #232a23;
+      --ring: #c8f23a;
+      --highlight: #c8f23a;
+      --glow: #f0c75e;
+      --chart-1: #c8f23a;
+      --chart-2: #f0c75e;
+      --chart-3: #7dd3a0;
+      --chart-4: #97a093;
+      --chart-5: #3d4a38;
+      --sidebar: #0b0e0b;
+      --sidebar-foreground: #e8ebe4;
+      --sidebar-primary: #c8f23a;
+      --sidebar-primary-foreground: #0b0e0b;
+      --sidebar-accent: #171c17;
+      --sidebar-accent-foreground: #e8ebe4;
+      --sidebar-border: #232a23;
+      --sidebar-ring: #c8f23a;
+   }
+}
+
+::-webkit-scrollbar {
+   display: none;
+}
+
+@layer base {
+   * {
+      @apply border-border outline-ring/50;
+   }
+
+   html {
+      scroll-behavior: smooth;
+   }
+
+   body {
+      @apply bg-background text-foreground font-sans antialiased;
+      background-image:
+         radial-gradient(
+            ellipse 80% 50% at 10% -10%,
+            color-mix(in oklab, var(--highlight) 12%, transparent),
+            transparent
+         ),
+         radial-gradient(
+            ellipse 60% 40% at 100% 0%,
+            color-mix(in oklab, var(--glow) 10%, transparent),
+            transparent
+         ),
+         url("data:image/svg+xml,%3Csvg width='28' height='28' viewBox='0 0 28 28' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M14 12.5v3M12.5 14h3' stroke='%23888888' stroke-opacity='0.18' stroke-width='1' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-attachment: fixed;
+      min-height: 100vh;
+   }
+
+   .dark body {
+      background-image:
+         radial-gradient(
+            ellipse 80% 50% at 10% -10%,
+            color-mix(in oklab, var(--highlight) 14%, transparent),
+            transparent
+         ),
+         radial-gradient(
+            ellipse 60% 40% at 100% 0%,
+            color-mix(in oklab, var(--glow) 8%, transparent),
+            transparent
+         ),
+         url("data:image/svg+xml,%3Csvg width='28' height='28' viewBox='0 0 28 28' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M14 12.5v3M12.5 14h3' stroke='%23c8f23a' stroke-opacity='0.08' stroke-width='1' stroke-linecap='round'/%3E%3C/svg%3E");
+   }
+
+   a {
+      @apply transition-colors;
+   }
+}
+
+@layer components {
+   .site-shell {
+      @apply mx-auto w-full max-w-[42rem] px-5 pb-16 pt-6 sm:px-6 sm:pt-10 md:pb-20;
+   }
+
+   .section-label {
+      @apply text-sm font-medium tracking-wide text-muted-foreground lowercase;
+   }
+
+   .text-mark {
+      @apply font-semibold text-highlight;
+   }
+
+   .nav-chip {
+      @apply inline-flex items-center gap-1 rounded-full border border-border/80 px-3 py-1 text-sm text-glow transition-colors hover:border-highlight hover:text-highlight;
+   }
+
+   .soft-link {
+      @apply text-glow underline decoration-glow/35 underline-offset-[3px] transition-colors hover:text-highlight hover:decoration-highlight;
+   }
+
+   .fade-up {
+      animation: fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+   }
+}
+
+@keyframes fade-up {
+   from {
+      opacity: 0;
+      transform: translateY(14px);
+   }
+   to {
+      opacity: 1;
+      transform: translateY(0);
+   }
+}
