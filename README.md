@@ -1,69 +1,63 @@
 # Nnamdi Azubuike - Portfolio
 
-Welcome to my portfolio! This project showcases my work as a **Software Engineer**, highlighting my expertise in **Next.js, React, and TypeScript**, as well as my skills in **system architecture, leadership, intermediate backend engineering, and mobile development using Flutter and React Native**.
+Portfolio site powered by **Next.js** and **Payload CMS**. Projects, articles, and site settings are editable in the Payload admin.
 
-## About Me
+## Stack
 
-Hi, I'm **Nnamdi Azubuike**, a passionate Software Engineer with a strong focus on building scalable, high-performance web applications. My expertise spans frontend and backend development, ensuring robust, maintainable, and efficient codebases. In addition to my work at **MTN Nigeria**, I specialize in **system architecture, leadership, and mobile development**.
+- Next.js 16 + React 19
+- Payload CMS 3 (Postgres)
+- Tailwind CSS + shadcn/ui
 
-## Projects
+## Setup
 
-### 1. **Next.js Portfolio**
+1. Copy env defaults:
 
-A dynamic portfolio website built with **Next.js**, showcasing my work, skills, and experience.
+```bash
+cp .env.example .env
+```
 
--  **Tech Stack**: Next.js, React, TypeScript, Tailwind CSS
--  **Features**: Dark mode, responsive design, optimized performance
--  **Deployment**: Hosted on Vercel
+2. Set:
 
-### 2. **Device Management Dashboard**
+- `DATABASE_URL` — Postgres connection string
+- `PAYLOAD_SECRET` — long random string
+- Optional: `PAYLOAD_ADMIN_EMAIL` / `PAYLOAD_ADMIN_PASSWORD` for the first admin user (defaults used by seed)
 
-An enterprise-level dashboard for managing IoT devices, featuring advanced search, filtering, and real-time updates.
-
--  **Tech Stack**: Next.js, React, Redux, shadcn/ui, TanStack Query
--  **Features**: Role-based access, pagination, and analytics integration
-
-### 3. **User Management System**
-
-A secure and scalable user management platform for enterprise applications.
-
--  **Tech Stack**: Next.js, Node.js, Express, PostgreSQL, Prisma
--  **Features**: Authentication (NextAuth), role-based access, and auditing
-
-### 4. **Mobile Applications**
-
-Developed cross-platform mobile applications using **Flutter** and **React Native**, delivering seamless user experiences on both Android and iOS.
-
--  **Tech Stack**: Flutter, React Native, Firebase, TypeScript
--  **Features**: Push notifications, authentication, offline support
-
-## Skills & Technologies
-
--  **Frontend**: Next.js, React, TypeScript, Tailwind CSS, Redux, shadcn/ui
--  **Backend**: Node.js, Express, PostgreSQL, MongoDB, Prisma
--  **Mobile**: Flutter, React Native, Firebase
--  **System Architecture**: Microservices, Cloud Computing, Scalable API Design
--  **Leadership**: Team Management, Agile Methodologies, Mentorship
--  **DevOps**: Docker, CI/CD, Vercel, AWS
--  **Tools**: Git, GitHub, Postman, Jest, TanStack Query
-
-## Getting Started
-
-This portfolio is built with **Next.js** and uses **pnpm** as the package manager. To run the project locally:
+3. Install and run:
 
 ```bash
 pnpm install
 pnpm dev
 ```
 
-Then, open [http://localhost:3000](http://localhost:3000) in your browser.
+4. Seed content from the previous hardcoded data (one-time):
 
-## Connect with Me
+```bash
+pnpm seed
+```
 
--  **LinkedIn**: [linkedin.com/in/nnamdiazubuike](https://linkedin.com/in/nnamdiazubuike)
--  **GitHub**: [github.com/nnamdiazubuike](https://github.com/nnamdiazubuike)
--  **Email**: [acu.nnamdi@gmail.com](mailto:acu.nnamdi@gmail.com)
+5. Open:
 
----
+- Site: [http://localhost:3000](http://localhost:3000)
+- Admin: [http://localhost:3000/admin](http://localhost:3000/admin)
 
-**Developed by:** Nnamdi Azubuike | Software Engineer
+## Useful scripts
+
+| Script | Purpose |
+| --- | --- |
+| `pnpm dev` | Next.js + Payload admin |
+| `pnpm seed` | Upsert projects, articles, site settings |
+| `pnpm generate:types` | Regenerate `payload-types.ts` |
+| `pnpm generate:importmap` | Regenerate admin import map |
+
+## Content model
+
+- **Projects** — portfolio case studies
+- **Articles** — `external` link cards or `full` in-site Lexical posts (`/articles/[slug]`)
+- **Site Settings** (global) — nav, social links, footer columns
+- **Media** — uploads for article images
+
+## Connect
+
+- LinkedIn: [linkedin.com/in/nnamdiazubuike](https://linkedin.com/in/nnamdiazubuike)
+- GitHub: [github.com/nnamdiazubuike](https://github.com/nnamdiazubuike)
+- Email: [acu.nnamdi@gmail.com](mailto:acu.nnamdi@gmail.com)
