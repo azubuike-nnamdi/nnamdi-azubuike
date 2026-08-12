@@ -20,7 +20,7 @@ const syne = Syne({
 });
 
 const siteDescription =
-  "Software Engineer who builds and scales frontend apps, backend services, and production systems with React, Next.js, Node.js, and NestJS — focused on performance, reliability, and maintainable architecture.";
+  "Software Engineer who builds and scales systems with React, Next.js, Node.js, and NestJS — focused on performance, reliability, and maintainable architecture.";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.nnamdiazubuike.dev"),
@@ -107,6 +107,7 @@ export default async function RootLayout({
             <Footer
               columns={siteSettings.footerColumns}
               socialLinks={siteSettings.socialLinks}
+              brand={siteSettings.footer}
             />
           </div>
         </ThemeProvider>
