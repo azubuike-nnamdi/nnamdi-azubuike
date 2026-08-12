@@ -1,5 +1,5 @@
-import type { ReactNode } from 'react'
 import Link from 'next/link'
+import type { ReactNode } from 'react'
 
 export type CmsAbout = {
   role: string
@@ -10,13 +10,13 @@ export type CmsAbout = {
 }
 
 export const defaultAbout: CmsAbout = {
-  role: 'Team Lead',
-  title: 'Senior Frontend Engineer',
+  role: 'Frontend Engineer',
+  title: 'Team Lead',
   intro:
-    'I build and scale frontend platforms that hold up in production — React, Next.js, and Node.js systems focused on performance, reliability, and maintainable architecture.',
+    "For 6+ years, I've built and shipped software across telecom, financial systems, and enterprise operations; solving problems where reliability, scalability, security, and user experience matter.",
   body:
-    'At MTN, I lead frontend delivery for self-service products used by over 1 million people across payments, data, and messaging — from delivery through production support. Outside work, I [[write|/articles]], mentor, and volunteer in communities that shaped me.',
-  highlights: ['React', 'Next.js', 'Node.js'],
+    "I've led and worked hands-on across platforms serving over 1 million users, from system architecture and backend services to APIs and frontend applications. I go beyond marking tickets as done; I think about the bigger picture: how a system is designed, how it scales, how secure and resilient it is, and how easily it can evolve as the business grows.",
+  highlights: ['financial systems', '1 million', 'telecom'],
 }
 
 /** Emphasize highlight terms in plain text (longest match first). */

@@ -63,20 +63,23 @@ export const ProjectData: ProjectDataType[] = [
     name: 'Numoni',
     slug: 'numoni',
     proof:
-      'Merchant portal for branches, transactions, and business settings — built for daily ops.',
+      'Loyalty, rewards, and payments — merchant portal and admin platform in production.',
     problem:
-      'Merchants needed one reliable place to manage branches, track transactions, and configure business settings without juggling fragmented tools.',
-    role: 'Architected and built the Next.js merchant portal, including state management, data fetching, and the core dashboard UX.',
+      'Merchants and operators needed separate, reliable surfaces for the same loyalty ecosystem: merchants running branches, rewards, POS, and transactions day to day; admins overseeing KYC, customers, charities, roles, settlements, and support without sharing one overloaded UI.',
+    role:
+      'Architected and built both Next.js apps — merchant (merchant.numoni.io) and admin (admin.numoni.io) — including auth, dashboard UX, TanStack Query data layer, Zustand UI state, and form-heavy flows with React Hook Form + Zod.',
     outcome:
-      'A production merchant portal used for day-to-day operations across branches and transactions.',
+      'Two production portals: merchants manage branches (incl. maps), reward tables, deals, POS, and transaction history; admins run merchant/customer/charity ops, RBAC, bonuses, reports, alerts, support, and e-commerce admin.',
     decisions:
-      'Chose Next.js with TanStack Query for server state and Zustand for local UI state — keeping remote data out of a global store so dashboard screens stay cacheable and easy to invalidate after mutations.',
+      'Split merchant and admin into dedicated apps that share the same frontend patterns (Next.js, TanStack Query for server state, Zustand for local UI) so each surface can evolve independently while staying consistent for the loyalty/rewards domain.',
     metrics: [
-      { label: 'Surface', value: 'Merchant portal' },
-      { label: 'Stack focus', value: 'Next.js · TanStack Query · Zustand' },
+      { label: 'Surfaces', value: 'Merchant + Admin' },
+      { label: 'Merchant', value: 'merchant.numoni.io' },
+      { label: 'Admin', value: 'admin.numoni.io' },
+      { label: 'Stack', value: 'Next.js · TanStack Query · Zustand' },
     ],
-    desc: 'Built with Next.js, React, Zustand, TanStack Query, Tailwind CSS, and shadcn.',
-    action: 'View Project',
+    desc: 'Merchant and admin platforms for Numoni’s loyalty, rewards, and payments ecosystem — Next.js, React, Zustand, TanStack Query, Tailwind CSS, and shadcn.',
+    action: 'View Merchant',
     uri: 'https://merchant.numoni.io/',
     technologies: [
       'Zustand',
@@ -86,6 +89,8 @@ export const ProjectData: ProjectDataType[] = [
       'TypeScript',
       'React',
       'shadcn',
+      'React Hook Form',
+      'Zod',
     ],
   },
   {

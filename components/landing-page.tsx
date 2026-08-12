@@ -71,7 +71,7 @@ export default function LandingPage({
       </section>
 
       <FeatureProject projects={projects} />
-      <Experience experience={experience} limit={1} showViewMore />
+      <Experience experience={experience} limit={1} highlightLimit={2} showViewMore />
       <Articles articles={articles} />
     </div>
   )
