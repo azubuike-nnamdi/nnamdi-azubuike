@@ -560,6 +560,10 @@ export interface SiteSetting {
         company: string;
         role: string;
         /**
+         * Optional chip next to the role (e.g. Promoted to Team Lead).
+         */
+        badge?: string | null;
+        /**
          * e.g. 2023 — Present
          */
         period?: string | null;
@@ -590,6 +594,20 @@ export interface SiteSetting {
         id?: string | null;
       }[]
     | null;
+  /**
+   * Copyright line. Year is generated automatically from the current date.
+   */
+  footer?: {
+    /**
+     * Shown as © {year} NAME
+     */
+    copyrightName?: string | null;
+    location?: string | null;
+    /**
+     * IANA timezone (e.g. Africa/Lagos). Offset is computed live as UTC±X — not stored as a fixed string.
+     */
+    timezone?: string | null;
+  };
   footerColumns?:
     | {
         title: string;
@@ -637,6 +655,7 @@ export interface SiteSettingsSelect<T extends boolean = true> {
     | {
         company?: T;
         role?: T;
+        badge?: T;
         period?: T;
         summary?: T;
         highlights?:
@@ -660,6 +679,13 @@ export interface SiteSettingsSelect<T extends boolean = true> {
         name?: T;
         uri?: T;
         id?: T;
+      };
+  footer?:
+    | T
+    | {
+        copyrightName?: T;
+        location?: T;
+        timezone?: T;
       };
   footerColumns?:
     | T

@@ -65,10 +65,23 @@ export type CmsContact = {
   whatsappUrl: string
 }
 
+export type CmsFooterBrand = {
+  copyrightName: string
+  location: string
+  timezone: string
+}
+
+export const defaultFooterBrand: CmsFooterBrand = {
+  copyrightName: 'NNAMDI AZUBUIKE',
+  location: 'LAGOS, NIGERIA',
+  timezone: 'Africa/Lagos',
+}
+
 export type CmsSiteSettings = {
   about: CmsAbout
   contact: CmsContact
   experience: CmsExperienceItem[]
+  footer: CmsFooterBrand
   navLinks: Array<{ id: string; name: string; href: string }>
   socialLinks: Array<{ id: string; name: string; uri: string }>
   footerColumns: CmsFooterColumn[]
@@ -131,12 +144,18 @@ type SiteSettingsDoc = {
     id?: string | null
     company: string
     role: string
+    badge?: string | null
     period?: string | null
     summary?: string | null
     highlights?: Array<{ id?: string | null; text: string }> | null
   }> | null
   navLinks?: Array<{ id?: string | null; name: string; href: string }> | null
   socialLinks?: Array<{ id?: string | null; name: string; uri: string }> | null
+  footer?: {
+    copyrightName?: string | null
+    location?: string | null
+    timezone?: string | null
+  } | null
   footerColumns?: Array<{
     id?: string | null
     title: string
@@ -247,6 +266,7 @@ function mapSiteSettings(doc: SiteSettingsDoc): CmsSiteSettings {
     .map((item) => ({
       company: item.company.trim(),
       role: item.role.trim(),
+      badge: item.badge?.trim() || undefined,
       period: item.period?.trim() || undefined,
       summary: item.summary?.trim() || undefined,
       highlights: (item.highlights ?? [])
@@ -269,6 +289,11 @@ function mapSiteSettings(doc: SiteSettingsDoc): CmsSiteSettings {
       whatsappUrl,
     },
     experience: experienceFromCms.length > 0 ? experienceFromCms : defaultExperience,
+    footer: {
+      copyrightName: doc.footer?.copyrightName?.trim() || defaultFooterBrand.copyrightName,
+      location: doc.footer?.location?.trim() || defaultFooterBrand.location,
+      timezone: doc.footer?.timezone?.trim() || defaultFooterBrand.timezone,
+    },
     navLinks: (doc.navLinks ?? []).map((link, index) => ({
       id: link.id ?? String(index),
       name: link.name,

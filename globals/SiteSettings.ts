@@ -18,12 +18,12 @@ export const SiteSettings: GlobalConfig = {
         {
           name: 'role',
           type: 'text',
-          defaultValue: 'Team Lead',
+          defaultValue: 'Frontend Engineer',
         },
         {
           name: 'title',
           type: 'text',
-          defaultValue: 'Senior Frontend Engineer',
+          defaultValue: 'Team Lead',
         },
         {
           name: 'intro',
@@ -110,6 +110,13 @@ export const SiteSettings: GlobalConfig = {
           required: true,
         },
         {
+          name: 'badge',
+          type: 'text',
+          admin: {
+            description: 'Optional chip next to the role (e.g. Promoted to Team Lead).',
+          },
+        },
+        {
           name: 'period',
           type: 'text',
           admin: {
@@ -177,6 +184,39 @@ export const SiteSettings: GlobalConfig = {
           name: 'uri',
           type: 'text',
           required: true,
+        },
+      ],
+    },
+    {
+      name: 'footer',
+      type: 'group',
+      label: 'Footer',
+      admin: {
+        description:
+          'Copyright line. Year is generated automatically from the current date.',
+      },
+      fields: [
+        {
+          name: 'copyrightName',
+          type: 'text',
+          defaultValue: 'NNAMDI AZUBUIKE',
+          admin: {
+            description: 'Shown as © {year} NAME',
+          },
+        },
+        {
+          name: 'location',
+          type: 'text',
+          defaultValue: 'LAGOS, NIGERIA',
+        },
+        {
+          name: 'timezone',
+          type: 'text',
+          defaultValue: 'Africa/Lagos',
+          admin: {
+            description:
+              'IANA timezone (e.g. Africa/Lagos). Offset is computed live as UTC±X — not stored as a fixed string.',
+          },
         },
       ],
     },

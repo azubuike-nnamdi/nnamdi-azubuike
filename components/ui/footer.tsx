@@ -1,11 +1,13 @@
 import { CONTACT_URL } from "@/config/routes";
-import { getCurrentYear } from "@/lib/helper";
+import { formatUtcOffset, getCurrentYear } from "@/lib/helper";
+import type { CmsFooterBrand } from "@/lib/cms";
 import type { FooterColumn, FooterLink, PortfolioItem } from "@/lib/definitions";
 import Link from "next/link";
 
 type FooterProps = {
   columns: FooterColumn[];
   socialLinks?: PortfolioItem[];
+  brand?: CmsFooterBrand;
 };
 
 function withContactRoute(links: FooterLink[]): FooterLink[] {
@@ -15,7 +17,7 @@ function withContactRoute(links: FooterLink[]): FooterLink[] {
   return [...links, { id: "contact", label: "Contact", url: CONTACT_URL }];
 }
 
-const Footer = ({ columns, socialLinks = [] }: FooterProps) => {
+const Footer = ({ columns, socialLinks = [], brand }: FooterProps) => {
   const elsewhere =
     socialLinks.length > 0
       ? socialLinks
@@ -34,6 +36,11 @@ const Footer = ({ columns, socialLinks = [] }: FooterProps) => {
       columns[columns.length - 1]?.links ??
       [],
   );
+
+  const year = getCurrentYear();
+  const copyrightName = brand?.copyrightName || "NNAMDI AZUBUIKE";
+  const location = brand?.location || "LAGOS, NIGERIA";
+  const utcOffset = formatUtcOffset(brand?.timezone || "Africa/Lagos");
 
   return (
     <footer className="mt-20 border-t border-border pt-10">
@@ -65,9 +72,14 @@ const Footer = ({ columns, socialLinks = [] }: FooterProps) => {
         </section>
       </div>
 
-      <p className="mt-10 text-sm text-muted-foreground">
-        Nnamdi © 2020 - {getCurrentYear()}
-      </p>
+      <div className="mt-10 space-y-1 text-xs tracking-wide text-muted-foreground uppercase sm:text-sm">
+        <p>
+          &copy; {year} {copyrightName}
+        </p>
+        <p>
+          {location} · {utcOffset}
+        </p>
+      </div>
     </footer>
   );
 };

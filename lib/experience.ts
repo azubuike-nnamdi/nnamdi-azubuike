@@ -1,6 +1,8 @@
 export type CmsExperienceItem = {
   company: string
   role: string
+  /** Short promotion / status chip, e.g. "Promoted to Team Lead" */
+  badge?: string
   period?: string
   summary?: string
   highlights: string[]
@@ -20,18 +22,28 @@ export type CmsExpertiseGroup = {
 /** Full experience from CV — used on /experience and as CMS defaults. */
 export const defaultExperience: CmsExperienceItem[] = [
   {
-    company: 'MTN Nigeria',
-    role: 'Senior Frontend Engineer (Team Lead)',
+    company: 'Estuary Business Solutions',
+    role: 'Frontend Engineer',
+    badge: 'Promoted to Team Lead',
     period: 'March 2023 — Present',
-    summary: 'Lagos, Nigeria',
+    summary: 'MTN Nigeria contract · Lagos, Nigeria',
     highlights: [
-      'Led and collaborated with a cross-functional frontend team of 6 engineers to deliver large-scale React and Next.js self-service portals used by 1M+ monthly users.',
-      'Built and scaled user-facing features enabling data and airtime purchases, bill payments, bulk SMS purchases, usage tracking, and IoT device monitoring, serving high-traffic consumer and enterprise use cases.',
-      'Led the design and implementation of the organisation-wide frontend design system, defining reusable components, layout patterns, and UI standards adopted across multiple product teams.',
-      'Built and maintained a frontend boilerplate starter kit with the organisation’s design system and core tooling preconfigured, enabling teams to bootstrap new projects without starting from scratch.',
-      'Acted as frontend technical owner for the design system, reviewing contributions, enforcing best practices, and mentoring engineers on scalable UI architecture.',
-      'Collaborated with backend and product teams to translate complex business requirements into maintainable frontend solutions.',
-      'Mentored junior engineers through code reviews, pairing sessions, and architectural guidance.',
+      'Led systems delivery across MTN Nigeria’s Next.js monorepo (Nx/Turbo) — self-service marketplace, FibreX, Bulk SMS, admin dashboard, cloud, and related apps — platforms used by 1M+ monthly users.',
+      'Built and evolved shared platform packages: NextAuth session helpers, server-to-server auth checks, reusable payment systems, and design-system utilities consumed across apps.',
+      'Shipped production hardening — hardened cookies/session config, payment and financial-record guards, replay/rate-limit patterns, and OpenTelemetry instrumentation — with support across SIT, UAT, and production.',
+      'Owned high-traffic technical flows (airtime, data, billing, fibre plan/payments, enterprise SMS) and mentored engineers through reviews, pairing, and architecture guidance.',
+    ],
+  },
+  {
+    company: 'Numoni',
+    role: 'Frontend Engineer',
+    period: 'September 2025 — January 2026',
+    summary:
+      'Contract · Loyalty, rewards & payments · Merchant portal + Admin platform',
+    highlights: [
+      'Built the merchant portal (merchant.numoni.io) for day-to-day ops: multi-branch setup with maps, reward tables, deals & promos, POS, and payment/POS transaction history.',
+      'Built the admin platform (admin.numoni.io) for operators: merchant KYC, customers, charities, roles & permissions, bonuses, settlements/reports, support, alerts, and e-commerce admin.',
+      'Shared stack across both apps — Next.js, React, TanStack Query, Zustand, React Hook Form + Zod, Tailwind, and shadcn — with table-heavy dashboards and mutation-safe cache invalidation.',
     ],
   },
   {
@@ -113,4 +125,4 @@ export const defaultExpertise: CmsExpertiseGroup[] = [
 ]
 
 export const cvSummary =
-  'Frontend engineer specializing in React and Next.js with 4+ years building production-grade web applications. Strong focus on component architecture, state management (Redux, Zustand, React Query), performance optimization, and accessible UI systems. Experienced in translating complex product requirements into maintainable frontend codebases used at scale.'
+  'Engineer with 6+ years of experience building production-grade web applications. Strong focus on component architecture, state management, performance optimization, and accessible UI systems. Experienced in translating complex product requirements into maintainable codebases used at scale.'
