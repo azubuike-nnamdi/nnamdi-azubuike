@@ -553,6 +553,15 @@ export interface SiteSetting {
     whatsappMessage?: string | null;
   };
   /**
+   * Public resume link used in the footer, contact page, and experience page.
+   */
+  resume?: {
+    /**
+     * Google Drive, Dropbox, or any public CV link. No code change needed after updating.
+     */
+    url?: string | null;
+  };
+  /**
    * Selective roles shown on the homepage (impact over job history).
    */
   experience?:
@@ -649,6 +658,11 @@ export interface SiteSettingsSelect<T extends boolean = true> {
     | {
         whatsappPhone?: T;
         whatsappMessage?: T;
+      };
+  resume?:
+    | T
+    | {
+        url?: T;
       };
   experience?:
     | T

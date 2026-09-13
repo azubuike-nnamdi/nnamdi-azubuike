@@ -3,7 +3,6 @@ import {
   EMAIL_URL,
   GITHUB_URL,
   LINKEDIN_URL,
-  RESUME_URL,
   TWITTER_URL,
 } from '@/config/routes'
 import { MessageCircle } from 'lucide-react'
@@ -12,11 +11,13 @@ import Link from 'next/link'
 type ContactPageProps = {
   whatsappUrl?: string
   whatsappPhone?: string
+  resumeUrl: string
 }
 
 export default function ContactPage({
   whatsappUrl = '',
   whatsappPhone = '',
+  resumeUrl,
 }: ContactPageProps) {
   const channels = [
     {
@@ -56,7 +57,7 @@ export default function ContactPage({
     {
       label: 'Resume',
       detail: 'View CV',
-      href: RESUME_URL,
+      href: resumeUrl,
       external: true,
     },
   ]

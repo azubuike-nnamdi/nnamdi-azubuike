@@ -29,5 +29,10 @@ export const metadata: Metadata = {
 export default async function Page() {
   const siteSettings = await getSiteSettings()
 
-  return <ExperienceLanding experience={siteSettings.experience} />
+  return (
+    <ExperienceLanding
+      experience={siteSettings.experience}
+      resumeUrl={siteSettings.resumeUrl}
+    />
+  )
 }

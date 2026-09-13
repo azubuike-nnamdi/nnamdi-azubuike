@@ -1,7 +1,11 @@
 import { getPayload } from 'payload'
 import config from '@payload-config'
 import { defaultAbout, type CmsAbout } from '@/lib/about'
-import { DEFAULT_WHATSAPP_MESSAGE, buildWhatsAppUrl } from '@/config/routes'
+import {
+  DEFAULT_WHATSAPP_MESSAGE,
+  RESUME_URL,
+  buildWhatsAppUrl,
+} from '@/config/routes'
 import { projectScreenshotFromUrl } from '@/lib/project'
 import { defaultExperience, type CmsExperienceItem } from '@/lib/experience'
 
@@ -80,6 +84,7 @@ export const defaultFooterBrand: CmsFooterBrand = {
 export type CmsSiteSettings = {
   about: CmsAbout
   contact: CmsContact
+  resumeUrl: string
   experience: CmsExperienceItem[]
   footer: CmsFooterBrand
   navLinks: Array<{ id: string; name: string; href: string }>
@@ -139,6 +144,9 @@ type SiteSettingsDoc = {
   contact?: {
     whatsappPhone?: string | null
     whatsappMessage?: string | null
+  } | null
+  resume?: {
+    url?: string | null
   } | null
   experience?: Array<{
     id?: string | null
@@ -275,6 +283,11 @@ function mapSiteSettings(doc: SiteSettingsDoc): CmsSiteSettings {
     }))
     .filter((item) => item.company && item.role)
 
+  const resumeFromSocial = (doc.socialLinks ?? []).find((link) =>
+    /resume|cv/i.test(link.name),
+  )?.uri
+  const resumeUrl = doc.resume?.url?.trim() || resumeFromSocial?.trim() || RESUME_URL
+
   return {
     about: {
       role: about?.role?.trim() || defaultAbout.role,
@@ -288,6 +301,7 @@ function mapSiteSettings(doc: SiteSettingsDoc): CmsSiteSettings {
       whatsappMessage,
       whatsappUrl,
     },
+    resumeUrl,
     experience: experienceFromCms.length > 0 ? experienceFromCms : defaultExperience,
     footer: {
       copyrightName: doc.footer?.copyrightName?.trim() || defaultFooterBrand.copyrightName,
@@ -302,7 +316,7 @@ function mapSiteSettings(doc: SiteSettingsDoc): CmsSiteSettings {
     socialLinks: (doc.socialLinks ?? []).map((link, index) => ({
       id: link.id ?? String(index),
       name: link.name,
-      uri: link.uri,
+      uri: /resume|cv/i.test(link.name) ? resumeUrl : link.uri,
     })),
     footerColumns: (doc.footerColumns ?? []).map((column, index) => ({
       id: column.id ?? String(index),

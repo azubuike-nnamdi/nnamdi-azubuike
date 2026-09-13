@@ -5,14 +5,17 @@ import {
   defaultExpertise,
   type CmsExperienceItem,
 } from '@/lib/experience'
-import { RESUME_URL } from '@/config/routes'
 import Link from 'next/link'
 
 type ExperienceLandingProps = {
   experience: CmsExperienceItem[]
+  resumeUrl: string
 }
 
-export default function ExperienceLanding({ experience }: ExperienceLandingProps) {
+export default function ExperienceLanding({
+  experience,
+  resumeUrl,
+}: ExperienceLandingProps) {
   return (
     <div className="space-y-12">
       <header className="space-y-3">
@@ -27,7 +30,7 @@ export default function ExperienceLanding({ experience }: ExperienceLandingProps
         </p>
         <p>
           <Link
-            href={RESUME_URL}
+            href={resumeUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="soft-link text-sm"
