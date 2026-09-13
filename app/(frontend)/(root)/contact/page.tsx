@@ -9,12 +9,13 @@ export const metadata: Metadata = {
 }
 
 export default async function Page() {
-  const { contact } = await getSiteSettings()
+  const { contact, resumeUrl } = await getSiteSettings()
 
   return (
     <ContactPage
       whatsappUrl={contact.whatsappUrl}
       whatsappPhone={contact.whatsappPhone}
+      resumeUrl={resumeUrl}
     />
   )
 }
