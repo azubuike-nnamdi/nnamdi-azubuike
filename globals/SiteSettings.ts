@@ -6,6 +6,14 @@ export const SiteSettings: GlobalConfig = {
   access: {
     read: () => true,
   },
+  hooks: {
+    afterChange: [
+      async () => {
+        const { revalidatePath } = await import('next/cache')
+        revalidatePath('/', 'layout')
+      },
+    ],
+  },
   fields: [
     {
       name: 'about',
@@ -83,6 +91,27 @@ export const SiteSettings: GlobalConfig = {
             'Hello Nnamdi, I came from your website and would like to talk.',
           admin: {
             description: 'Prefill message when someone opens WhatsApp.',
+          },
+        },
+      ],
+    },
+    {
+      name: 'resume',
+      type: 'group',
+      label: 'Resume / CV',
+      admin: {
+        description:
+          'Public resume link used in the footer, contact page, and experience page.',
+      },
+      fields: [
+        {
+          name: 'url',
+          type: 'text',
+          label: 'Resume URL',
+          admin: {
+            description:
+              'Google Drive, Dropbox, or any public CV link. No code change needed after updating.',
+            placeholder: 'https://drive.google.com/file/d/.../view',
           },
         },
       ],
