@@ -31,7 +31,8 @@ export default function LandingPage({
 }: LandingPageProps) {
   return (
     <div className="space-y-14 sm:space-y-16">
-      <section className="fade-up max-w-2xl" style={{ animationDelay: '60ms' }}>
+      {/* No fade-up on the hero — opacity:0 blocks LCP (PageSpeed NO_LCP). */}
+      <section className="max-w-2xl">
         <h1 className="font-display text-4xl font-extrabold tracking-tight text-highlight sm:text-5xl">
           Nnamdi Azubuike
         </h1>
