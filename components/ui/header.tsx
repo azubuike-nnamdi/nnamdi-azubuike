@@ -32,7 +32,7 @@ const Header = ({ navLinks = fallbackNav }: HeaderProps) => {
   const links = withContactLink(navLinks);
 
   return (
-    <header className="fade-up flex items-center justify-between gap-4">
+    <header className="flex items-center justify-between gap-4">
       <Link
         href="/"
         className={`font-display text-lg font-semibold tracking-tight transition-colors ${
