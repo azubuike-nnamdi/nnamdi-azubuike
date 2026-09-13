@@ -65,6 +65,9 @@ async function seed() {
         whatsappMessage:
           'Hello Nnamdi, I came from your website and would like to talk.',
       },
+      resume: {
+        url: RESUME_URL,
+      },
       experience: defaultExperience.map((item) => ({
         company: item.company,
         role: item.role,
