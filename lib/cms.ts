@@ -1,6 +1,7 @@
 import { getPayload } from 'payload'
 import config from '@payload-config'
 import { defaultAbout, type CmsAbout } from '@/lib/about'
+import { tailorPortfolio, tailorSlug } from '@/lib/tailor'
 import { defaultExperience, type CmsExperienceItem } from '@/lib/experience'
 import {
   DEFAULT_WHATSAPP_MESSAGE,
@@ -425,4 +426,84 @@ export async function getSiteSettings(): Promise<CmsSiteSettings> {
   })
 
   return mapSiteSettings(doc as SiteSettingsDoc)
+}
+
+export type TailoredPageRecord = {
+  slug: string
+  audience: string
+  headline: string
+  lede: string
+  skills: string[]
+  projectSlugs: string[]
+  experienceCompany: string
+}
+
+function mapTailoredPage(doc: {
+  slug: string
+  audience: string
+  headline: string
+  lede: string
+  skills?: Array<string | null> | null
+  projectSlugs?: Array<{ slug?: string | null } | string> | null
+  experienceCompany?: string | null
+}): TailoredPageRecord {
+  const projectSlugs = (doc.projectSlugs ?? [])
+    .map((item) => (typeof item === 'string' ? item : item.slug))
+    .filter((slug): slug is string => Boolean(slug))
+  const skills = (doc.skills ?? []).filter((skill): skill is string => Boolean(skill?.trim()))
+
+  return {
+    slug: doc.slug,
+    audience: doc.audience,
+    headline: doc.headline,
+    lede: doc.lede,
+    skills,
+    projectSlugs,
+    experienceCompany: doc.experienceCompany ?? '',
+  }
+}
+
+export async function getTailoredPage(slug: string): Promise<TailoredPageRecord | null> {
+  const payload = await getPayloadClient()
+  const result = await payload.find({
+    collection: 'tailored-pages',
+    where: { slug: { equals: slug } },
+    limit: 1,
+    depth: 0,
+  })
+
+  const doc = result.docs[0]
+  if (!doc) return null
+  return mapTailoredPage(doc)
+}
+
+export async function createTailoredPage(input: {
+  jobTitle: string
+  description: string
+}): Promise<TailoredPageRecord> {
+  const payload = await getPayloadClient()
+  const [projects, settings] = await Promise.all([getProjects(), getSiteSettings()])
+  const copy = tailorPortfolio({
+    jobTitle: input.jobTitle,
+    description: input.description,
+    projects,
+    experience: settings.experience,
+  })
+  const slug = tailorSlug(copy.audience)
+
+  const doc = await payload.create({
+    collection: 'tailored-pages',
+    overrideAccess: true,
+    data: {
+      slug,
+      audience: copy.audience,
+      headline: copy.headline,
+      lede: copy.lede,
+      skills: copy.skills,
+      projectSlugs: copy.projectSlugs.map((projectSlug) => ({ slug: projectSlug })),
+      experienceCompany: copy.experienceCompany,
+    },
+  })
+
+  return mapTailoredPage(doc)
 }
