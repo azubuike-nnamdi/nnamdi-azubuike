@@ -1,24 +1,19 @@
-import BackToTop from "@/components/ui/back-to-top";
-import Footer from "@/components/ui/footer";
-import Header from "@/components/ui/header";
+import SiteFooter from "@/components/site-footer";
+import SiteHeader from "@/components/site-header";
 import { ThemeProvider } from "@/components/ui/theme-provider";
 import { getSiteSettings } from "@/lib/cms";
 import { personJsonLd } from "@/lib/person-jsonld";
 import type { Metadata } from "next";
-import { Instrument_Sans, Newsreader } from "next/font/google";
+import { Plus_Jakarta_Sans } from "next/font/google";
+import Script from "next/script";
 import { URL } from "node:url";
 import "./globals.css";
+import "./redesign.css";
 
-const instrumentSans = Instrument_Sans({
+const jakarta = Plus_Jakarta_Sans({
   variable: "--font-body",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-});
-
-const newsreader = Newsreader({
-  variable: "--font-newsreader",
-  subsets: ["latin"],
-  weight: ["400", "500", "600"],
+  weight: ["400", "500", "600", "700", "800"],
 });
 
 const siteDescription =
@@ -92,27 +87,60 @@ export default async function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${instrumentSans.variable} ${newsreader.variable} font-sans antialiased`}
+        className={`${jakarta.variable} font-sans antialiased`}
       >
         <ThemeProvider
           attribute="class"
-          defaultTheme="light"
+          forcedTheme="light"
+          enableSystem={false}
           disableTransitionOnChange
         >
           <script
             type="application/ld+json"
             dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd()) }}
           />
-          <div className="site-shell">
-            <Header navLinks={siteSettings.navLinks} />
-            <main className="pt-10 sm:pt-14">{children}</main>
-            <Footer
-              columns={siteSettings.footerColumns}
-              socialLinks={siteSettings.socialLinks}
-              brand={siteSettings.footer}
-            />
-            <BackToTop />
-          </div>
+          <SiteHeader />
+          {children}
+          <SiteFooter whatsappUrl={siteSettings.contact.whatsappUrl} />
+          <Script id="site-behavior" strategy="afterInteractive">
+            {`(function () {
+  var header = document.getElementById('hd');
+  var nav = header && header.querySelector('.nav');
+  var toggle = header && header.querySelector('.nav-toggle');
+  if (header && nav && !header.dataset.bound) {
+    header.dataset.bound = '1';
+    var onScroll = function () {
+      header.classList.toggle('s', window.scrollY > 10);
+      var links = nav.querySelectorAll('ul a[data-id]');
+      if (location.pathname !== '/') {
+        links.forEach(function (link) {
+          link.classList.toggle('on', link.getAttribute('data-id') === 'fun' && location.pathname === '/fun');
+        });
+        return;
+      }
+      var active = 'top';
+      links.forEach(function (link) {
+        var id = link.getAttribute('data-id');
+        var section = document.getElementById(id);
+        if (section && section.getBoundingClientRect().top < 200) active = id;
+      });
+      links.forEach(function (link) {
+        link.classList.toggle('on', link.getAttribute('data-id') === active);
+      });
+    };
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    if (toggle) {
+      toggle.addEventListener('click', function () {
+        var open = nav.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+        toggle.textContent = open ? 'Close' : 'Menu';
+      });
+    }
+  }
+})();`}
+          </Script>
         </ThemeProvider>
       </body>
     </html>
