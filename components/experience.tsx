@@ -42,7 +42,7 @@ function ExperienceList({
   showBadge?: boolean
 }) {
   return (
-    <ul className="border-t border-foreground/80">
+    <div className="channel-list">
       {items.map((item) => {
         const highlights =
           typeof highlightLimit === 'number'
@@ -51,38 +51,23 @@ function ExperienceList({
         const badge = visibleBadge(item, showBadge)
 
         return (
-          <li
-            key={`${item.company}-${item.role}-${item.period ?? ''}`}
-            className="grid grid-cols-1 gap-3 border-b border-border py-6 sm:grid-cols-[minmax(11rem,15rem)_1fr] sm:gap-10"
-          >
-            <div>
-              <p className="font-display text-lg leading-snug text-foreground">{item.company}</p>
-              {item.period ? (
-                <p className="mt-1 text-sm text-muted-foreground">{item.period}</p>
-              ) : null}
-            </div>
-            <div className="space-y-3">
-              <div>
-                <p className="text-base text-foreground">{presentedRole(item)}</p>
-                {badge ? (
-                  <p className="mt-1 text-sm text-muted-foreground">{badge}</p>
-                ) : null}
-                {item.summary ? (
-                  <p className="mt-1 text-sm leading-6 text-muted-foreground">{item.summary}</p>
-                ) : null}
-              </div>
-              {highlights.length > 0 ? (
-                <ul className="space-y-2 text-sm leading-6 text-muted-foreground">
-                  {highlights.map((highlight) => (
-                    <li key={highlight}>{highlight}</li>
-                  ))}
-                </ul>
-              ) : null}
-            </div>
-          </li>
+          <article key={`${item.company}-${item.role}-${item.period ?? ''}`} className="card">
+            {item.period ? <p className="k">{item.period}</p> : null}
+            <h3>{presentedRole(item)}</h3>
+            <p>{item.company}</p>
+            {badge ? <p>{badge}</p> : null}
+            {item.summary ? <p>{item.summary}</p> : null}
+            {highlights.length > 0 ? (
+              <ul className="mt-3 space-y-2 text-sm leading-6" style={{ color: 'var(--mute)' }}>
+                {highlights.map((highlight) => (
+                  <li key={highlight}>{highlight}</li>
+                ))}
+              </ul>
+            ) : null}
+          </article>
         )
       })}
-    </ul>
+    </div>
   )
 }
 
@@ -109,11 +94,8 @@ export default function Experience({
               Where this sits
             </h2>
             {hasMore ? (
-              <Link
-                href={EXPERIENCE_URL}
-                className="text-sm text-muted-foreground hover:text-foreground"
-              >
-                view more
+              <Link href={EXPERIENCE_URL} className="section-more">
+                Full experience →
               </Link>
             ) : null}
           </div>
@@ -124,14 +106,6 @@ export default function Experience({
       ) : null}
 
       <ExperienceList items={items} highlightLimit={highlightLimit} showBadge={showBadge} />
-
-      {hasMore ? (
-        <div className="mt-6">
-          <Link href={EXPERIENCE_URL} className="soft-link text-sm">
-            view full experience →
-          </Link>
-        </div>
-      ) : null}
     </section>
   )
 }
