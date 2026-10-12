@@ -17,25 +17,21 @@ export default function ExperienceLanding({
   resumeUrl,
 }: ExperienceLandingProps) {
   return (
-    <div className="space-y-12">
-      <header className="space-y-3">
-        <Link href="/" className="soft-link text-sm">
-          ← home
+    <div className="space-y-16">
+      <header className="max-w-2xl">
+        <Link href="/" className="text-sm text-muted-foreground hover:text-foreground">
+          Home
         </Link>
-        <h1 className="font-display text-3xl font-bold tracking-tight text-highlight sm:text-5xl">
-          Experience
-        </h1>
-        <p className="max-w-2xl text-base leading-7 text-muted-foreground sm:text-lg sm:leading-8">
-          {cvSummary}
-        </p>
-        <p>
+        <h1 className="page-title mt-6">Experience</h1>
+        <p className="mt-5 text-lg leading-8 text-muted-foreground">{cvSummary}</p>
+        <p className="mt-4">
           <Link
             href={resumeUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="soft-link text-sm"
+            className="text-link text-sm"
           >
-            Download CV →
+            Download CV
           </Link>
         </p>
       </header>
@@ -43,7 +39,7 @@ export default function ExperienceLanding({
       <Experience experience={experience} showHeading={false} />
 
       <section className="space-y-4">
-        <h2 className="section-label">core frontend expertise</h2>
+        <h2 className="section-label">scope</h2>
         <ul className="space-y-3">
           {defaultExpertise.map((group) => (
             <li
