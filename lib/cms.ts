@@ -1,13 +1,14 @@
 import { getPayload } from 'payload'
 import config from '@payload-config'
 import { defaultAbout, type CmsAbout } from '@/lib/about'
+import { defaultExperience, type CmsExperienceItem } from '@/lib/experience'
 import {
   DEFAULT_WHATSAPP_MESSAGE,
   RESUME_URL,
   buildWhatsAppUrl,
 } from '@/config/routes'
 import { projectScreenshotFromUrl } from '@/lib/project'
-import { defaultExperience, type CmsExperienceItem } from '@/lib/experience'
+import { asNoteType, noteTypeLabel, writingSection, type NoteType, type WritingSection } from '@/lib/writing'
 
 export type CmsProject = {
   id: string
@@ -39,6 +40,9 @@ export type CmsArticle = {
   date: string
   readTime: string
   summary?: string | null
+  section: WritingSection
+  noteType: NoteType
+  noteTypeLabel: string
   desc?: string
   categories: string[]
   category: string[]
@@ -126,6 +130,8 @@ type ArticleDoc = {
   publishedAt: string
   readTime: string
   summary?: string | null
+  section?: string | null
+  noteType?: string | null
   categories?: Array<{ name: string }> | null
   image?: number | string | MediaDoc | null
   imageUrl?: string | null
@@ -249,6 +255,9 @@ function mapArticle(doc: ArticleDoc): CmsArticle {
     readTime: doc.readTime,
     summary: doc.summary,
     desc: doc.summary ?? undefined,
+    section: writingSection(doc.section),
+    noteType: asNoteType(doc.noteType),
+    noteTypeLabel: noteTypeLabel(doc.noteType),
     categories,
     category: categories,
     image,
@@ -372,16 +381,23 @@ export async function getProjectBySlug(slug: string) {
   return mapProject(doc)
 }
 
-export async function getArticles(options?: { limit?: number }) {
+export async function getArticles(options?: {
+  limit?: number
+  section?: WritingSection
+}) {
   const payload = await getPayloadClient()
   const result = await payload.find({
     collection: 'articles',
-    sort: 'order',
-    limit: options?.limit ?? 100,
+    sort: '-publishedAt',
+    limit: 100,
     depth: 1,
   })
 
-  return result.docs.map((doc) => mapArticle(doc as ArticleDoc))
+  const articles = result.docs
+    .map((doc) => mapArticle(doc as ArticleDoc))
+    .filter((article) => (options?.section ? article.section === options.section : true))
+
+  return typeof options?.limit === 'number' ? articles.slice(0, options.limit) : articles
 }
 
 export async function getArticleBySlug(slug: string) {
