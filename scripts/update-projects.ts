@@ -13,17 +13,13 @@ async function main() {
     slug: 'site-settings',
     data: {
       about: {
-        role: 'Frontend Engineer',
-        title: 'Team Lead',
+        role: 'Software Engineering Lead',
+        title: 'MTN Nigeria',
         intro:
-          "For 6+ years, I've built and shipped software across telecom, financial systems, and enterprise operations — solving problems where reliability, scalability, security, and user experience matter.",
+          'I set technical direction, engineering standards, and how teams deliver across consumer, enterprise, payments, messaging, and connectivity at MTN Nigeria.',
         body:
-          "I've led and worked hands-on across platforms serving over 1 million users, from system architecture and backend services to APIs and frontend applications. I go beyond marking tickets as done — I think about the bigger picture: how a system is designed, how it scales, how secure and resilient it is, and how easily it can evolve as the business grows.",
-        highlights: [
-          { term: 'financial systems' },
-          { term: '1 million' },
-          { term: 'telecom' },
-        ],
+          'That scope includes myMTN, messaging, Bulk SMS, FibreX, FlyX, IoT, and cloud — platforms used by more than 1 million people a month. I still work in the architecture. The [[work|/projects]] is the record.',
+        highlights: [{ term: '1 million' }, { term: 'MTN Nigeria' }, { term: 'payments' }],
       },
       experience: defaultExperience.map((item) => ({
         company: item.company,
