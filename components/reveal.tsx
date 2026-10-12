@@ -11,14 +11,22 @@ export default function Reveal({ children }: { children: ReactNode }) {
 
     const nodes = [...root.querySelectorAll<HTMLElement>('.rv')]
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    const show = (node: Element) => node.classList.add('in')
+    const show = (node: Element) => {
+      node.classList.add('in')
+      node.classList.remove('out')
+    }
 
     const inView = nodes.filter((node) => {
       const rect = node.getBoundingClientRect()
       return rect.top < window.innerHeight && rect.bottom > 0
     })
     if (reduce || inView.length === 0) nodes.forEach(show)
-    else inView.forEach(show)
+    else {
+      nodes.forEach((node) => {
+        if (inView.includes(node)) show(node)
+        else node.classList.add('out')
+      })
+    }
     root.classList.add('reveal-on')
 
     if (reduce || typeof IntersectionObserver === 'undefined') {
@@ -31,6 +39,7 @@ export default function Reveal({ children }: { children: ReactNode }) {
         entries.forEach((entry) => {
           if (!entry.isIntersecting) return
           entry.target.classList.add('in')
+          entry.target.classList.remove('out')
           observer.unobserve(entry.target)
         })
       },
