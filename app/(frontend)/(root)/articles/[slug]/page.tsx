@@ -1,3 +1,4 @@
+import { NOTES_URL, INSIGHTS_URL } from '@/config/routes'
 import { getArticleBySlug } from '@/lib/cms'
 import { RichText } from '@payloadcms/richtext-lexical/react'
 import type { Metadata } from 'next'
@@ -52,21 +53,24 @@ export default async function ArticlePage({ params }: PageProps) {
     notFound()
   }
 
+  const indexHref = article.section === 'insight' ? INSIGHTS_URL : NOTES_URL
+  const indexLabel = article.section === 'insight' ? 'All insights' : 'All notes'
+
   return (
     <article className="fade-up mx-auto max-w-2xl">
-      <Link href="/articles" className="soft-link text-sm">
-        ← articles
+      <Link href={indexHref} className="text-sm text-muted-foreground hover:text-foreground">
+        {indexLabel}
       </Link>
 
       <header className="mt-8 mb-10 space-y-4">
-        <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs uppercase tracking-wider text-muted-foreground">
+        <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs uppercase tracking-[0.16em] text-muted-foreground">
+          <span>{article.noteTypeLabel}</span>
+          <span>·</span>
           <span>{article.readTime} min read</span>
-          <span className="text-border">|</span>
+          <span>·</span>
           <span>{article.date}</span>
         </div>
-        <h1 className="font-display text-3xl font-bold tracking-tight text-highlight sm:text-5xl">
-          {article.title}
-        </h1>
+        <h1 className="page-title">{article.title}</h1>
         {article.summary ? (
           <p className="text-lg leading-8 text-muted-foreground">{article.summary}</p>
         ) : null}
