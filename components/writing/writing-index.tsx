@@ -1,0 +1,172 @@
+'use client'
+
+import { noteTypeLabel, noteTypes } from '@/lib/writing'
+import type { Article } from '@/lib/definitions'
+import Link from 'next/link'
+import { useMemo, useState, type ReactNode } from 'react'
+
+type WritingIndexProps = {
+  items: Article[]
+  eyebrow: string
+  title: string
+  dek: string
+  aside?: ReactNode
+  empty: string
+}
+
+function formatNoteDate(value?: string) {
+  if (!value) return ''
+  const parsed = new Date(value)
+  if (Number.isNaN(parsed.getTime())) return value
+  return parsed.toLocaleDateString('en-GB', {
+    day: 'numeric',
+    month: 'short',
+    year: 'numeric',
+  })
+}
+
+function readMinutes(value?: string) {
+  const minutes = value?.trim()
+  if (!minutes) return ''
+  return /min/i.test(minutes) ? minutes : `${minutes} min`
+}
+
+export default function WritingIndex({
+  items,
+  eyebrow,
+  title,
+  dek,
+  aside,
+  empty,
+}: WritingIndexProps) {
+  const [query, setQuery] = useState('')
+  const [type, setType] = useState('all')
+
+  const presentTypes = useMemo(() => {
+    const found = new Set(items.map((item) => item.noteType || 'technical'))
+    return noteTypes.filter((option) => found.has(option.value))
+  }, [items])
+
+  const visible = useMemo(() => {
+    const needle = query.trim().toLowerCase()
+    return items.filter((item) => {
+      const itemType = item.noteType || 'technical'
+      if (type !== 'all' && itemType !== type) return false
+      if (!needle) return true
+      const haystack = [item.title, item.desc, item.summary, noteTypeLabel(itemType)]
+        .filter(Boolean)
+        .join(' ')
+        .toLowerCase()
+      return haystack.includes(needle)
+    })
+  }, [items, query, type])
+
+  return (
+    <div className="fade-up">
+      <p className="kicker">{eyebrow}</p>
+      <h1 className="page-title mt-3">{title}</h1>
+      <p className="mt-4 max-w-xl text-lg leading-8 text-muted-foreground">{dek}</p>
+      {aside ? <p className="mt-3 max-w-xl text-sm leading-6 text-muted-foreground">{aside}</p> : null}
+
+      <div className="mt-10 flex flex-col gap-5 border-b border-border pb-5 sm:flex-row sm:items-end sm:justify-between">
+        <div className="flex flex-wrap gap-x-5 gap-y-2">
+          <FilterButton active={type === 'all'} onClick={() => setType('all')}>
+            All
+          </FilterButton>
+          {presentTypes.map((option) => (
+            <FilterButton
+              key={option.value}
+              active={type === option.value}
+              onClick={() => setType(option.value)}
+            >
+              {option.label}
+            </FilterButton>
+          ))}
+        </div>
+        <label className="block w-full border-b border-border sm:max-w-xs">
+          <span className="sr-only">Search</span>
+          <input
+            value={query}
+            onChange={(event) => setQuery(event.target.value)}
+            placeholder="Search"
+            className="w-full bg-transparent py-2 text-sm outline-none placeholder:text-muted-foreground"
+          />
+        </label>
+      </div>
+
+      {items.length === 0 ? (
+        <p className="mt-10 max-w-xl text-muted-foreground">{empty}</p>
+      ) : visible.length === 0 ? (
+        <p className="mt-10 text-muted-foreground">Nothing matches that search.</p>
+      ) : (
+        <ul>
+          {visible.map((item) => {
+            const href = item.href || item.uri || '#'
+            const isExternal = item.kind !== 'full'
+            const date = formatNoteDate(item.publishedAt || item.date)
+            const minutes = readMinutes(item.readTime)
+
+            return (
+              <li key={item.id} className="border-b border-border py-8">
+                <p className="text-xs uppercase tracking-[0.16em] text-muted-foreground">
+                  {item.noteTypeLabel || noteTypeLabel(item.noteType)}
+                </p>
+                <h2 className="mt-2 font-display text-2xl font-medium tracking-tight sm:text-3xl">
+                  <Link
+                    href={href}
+                    target={isExternal ? '_blank' : undefined}
+                    rel={isExternal ? 'noopener noreferrer' : undefined}
+                    className="hover:underline hover:decoration-foreground/30 hover:underline-offset-4"
+                  >
+                    {item.title}
+                  </Link>
+                </h2>
+                {item.desc || item.summary ? (
+                  <p className="mt-2 max-w-2xl text-[0.95rem] leading-7 text-muted-foreground">
+                    {item.desc || item.summary}
+                  </p>
+                ) : null}
+                <p className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-muted-foreground">
+                  {date ? <span>{date}</span> : null}
+                  {minutes ? <span>{minutes}</span> : null}
+                  <Link
+                    href={href}
+                    target={isExternal ? '_blank' : undefined}
+                    rel={isExternal ? 'noopener noreferrer' : undefined}
+                    className="text-foreground underline decoration-foreground/30 underline-offset-4"
+                  >
+                    Read
+                  </Link>
+                </p>
+              </li>
+            )
+          })}
+        </ul>
+      )}
+    </div>
+  )
+}
+
+function FilterButton({
+  active,
+  onClick,
+  children,
+}: {
+  active: boolean
+  onClick: () => void
+  children: ReactNode
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className={`text-sm ${
+        active
+          ? 'text-foreground underline decoration-foreground/40 underline-offset-[6px]'
+          : 'text-muted-foreground hover:text-foreground'
+      }`}
+    >
+      {children}
+    </button>
+  )
+}
