@@ -1,3 +1,4 @@
+import BackToTop from "@/components/ui/back-to-top";
 import Footer from "@/components/ui/footer";
 import Header from "@/components/ui/header";
 import { ThemeProvider } from "@/components/ui/theme-provider";
@@ -110,6 +111,7 @@ export default async function RootLayout({
               socialLinks={siteSettings.socialLinks}
               brand={siteSettings.footer}
             />
+            <BackToTop />
           </div>
         </ThemeProvider>
       </body>
