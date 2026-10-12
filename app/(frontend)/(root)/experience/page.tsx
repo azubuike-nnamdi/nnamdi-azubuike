@@ -5,11 +5,11 @@ import type { Metadata } from 'next'
 export const metadata: Metadata = {
   title: 'Experience',
   description:
-    'Nnamdi Azubuike — Senior Frontend Engineer and Team Lead at MTN Nigeria, with prior roles at Weavii, Cellcore, and KudiGo.',
+    'Nnamdi Azubuike — Software Engineering Lead at MTN Nigeria, with earlier product work at Numoni, Weavii, Cellcore, and KudiGo.',
   openGraph: {
     title: 'Experience | Nnamdi Azubuike',
     description:
-      'Team lead and senior frontend experience across MTN, Weavii, Cellcore, and KudiGo.',
+      'Software Engineering Lead at MTN Nigeria, with earlier work at Numoni, Weavii, Cellcore, and KudiGo.',
     url: 'https://www.nnamdiazubuike.dev/experience',
     images: [{ url: '/og.png', width: 1200, height: 630, alt: 'Nnamdi Azubuike' }],
   },
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Experience | Nnamdi Azubuike',
     description:
-      'Team lead and senior frontend experience across MTN, Weavii, Cellcore, and KudiGo.',
+      'Software Engineering Lead at MTN Nigeria, with earlier work at Numoni, Weavii, Cellcore, and KudiGo.',
     images: ['/og.png'],
   },
   robots: {

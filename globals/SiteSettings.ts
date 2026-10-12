@@ -20,18 +20,19 @@ export const SiteSettings: GlobalConfig = {
       type: 'group',
       label: 'About',
       admin: {
-        description: 'Homepage intro under your name.',
+        description:
+          'Supporting copy for the site. The homepage headline is fixed in the page: “Products that have to stay up.”',
       },
       fields: [
         {
           name: 'role',
           type: 'text',
-          defaultValue: 'Frontend Engineer',
+          defaultValue: 'Software Engineering Lead',
         },
         {
           name: 'title',
           type: 'text',
-          defaultValue: 'Team Lead',
+          defaultValue: 'MTN Nigeria',
         },
         {
           name: 'intro',

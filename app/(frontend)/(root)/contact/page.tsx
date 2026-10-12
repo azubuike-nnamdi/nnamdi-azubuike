@@ -5,7 +5,7 @@ import type { Metadata } from 'next'
 export const metadata: Metadata = {
   title: 'Contact',
   description:
-    'Get in touch with Nnamdi Azubuike — collaborations, consulting, and frontend work.',
+    'Get in touch with Nnamdi Azubuike about a product estate, a payments platform, or a team that needs technical direction.',
 }
 
 export default async function Page() {

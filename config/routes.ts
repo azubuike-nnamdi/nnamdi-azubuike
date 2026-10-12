@@ -1,5 +1,7 @@
 const PROJECT_URL: string = '/projects'
 const ARTICLE_URL: string = '/articles'
+const NOTES_URL: string = '/notes'
+const INSIGHTS_URL: string = '/insights'
 const EXPERIENCE_URL: string = '/experience'
 const TALK_URL: string = '/talks'
 const ABOUT_URL: string = '/about'
@@ -39,6 +41,7 @@ export {
   ABOUT_URL,
   ARTICLE_URL,
   CONTACT_URL,
+  INSIGHTS_URL,
   DEFAULT_WHATSAPP_MESSAGE,
   EMAIL,
   EMAIL_URL,
@@ -47,6 +50,7 @@ export {
   HASHNODE_URL,
   LINKEDIN_URL,
   MEDIUM_URL,
+  NOTES_URL,
   PROJECT_URL,
   RESUME_URL,
   TALK_URL,

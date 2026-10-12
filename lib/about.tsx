@@ -10,13 +10,13 @@ export type CmsAbout = {
 }
 
 export const defaultAbout: CmsAbout = {
-  role: 'Frontend Engineer',
-  title: 'Team Lead',
+  role: 'Software Engineering Lead',
+  title: 'MTN Nigeria',
   intro:
-    "For 6+ years, I've built and shipped software across telecom, financial systems, and enterprise operations; solving problems where reliability, scalability, security, and user experience matter.",
+    'I set technical direction, engineering standards, and how teams deliver across consumer, enterprise, payments, messaging, and connectivity at MTN Nigeria.',
   body:
-    "I've led and worked hands-on across platforms serving over 1 million users, from system architecture and backend services to APIs and frontend applications. I go beyond marking tickets as done; I think about the bigger picture: how a system is designed, how it scales, how secure and resilient it is, and how easily it can evolve as the business grows.",
-  highlights: ['financial systems', '1 million', 'telecom'],
+    'That scope includes myMTN, messaging, Bulk SMS, FibreX, FlyX, IoT, and cloud — platforms used by more than 1 million people a month. I still work in the architecture. The [[work|/projects]] is the record.',
+  highlights: ['1 million', 'MTN Nigeria', 'payments'],
 }
 
 /** Emphasize highlight terms in plain text (longest match first). */

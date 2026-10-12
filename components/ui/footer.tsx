@@ -1,4 +1,4 @@
-import { CONTACT_URL } from "@/config/routes";
+import { ABOUT_URL, CONTACT_URL, EXPERIENCE_URL, INSIGHTS_URL, NOTES_URL } from "@/config/routes";
 import { formatUtcOffset, getCurrentYear } from "@/lib/helper";
 import type { CmsFooterBrand } from "@/lib/cms";
 import type { FooterColumn, FooterLink, PortfolioItem } from "@/lib/definitions";
@@ -10,11 +10,49 @@ type FooterProps = {
   brand?: CmsFooterBrand;
 };
 
-function withContactRoute(links: FooterLink[]): FooterLink[] {
-  const hasContact = links.some((link) => link.url === CONTACT_URL);
-  if (hasContact) return links;
+function toTitle(value: string) {
+  return value
+    .toLowerCase()
+    .replace(/\b[a-z]/g, (letter) => letter.toUpperCase());
+}
 
-  return [...links, { id: "contact", label: "Contact", url: CONTACT_URL }];
+const routeLabels: Record<string, string> = {
+  "/": "Home",
+  "/projects": "Work",
+  [NOTES_URL]: "Notes",
+  [INSIGHTS_URL]: "Insights",
+  [ABOUT_URL]: "About",
+  "/articles": "Notes",
+  [EXPERIENCE_URL]: "Experience",
+  [CONTACT_URL]: "Contact",
+};
+
+function normalizeRoute(url: string) {
+  return url === "/articles" ? NOTES_URL : url;
+}
+
+function presentRoutes(links: FooterLink[]): FooterLink[] {
+  const byUrl = new Map<string, FooterLink>();
+
+  for (const link of links) {
+    const url = normalizeRoute(link.url);
+    byUrl.set(url, { ...link, url, label: routeLabels[url] ?? link.label });
+  }
+
+  const required = [NOTES_URL, INSIGHTS_URL, ABOUT_URL, EXPERIENCE_URL, CONTACT_URL];
+  for (const url of required) {
+    if (!byUrl.has(url)) {
+      byUrl.set(url, { id: url, label: routeLabels[url], url });
+    }
+  }
+
+  const preferred = ["/projects", NOTES_URL, INSIGHTS_URL, ABOUT_URL, EXPERIENCE_URL, CONTACT_URL];
+  const ordered = preferred
+    .map((url) => byUrl.get(url))
+    .filter((link): link is FooterLink => Boolean(link));
+  const extras = [...byUrl.values()].filter((link) => !preferred.includes(link.url));
+
+  return [...ordered, ...extras];
 }
 
 const Footer = ({ columns, socialLinks = [], brand }: FooterProps) => {
@@ -31,55 +69,57 @@ const Footer = ({ columns, socialLinks = [], brand }: FooterProps) => {
             uri: link.url,
           }));
 
-  const routes = withContactRoute(
+  const routes = presentRoutes(
     columns.find((column) => column.title.toLowerCase().includes("quick"))?.links ??
       columns[columns.length - 1]?.links ??
       [],
   );
 
   const year = getCurrentYear();
-  const copyrightName = brand?.copyrightName || "NNAMDI AZUBUIKE";
-  const location = brand?.location || "LAGOS, NIGERIA";
+  const copyrightName = toTitle(brand?.copyrightName || "Nnamdi Azubuike");
+  const location = toTitle(brand?.location || "Lagos, Nigeria");
   const utcOffset = formatUtcOffset(brand?.timezone || "Africa/Lagos");
 
   return (
-    <footer className="mt-20 border-t border-border pt-10">
-      <div className="grid gap-10 sm:grid-cols-2">
-        <section>
-          <h2 className="section-label mb-4">Find me elsewhere</h2>
-          <ul className="flex flex-wrap gap-x-4 gap-y-2 text-sm">
-            {elsewhere.map((link) => (
-              <li key={link.id}>
-                <Link href={link.uri} target="_blank" rel="noopener noreferrer" className="soft-link">
-                  {link.name.toLowerCase()}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </section>
+    <footer className="mt-24 border-t border-foreground/80 pt-8">
+      <div className="flex flex-col gap-8 sm:flex-row sm:items-start sm:justify-between">
+        <div>
+          <p className="font-display text-2xl font-medium">Nnamdi Azubuike</p>
+          <p className="mt-2 text-sm text-muted-foreground">
+            {location} · {utcOffset}
+          </p>
+        </div>
 
-        <section>
-          <h2 className="section-label mb-4">Routes</h2>
-          <ul className="flex flex-wrap gap-x-4 gap-y-2 text-sm">
+        <div className="flex flex-wrap gap-x-8 gap-y-6">
+          <ul className="space-y-2 text-sm">
             {routes.map((link) => (
               <li key={link.id}>
-                <Link href={link.url} className="soft-link">
-                  {link.label.toLowerCase()}
+                <Link href={link.url} className="text-muted-foreground hover:text-foreground">
+                  {routeLabels[link.url] ?? link.label}
                 </Link>
               </li>
             ))}
           </ul>
-        </section>
+          <ul className="space-y-2 text-sm">
+            {elsewhere.map((link) => (
+              <li key={link.id}>
+                <Link
+                  href={link.uri}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-muted-foreground hover:text-foreground"
+                >
+                  {link.name}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
 
-      <div className="mt-10 space-y-1 text-xs tracking-wide text-muted-foreground uppercase sm:text-sm">
-        <p>
-          &copy; {year} {copyrightName}
-        </p>
-        <p>
-          {location} · {utcOffset}
-        </p>
-      </div>
+      <p className="mt-10 text-sm text-muted-foreground">
+        © {year} {copyrightName}
+      </p>
     </footer>
   );
 };

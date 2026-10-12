@@ -15,39 +15,38 @@ function shortDesc(project: ProjectDataType) {
 
   const cleaned = (project.desc ?? '').trim()
   if (!cleaned) return 'View case study'
-  if (cleaned.length <= 72) return cleaned
+  if (cleaned.length <= 120) return cleaned
   const sentence = cleaned.split(/(?<=[.!?])\s+/)[0]
-  if (sentence && sentence.length <= 88) return sentence
-  return `${cleaned.slice(0, 70).trimEnd()}...`
+  if (sentence && sentence.length <= 140) return sentence
+  return `${cleaned.slice(0, 117).trimEnd()}...`
 }
 
 const FeatureProject = ({ projects }: FeatureProjectProps) => {
   return (
-    <section className="fade-up" style={{ animationDelay: '140ms' }}>
-      <div className="mb-2 flex items-baseline justify-between gap-4">
-        <h2 className="section-label">featured work</h2>
-        <Link
-          href={PROJECT_URL}
-          className="text-sm text-muted-foreground transition-colors hover:text-highlight"
-        >
-          see all
+    <section>
+      <div className="mb-6 flex items-end justify-between gap-4">
+        <h2 className="font-display text-3xl font-medium tracking-tight sm:text-4xl">
+          Selected systems
+        </h2>
+        <Link href={PROJECT_URL} className="text-sm text-muted-foreground hover:text-foreground">
+          All work
         </Link>
       </div>
-      <p className="mb-5 max-w-xl text-sm leading-6 text-muted-foreground">
-        Platforms shipped and maintained in production — not demos.
-      </p>
 
-      <ul className="space-y-4">
-        {projects.map((project) => (
+      <ul className="border-t border-foreground/80">
+        {projects.map((project, index) => (
           <li key={project.id}>
             <Link
               href={projectHref(project)}
-              className="group grid w-full grid-cols-1 gap-1 text-left sm:grid-cols-[minmax(7rem,11rem)_1fr] sm:items-baseline sm:gap-4"
+              className="group grid grid-cols-[2.5rem_1fr] gap-4 border-b border-border py-5 sm:grid-cols-[3rem_14rem_1fr] sm:items-baseline"
             >
-              <span className="font-display text-base font-semibold text-highlight transition-colors group-hover:text-glow sm:text-lg">
+              <span className="pt-2 text-xs tabular-nums text-muted-foreground">
+                {String(index + 1).padStart(2, '0')}
+              </span>
+              <span className="font-display text-2xl text-foreground group-hover:underline group-hover:decoration-foreground/30 group-hover:underline-offset-4">
                 {project.name.trim()}
               </span>
-              <span className="text-[0.95rem] leading-7 text-muted-foreground transition-colors group-hover:text-foreground/85">
+              <span className="col-start-2 text-sm leading-6 text-muted-foreground sm:col-start-auto sm:text-base">
                 {shortDesc(project)}
               </span>
             </Link>

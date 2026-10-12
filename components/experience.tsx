@@ -11,63 +11,73 @@ type ExperienceProps = {
   showViewMore?: boolean
   /** Hide the section label when the page already has an h1. */
   showHeading?: boolean
+  /** Homepage hides promotion chips so the section reads as scope, not a title. */
+  showBadge?: boolean
+}
+
+export function presentedRole(item: CmsExperienceItem) {
+  const company = item.company.toLowerCase()
+  const role = item.role.toLowerCase()
+  const atMtn = company.includes('estuary') || company.includes('mtn')
+  const legacyTitle =
+    role.includes('frontend') || role.includes('team lead') || role.includes('engineering lead')
+
+  if (atMtn && legacyTitle) return 'Software Engineering Lead'
+  return item.role
+}
+
+function visibleBadge(item: CmsExperienceItem, showBadge: boolean) {
+  if (!showBadge || !item.badge) return null
+  if (/^promoted to/i.test(item.badge)) return null
+  return item.badge
 }
 
 function ExperienceList({
   items,
   highlightLimit,
+  showBadge = true,
 }: {
   items: CmsExperienceItem[]
   highlightLimit?: number
+  showBadge?: boolean
 }) {
   return (
-    <ul className="space-y-8">
+    <ul className="border-t border-foreground/80">
       {items.map((item) => {
         const highlights =
           typeof highlightLimit === 'number'
             ? item.highlights.slice(0, highlightLimit)
             : item.highlights
+        const badge = visibleBadge(item, showBadge)
 
         return (
-          <li key={`${item.company}-${item.role}-${item.period ?? ''}`}>
-            <div className="grid grid-cols-1 gap-1 sm:grid-cols-[minmax(7rem,11rem)_1fr] sm:items-baseline sm:gap-4">
+          <li
+            key={`${item.company}-${item.role}-${item.period ?? ''}`}
+            className="grid grid-cols-1 gap-3 border-b border-border py-6 sm:grid-cols-[minmax(11rem,15rem)_1fr] sm:gap-10"
+          >
+            <div>
+              <p className="font-display text-lg leading-snug text-foreground">{item.company}</p>
+              {item.period ? (
+                <p className="mt-1 text-sm text-muted-foreground">{item.period}</p>
+              ) : null}
+            </div>
+            <div className="space-y-3">
               <div>
-                <p className="font-display text-base font-semibold text-highlight sm:text-lg">
-                  {item.company}
-                </p>
-                {item.period ? (
-                  <p className="mt-0.5 text-sm text-muted-foreground">{item.period}</p>
+                <p className="text-base text-foreground">{presentedRole(item)}</p>
+                {badge ? (
+                  <p className="mt-1 text-sm text-muted-foreground">{badge}</p>
+                ) : null}
+                {item.summary ? (
+                  <p className="mt-1 text-sm leading-6 text-muted-foreground">{item.summary}</p>
                 ) : null}
               </div>
-              <div className="space-y-3">
-                <div>
-                  <div className="flex flex-wrap items-center gap-2">
-                    <p className="text-[0.95rem] font-medium leading-7 text-foreground">
-                      {item.role}
-                    </p>
-                    {item.badge ? (
-                      <span className="inline-flex items-center rounded-sm bg-highlight px-2 py-0.5 font-mono text-[0.65rem] font-semibold uppercase tracking-wide text-[#0b0e0b]">
-                        {item.badge}
-                      </span>
-                    ) : null}
-                  </div>
-                  {item.summary ? (
-                    <p className="mt-1 text-[0.95rem] leading-7 text-muted-foreground">
-                      {item.summary}
-                    </p>
-                  ) : null}
-                </div>
-                {highlights.length > 0 ? (
-                  <ul className="space-y-2 text-[0.95rem] leading-7 text-muted-foreground">
-                    {highlights.map((highlight) => (
-                      <li key={highlight} className="flex gap-2">
-                        <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-highlight/70" />
-                        <span>{highlight}</span>
-                      </li>
-                    ))}
-                  </ul>
-                ) : null}
-              </div>
+              {highlights.length > 0 ? (
+                <ul className="space-y-2 text-sm leading-6 text-muted-foreground">
+                  {highlights.map((highlight) => (
+                    <li key={highlight}>{highlight}</li>
+                  ))}
+                </ul>
+              ) : null}
             </div>
           </li>
         )
@@ -82,6 +92,7 @@ export default function Experience({
   highlightLimit,
   showViewMore = false,
   showHeading = true,
+  showBadge = true,
 }: ExperienceProps) {
   if (experience.length === 0) return null
 
@@ -94,23 +105,25 @@ export default function Experience({
       {showHeading ? (
         <>
           <div className="mb-2 flex items-baseline justify-between gap-4">
-            <h2 className="section-label">experience</h2>
+            <h2 className="font-display text-3xl font-medium tracking-tight sm:text-4xl">
+              Where this sits
+            </h2>
             {hasMore ? (
               <Link
                 href={EXPERIENCE_URL}
-                className="text-sm text-muted-foreground transition-colors hover:text-highlight"
+                className="text-sm text-muted-foreground hover:text-foreground"
               >
                 view more
               </Link>
             ) : null}
           </div>
           <p className="mb-5 max-w-xl text-sm leading-6 text-muted-foreground">
-            Roles where I owned delivery, not just tickets.
+            Scope on the current mandate: the estate, the teams, and what is already in production.
           </p>
         </>
       ) : null}
 
-      <ExperienceList items={items} highlightLimit={highlightLimit} />
+      <ExperienceList items={items} highlightLimit={highlightLimit} showBadge={showBadge} />
 
       {hasMore ? (
         <div className="mt-6">

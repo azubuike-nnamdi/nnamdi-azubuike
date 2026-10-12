@@ -1,8 +1,6 @@
 import type { ProjectDataType } from '@/lib/definitions'
 import { ExternalLink } from 'lucide-react'
 import Link from 'next/link'
-import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
 import ProjectScreenshot from '@/components/projects/project-screenshot'
 
 type ProjectCaseStudyProps = {
@@ -77,29 +75,18 @@ export default function ProjectCaseStudy({ project }: ProjectCaseStudyProps) {
       ) : null}
 
       <Section label="stack">
-        <div className="flex flex-wrap gap-2">
-          {project.technologies.map((tech) => (
-            <Badge
-              key={tech}
-              variant="outline"
-              className="border-border bg-secondary px-3 py-1 text-sm text-foreground"
-            >
-              {tech}
-            </Badge>
-          ))}
-        </div>
+        <p>{project.technologies.join(' · ')}</p>
       </Section>
 
-      <Button
-        asChild
-        className="group w-full bg-highlight text-[#0b0e0b] transition-colors hover:bg-glow sm:w-auto"
-        size="lg"
+      <Link
+        href={project.uri}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="inline-flex items-center gap-2 bg-foreground px-4 py-2.5 text-sm text-background"
       >
-        <Link href={project.uri} target="_blank" rel="noopener noreferrer">
-          {project.action || 'View live project'}
-          <ExternalLink className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-        </Link>
-      </Button>
+        {project.action || 'View live project'}
+        <ExternalLink className="h-4 w-4" />
+      </Link>
     </div>
   )
 }

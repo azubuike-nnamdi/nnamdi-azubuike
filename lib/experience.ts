@@ -23,10 +23,9 @@ export type CmsExpertiseGroup = {
 export const defaultExperience: CmsExperienceItem[] = [
   {
     company: 'Estuary Business Solutions',
-    role: 'Frontend Engineer',
-    badge: 'Promoted to Team Lead',
+    role: 'Software Engineering Lead',
     period: 'March 2023 — Present',
-    summary: 'MTN Nigeria contract · Lagos, Nigeria',
+    summary: 'MTN Nigeria · Lagos',
     highlights: [
       'Led systems delivery across MTN Nigeria’s Next.js monorepo (Nx/Turbo) — self-service marketplace, FibreX, Bulk SMS, admin dashboard, cloud, and related apps — platforms used by 1M+ monthly users.',
       'Built and evolved shared platform packages: NextAuth session helpers, server-to-server auth checks, reusable payment systems, and design-system utilities consumed across apps.',
@@ -88,6 +87,11 @@ export const defaultExperience: CmsExperienceItem[] = [
 
 export const defaultEducation: CmsEducationItem[] = [
   {
+    title: 'Master of Science (MSc), Information Technology',
+    institution: 'Miva Open University',
+    detail: 'In progress',
+  },
+  {
     title: 'Bachelor of Science (BSc), Computer Science',
     institution: 'Kwara State University, Malete',
   },
@@ -99,30 +103,30 @@ export const defaultEducation: CmsEducationItem[] = [
 
 export const defaultExpertise: CmsExpertiseGroup[] = [
   {
-    label: 'Frameworks & Libraries',
-    items: 'React, Next.js, TypeScript',
+    label: 'Leadership',
+    items: 'Technical direction, delivery ownership, mentoring, architecture reviews',
   },
   {
-    label: 'State & Data',
-    items: 'Redux Toolkit, Zustand, React Query, REST APIs',
+    label: 'Fintech',
+    items: 'Payments, billing, airtime, data, fibre, loyalty, settlements',
   },
   {
-    label: 'UI & Styling',
-    items: 'Tailwind CSS, CSS Modules, Responsive Design, Design Systems',
+    label: 'Platforms',
+    items: 'Next.js monorepos, shared auth, design systems, Nx/Turbo',
   },
   {
-    label: 'Performance',
-    items: 'Code-splitting, memoisation, lazy loading, Web Vitals optimisation',
+    label: 'Product engineering',
+    items: 'React, Next.js, TypeScript, TanStack Query, Zustand',
   },
   {
-    label: 'Quality & Testing',
-    items: 'Jest, React Testing Library, Cypress',
+    label: 'Quality',
+    items: 'Jest, React Testing Library, Cypress, payment and session guards',
   },
   {
-    label: 'Accessibility',
-    items: 'Semantic HTML, ARIA basics, WCAG awareness',
+    label: 'Operations',
+    items: 'SIT, UAT, production support, OpenTelemetry, rate limits',
   },
 ]
 
 export const cvSummary =
-  'Engineer with 6+ years of experience building production-grade web applications. Strong focus on component architecture, state management, performance optimization, and accessible UI systems. Experienced in translating complex product requirements into maintainable codebases used at scale.'
+  'Software Engineering Lead at MTN Nigeria. I set technical direction, engineering standards, and how teams deliver across consumer, enterprise, payments, messaging, connectivity, IoT, and cloud. The platforms in that scope are used by more than a million people a month.'
