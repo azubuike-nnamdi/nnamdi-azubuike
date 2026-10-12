@@ -20,50 +20,30 @@ export default function FunProjects({ showHeading = true }: FunProjectsProps) {
         <h2 className="font-display text-3xl font-medium tracking-tight sm:text-4xl">Fun projects</h2>
       )}
 
-      <ul className="mt-10 border-t border-foreground/80">
+      <div className="note-grid" style={{ marginTop: 36 }}>
         {funProjects.map((project) => (
-          <li key={project.name} className="border-b border-border py-6">
-            <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2">
-              {showHeading ? (
-                <h2 className="font-display text-2xl font-medium">{project.name}</h2>
-              ) : (
-                <h3 className="font-display text-2xl font-medium">{project.name}</h3>
-              )}
-              <p className="kicker">{project.kind}</p>
-            </div>
-            <p className="mt-3 max-w-2xl text-[0.95rem] leading-7 text-muted-foreground">
-              {project.summary}
-            </p>
-            {project.stack ? (
-              <p className="mt-2 text-sm text-muted-foreground">{project.stack}</p>
-            ) : null}
+          <article key={project.name} className="card">
+            <p className="k">{project.kind}</p>
+            {showHeading ? <h2>{project.name}</h2> : <h3>{project.name}</h3>}
+            <p>{project.summary}</p>
+            {project.stack ? <p>{project.stack}</p> : null}
             {project.href || project.live ? (
-              <p className="mt-3 flex flex-wrap gap-x-5 gap-y-2 text-sm">
+              <p className="flex flex-wrap gap-x-5 gap-y-2">
                 {project.href ? (
-                  <Link
-                    href={project.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-link"
-                  >
+                  <Link href={project.href} target="_blank" rel="noopener noreferrer" className="text-link">
                     GitHub
                   </Link>
                 ) : null}
                 {project.live ? (
-                  <Link
-                    href={project.live}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-link"
-                  >
+                  <Link href={project.live} target="_blank" rel="noopener noreferrer" className="text-link">
                     Live
                   </Link>
                 ) : null}
               </p>
             ) : null}
-          </li>
+          </article>
         ))}
-      </ul>
+      </div>
     </section>
   )
 }
