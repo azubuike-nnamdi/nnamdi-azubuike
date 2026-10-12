@@ -41,10 +41,10 @@ export default function ExperienceLanding({
 
       <section className="space-y-6">
         <h2 className="font-display text-3xl font-medium tracking-tight sm:text-4xl">The toolkit</h2>
-        <ul className="grid gap-px border border-foreground/80 bg-foreground/80 sm:grid-cols-2 lg:grid-cols-3">
+        <ul className="note-grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))' }}>
           {toolkit.map((group) => (
-            <li key={group.label} className="bg-background p-5">
-              <p className="kicker">{group.label}</p>
+            <li key={group.label} className="card">
+              <p className="k">{group.label}</p>
               <ul className="mt-4 space-y-2">
                 {group.items.map((item) => (
                   <li key={item} className="text-[0.95rem] leading-6 text-foreground">
