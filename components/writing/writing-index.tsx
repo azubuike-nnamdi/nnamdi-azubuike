@@ -1,6 +1,6 @@
 'use client'
 
-import { noteTypeLabel, noteTypes } from '@/lib/writing'
+import { noteTypeLabel, noteTypes, tidyNoteText } from '@/lib/writing'
 import type { Article } from '@/lib/definitions'
 import Link from 'next/link'
 import { useMemo, useState, type ReactNode } from 'react'
@@ -68,8 +68,8 @@ export default function WritingIndex({
       <p className="mt-4 max-w-xl text-lg leading-8 text-muted-foreground">{dek}</p>
       {aside ? <p className="mt-3 max-w-xl text-sm leading-6 text-muted-foreground">{aside}</p> : null}
 
-      <div className="mt-10 flex flex-col gap-5 border-b border-border pb-5 sm:flex-row sm:items-end sm:justify-between">
-        <div className="flex flex-wrap gap-x-5 gap-y-2">
+      <div className="mt-8 flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
+        <div className="filter-row" style={{ margin: 0 }}>
           <FilterButton active={type === 'all'} onClick={() => setType('all')}>
             All
           </FilterButton>
@@ -99,7 +99,7 @@ export default function WritingIndex({
       ) : visible.length === 0 ? (
         <p className="mt-10 text-muted-foreground">Nothing matches that search.</p>
       ) : (
-        <ul>
+        <div className="note-grid">
           {visible.map((item) => {
             const href = item.href || item.uri || '#'
             const isExternal = item.kind !== 'full'
@@ -107,41 +107,27 @@ export default function WritingIndex({
             const minutes = readMinutes(item.readTime)
 
             return (
-              <li key={item.id} className="border-b border-border py-8">
-                <p className="text-xs uppercase tracking-[0.16em] text-muted-foreground">
-                  {item.noteTypeLabel || noteTypeLabel(item.noteType)}
-                </p>
-                <h2 className="mt-2 font-display text-2xl font-medium tracking-tight sm:text-3xl">
-                  <Link
-                    href={href}
-                    target={isExternal ? '_blank' : undefined}
-                    rel={isExternal ? 'noopener noreferrer' : undefined}
-                    className="hover:underline hover:decoration-foreground/30 hover:underline-offset-4"
-                  >
-                    {item.title}
-                  </Link>
-                </h2>
+              <Link
+                key={item.id}
+                href={href}
+                target={isExternal ? '_blank' : undefined}
+                rel={isExternal ? 'noopener noreferrer' : undefined}
+                className="card"
+              >
+                <p className="k">{item.noteTypeLabel || noteTypeLabel(item.noteType)}</p>
+                <h2>{tidyNoteText(item.title)}</h2>
                 {item.desc || item.summary ? (
-                  <p className="mt-2 max-w-2xl text-[0.95rem] leading-7 text-muted-foreground">
-                    {item.desc || item.summary}
+                  <p className="line-clamp-3">{tidyNoteText(item.desc || item.summary || '')}</p>
+                ) : null}
+                {date || minutes ? (
+                  <p>
+                    {[date, minutes].filter(Boolean).join(' · ')}
                   </p>
                 ) : null}
-                <p className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-muted-foreground">
-                  {date ? <span>{date}</span> : null}
-                  {minutes ? <span>{minutes}</span> : null}
-                  <Link
-                    href={href}
-                    target={isExternal ? '_blank' : undefined}
-                    rel={isExternal ? 'noopener noreferrer' : undefined}
-                    className="text-foreground underline decoration-foreground/30 underline-offset-4"
-                  >
-                    Read
-                  </Link>
-                </p>
-              </li>
+              </Link>
             )
           })}
-        </ul>
+        </div>
       )}
     </div>
   )
@@ -160,11 +146,7 @@ function FilterButton({
     <button
       type="button"
       onClick={onClick}
-      className={`text-sm ${
-        active
-          ? 'text-foreground underline decoration-foreground/40 underline-offset-[6px]'
-          : 'text-muted-foreground hover:text-foreground'
-      }`}
+      className={active ? 'on' : undefined}
     >
       {children}
     </button>
