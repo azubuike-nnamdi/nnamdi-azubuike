@@ -1,10 +1,11 @@
 import type { CollectionConfig } from 'payload'
+import { noteTypes, writingSections } from '@/lib/writing'
 
 export const Articles: CollectionConfig = {
   slug: 'articles',
   admin: {
     useAsTitle: 'title',
-    defaultColumns: ['title', 'kind', 'publishedAt', 'order'],
+    defaultColumns: ['title', 'section', 'noteType', 'publishedAt', 'order'],
   },
   access: {
     read: () => true,
@@ -14,6 +15,29 @@ export const Articles: CollectionConfig = {
       name: 'title',
       type: 'text',
       required: true,
+    },
+    {
+      name: 'section',
+      type: 'select',
+      required: true,
+      defaultValue: 'note',
+      options: [...writingSections],
+      admin: {
+        position: 'sidebar',
+        description: 'Notes are the shorter pieces. Insights are the longer writing.',
+      },
+    },
+    {
+      name: 'noteType',
+      type: 'select',
+      required: true,
+      defaultValue: 'technical',
+      label: 'Type',
+      options: [...noteTypes],
+      admin: {
+        position: 'sidebar',
+        description: 'Filter on the Notes and Insights pages. Existing writing is Technical.',
+      },
     },
     {
       name: 'kind',
