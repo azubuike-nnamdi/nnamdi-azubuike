@@ -168,6 +168,105 @@
       @apply text-foreground underline decoration-foreground/25 underline-offset-[5px] transition-colors hover:decoration-foreground;
    }
 
+   .payload-richtext {
+      @apply text-[1.05rem] leading-8 text-foreground;
+   }
+
+   .payload-richtext > * + * {
+      @apply mt-5;
+   }
+
+   .payload-richtext h2,
+   .payload-richtext h3,
+   .payload-richtext h4 {
+      @apply font-display font-medium tracking-tight text-foreground;
+   }
+
+   .payload-richtext h2 {
+      @apply mt-12 text-3xl leading-tight;
+   }
+
+   .payload-richtext h3 {
+      @apply mt-10 text-2xl leading-tight;
+   }
+
+   .payload-richtext h4 {
+      @apply mt-8 text-xl leading-snug;
+   }
+
+   .payload-richtext h2 + *,
+   .payload-richtext h3 + *,
+   .payload-richtext h4 + * {
+      @apply mt-3;
+   }
+
+   .payload-richtext a {
+      @apply underline decoration-foreground/25 underline-offset-[5px] hover:decoration-foreground;
+   }
+
+   .payload-richtext ul,
+   .payload-richtext ol {
+      @apply space-y-2 pl-6;
+   }
+
+   .payload-richtext ul {
+      @apply list-disc;
+   }
+
+   .payload-richtext ol {
+      @apply list-decimal;
+   }
+
+   .payload-richtext li > ul,
+   .payload-richtext li > ol {
+      @apply mt-2;
+   }
+
+   .payload-richtext blockquote {
+      @apply border-l border-foreground/80 pl-5 font-display text-2xl leading-snug text-muted-foreground;
+   }
+
+   .payload-richtext hr {
+      @apply my-10 border-0 border-t border-foreground/80;
+   }
+
+   .payload-richtext img {
+      @apply my-2 h-auto w-full border border-border;
+   }
+
+   .payload-richtext figure {
+      @apply my-8;
+   }
+
+   .payload-richtext figcaption {
+      @apply mt-2 text-sm text-muted-foreground;
+   }
+
+   .payload-richtext :not(pre) > code {
+      @apply bg-secondary px-1.5 py-0.5 text-[0.9em];
+   }
+
+   .payload-richtext pre {
+      @apply overflow-x-auto bg-foreground px-4 py-4 text-sm leading-6 text-background;
+   }
+
+   .payload-richtext pre code {
+      @apply bg-transparent p-0 text-inherit;
+   }
+
+   .payload-richtext table {
+      @apply w-full border-collapse text-left text-sm;
+   }
+
+   .payload-richtext th,
+   .payload-richtext td {
+      @apply border border-border px-3 py-2 align-top;
+   }
+
+   .payload-richtext th {
+      @apply font-medium;
+   }
+
    .fade-up {
       animation: fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
    }

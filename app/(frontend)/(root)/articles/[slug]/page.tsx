@@ -1,4 +1,4 @@
-import { NOTES_URL, INSIGHTS_URL } from '@/config/routes'
+import { NOTES_URL } from '@/config/routes'
 import { getArticleBySlug } from '@/lib/cms'
 import { RichText } from '@payloadcms/richtext-lexical/react'
 import type { Metadata } from 'next'
@@ -53,8 +53,8 @@ export default async function ArticlePage({ params }: PageProps) {
     notFound()
   }
 
-  const indexHref = article.section === 'insight' ? INSIGHTS_URL : NOTES_URL
-  const indexLabel = article.section === 'insight' ? 'All insights' : 'All notes'
+  const indexHref = NOTES_URL
+  const indexLabel = 'All notes'
 
   return (
     <article className="fade-up mx-auto max-w-2xl">
@@ -83,9 +83,7 @@ export default async function ArticlePage({ params }: PageProps) {
       ) : null}
 
       {article.content ? (
-        <div className="prose prose-neutral dark:prose-invert max-w-none prose-headings:font-display prose-a:text-highlight">
-          <RichText data={article.content as never} />
-        </div>
+        <RichText data={article.content as never} />
       ) : null}
     </article>
   )

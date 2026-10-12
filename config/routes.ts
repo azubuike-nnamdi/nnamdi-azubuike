@@ -1,8 +1,8 @@
 const PROJECT_URL: string = '/projects'
 const ARTICLE_URL: string = '/articles'
 const NOTES_URL: string = '/notes'
-const INSIGHTS_URL: string = '/insights'
 const EXPERIENCE_URL: string = '/experience'
+const FUN_URL: string = '/fun'
 const TALK_URL: string = '/talks'
 const ABOUT_URL: string = '/about'
 const CONTACT_URL: string = '/contact'
@@ -41,11 +41,11 @@ export {
   ABOUT_URL,
   ARTICLE_URL,
   CONTACT_URL,
-  INSIGHTS_URL,
   DEFAULT_WHATSAPP_MESSAGE,
   EMAIL,
   EMAIL_URL,
   EXPERIENCE_URL,
+  FUN_URL,
   GITHUB_URL,
   HASHNODE_URL,
   LINKEDIN_URL,

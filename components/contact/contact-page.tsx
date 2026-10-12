@@ -11,12 +11,14 @@ type ContactPageProps = {
   whatsappUrl?: string
   whatsappPhone?: string
   resumeUrl: string
+  showIntro?: boolean
 }
 
 export default function ContactPage({
   whatsappUrl = '',
   whatsappPhone = '',
   resumeUrl,
+  showIntro = true,
 }: ContactPageProps) {
   const channels = [
     {
@@ -63,14 +65,16 @@ export default function ContactPage({
 
   return (
     <div className="space-y-12">
-      <header className="max-w-2xl">
-        <p className="kicker">Contact</p>
-        <h1 className="page-title mt-3">Start a conversation.</h1>
-        <p className="mt-5 text-lg leading-8 text-muted-foreground">
-          For a product estate, a payments platform, or a team that needs a clear technical
-          direction through production. I usually reply within a couple of days.
-        </p>
-      </header>
+      {showIntro ? (
+        <header className="max-w-2xl">
+          <p className="kicker">Contact</p>
+          <h1 className="page-title mt-3">Start a conversation.</h1>
+          <p className="mt-5 text-lg leading-8 text-muted-foreground">
+            For a product estate, a payments platform, or a team that needs a clear technical
+            direction through production. I usually reply within a couple of days.
+          </p>
+        </header>
+      ) : null}
 
       <ul className="border-t border-foreground/80">
         {channels.map((channel) => (

@@ -9,7 +9,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { ABOUT_URL, CONTACT_URL, EXPERIENCE_URL, INSIGHTS_URL, NOTES_URL } from "@/config/routes";
+import { ABOUT_URL, CONTACT_URL, EXPERIENCE_URL, FUN_URL, NOTES_URL } from "@/config/routes";
 import type { NavLinks } from "@/lib/definitions";
 import { PanelLeft, X } from "lucide-react";
 import Link from "next/link";
@@ -23,20 +23,31 @@ type HeaderProps = {
 const fallbackNav: NavLinks[] = [
   { id: 1, name: "Work", href: "/projects" },
   { id: 2, name: "Notes", href: NOTES_URL },
-  { id: 3, name: "Insights", href: INSIGHTS_URL },
-  { id: 4, name: "About", href: ABOUT_URL },
+  { id: 3, name: "About", href: ABOUT_URL },
   { id: 5, name: "Experience", href: EXPERIENCE_URL },
-  { id: 6, name: "Contact", href: CONTACT_URL },
+  { id: 6, name: "Fun projects", href: FUN_URL },
+  { id: 7, name: "Contact", href: CONTACT_URL },
 ];
 
-const navOrder = ["/projects", NOTES_URL, INSIGHTS_URL, ABOUT_URL, EXPERIENCE_URL, CONTACT_URL];
+const navOrder = ["/projects", NOTES_URL, ABOUT_URL, EXPERIENCE_URL, FUN_URL, CONTACT_URL];
+
+const onePageAnchors: Record<string, string> = {
+  "/": "#top",
+  "/projects": "#work",
+  [NOTES_URL]: "#notes",
+  "/articles": "#notes",
+  [ABOUT_URL]: "#about",
+  [EXPERIENCE_URL]: "#experience",
+  [FUN_URL]: "#fun",
+  [CONTACT_URL]: "#contact",
+};
 
 const navLabels: Record<string, string> = {
   "/projects": "Work",
   [NOTES_URL]: "Notes",
-  [INSIGHTS_URL]: "Insights",
   [ABOUT_URL]: "About",
   [EXPERIENCE_URL]: "Experience",
+  [FUN_URL]: "Fun projects",
   [CONTACT_URL]: "Contact",
 };
 
@@ -51,6 +62,7 @@ function presentNav(links: NavLinks[]): NavLinks[] {
 
   for (const link of links) {
     const href = normalizeHref(link.href);
+    if (href === "/insights") continue;
     byHref.set(href, {
       ...link,
       href,
@@ -60,9 +72,9 @@ function presentNav(links: NavLinks[]): NavLinks[] {
 
   const required: NavLinks[] = [
     { id: "notes", name: "Notes", href: NOTES_URL },
-    { id: "insights", name: "Insights", href: INSIGHTS_URL },
     { id: "about", name: "About", href: ABOUT_URL },
     { id: "experience", name: "Experience", href: EXPERIENCE_URL },
+    { id: "fun", name: "Fun projects", href: FUN_URL },
     { id: "contact", name: "Contact", href: CONTACT_URL },
   ];
 
@@ -90,7 +102,12 @@ function isCurrent(pathname: string, href: string) {
 const Header = ({ navLinks = fallbackNav }: HeaderProps) => {
   const pathname = usePathname();
   const router = useRouter();
-  const links = presentNav(navLinks);
+  const onePage = pathname.startsWith("/for/");
+  const links = presentNav(navLinks).map((link) =>
+    onePage
+      ? { ...link, href: onePageAnchors[normalizeHref(link.href)] ?? link.href }
+      : link,
+  );
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
@@ -99,7 +116,7 @@ const Header = ({ navLinks = fallbackNav }: HeaderProps) => {
 
   return (
     <header className="flex items-center justify-between gap-x-6 border-b border-border pb-5">
-      <Link href="/" className="group">
+      <Link href={onePage ? "#top" : "/"} className="group">
         <span className="font-display text-2xl font-medium tracking-tight text-foreground">
           Nnamdi Azubuike
         </span>
@@ -132,7 +149,7 @@ const Header = ({ navLinks = fallbackNav }: HeaderProps) => {
           </SheetHeader>
           <nav className="flex flex-col px-5 py-4">
             {links.map((nav) => {
-              const href = nav.href.startsWith("/") ? nav.href : `/${nav.href}`;
+              const href = nav.href.startsWith("#") || nav.href.startsWith("/") ? nav.href : `/${nav.href}`;
               const isActive = isCurrent(pathname, href);
 
               return (
@@ -142,6 +159,13 @@ const Header = ({ navLinks = fallbackNav }: HeaderProps) => {
                   onClick={(event) => {
                     event.preventDefault();
                     setOpen(false);
+                    if (href.startsWith("#")) {
+                      const id = href.slice(1);
+                      window.setTimeout(() => {
+                        document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+                      }, 200);
+                      return;
+                    }
                     router.push(href);
                   }}
                   className={`border-b border-border py-3 text-base ${
@@ -160,7 +184,7 @@ const Header = ({ navLinks = fallbackNav }: HeaderProps) => {
 
       <nav className="hidden flex-wrap justify-end gap-x-5 gap-y-2 pb-1 md:flex">
         {links.map((nav) => {
-          const href = nav.href.startsWith("/") ? nav.href : `/${nav.href}`;
+          const href = nav.href.startsWith("#") || nav.href.startsWith("/") ? nav.href : `/${nav.href}`;
           const isActive = isCurrent(pathname, href);
 
           return (

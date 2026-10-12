@@ -1,8 +1,6 @@
 import WritingIndex from '@/components/writing/writing-index'
-import { INSIGHTS_URL } from '@/config/routes'
 import { getArticles } from '@/lib/cms'
 import type { Metadata } from 'next'
-import Link from 'next/link'
 
 export const metadata: Metadata = {
   title: 'Notes',
@@ -32,16 +30,7 @@ export default async function Page() {
       items={articles}
       eyebrow="Writing"
       title="Notes"
-      dek="Shorter writing from the work, filed by type. Everything here so far is technical."
-      aside={
-        <>
-          Looking for the longer pieces? They live in{' '}
-          <Link href={INSIGHTS_URL} className="text-link">
-            Insights
-          </Link>
-          .
-        </>
-      }
+      dek="Shorter writing from the work, filed by type."
       empty="No notes yet. Add one in Payload and set its section to Note."
     />
   )
