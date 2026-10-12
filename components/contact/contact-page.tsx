@@ -5,7 +5,6 @@ import {
   LINKEDIN_URL,
   TWITTER_URL,
 } from '@/config/routes'
-import { MessageCircle } from 'lucide-react'
 import Link from 'next/link'
 
 type ContactPageProps = {
@@ -63,58 +62,29 @@ export default function ContactPage({
   ]
 
   return (
-    <div className="fade-up space-y-10">
-      <header className="space-y-3">
-        <h1 className="font-display text-3xl font-bold tracking-tight text-highlight sm:text-4xl">
-          Contact
-        </h1>
-        <p className="max-w-xl text-base leading-7 text-muted-foreground">
-          Open to collaborations, consulting, and interesting frontend work. Reach out directly —
-          I usually reply within a couple of days.
+    <div className="space-y-12">
+      <header className="max-w-2xl">
+        <p className="kicker">Contact</p>
+        <h1 className="page-title mt-3">Start a conversation.</h1>
+        <p className="mt-5 text-lg leading-8 text-muted-foreground">
+          For a product estate, a payments platform, or a team that needs a clear technical
+          direction through production. I usually reply within a couple of days.
         </p>
       </header>
 
-      <div className="flex flex-wrap gap-3">
-        <Link
-          href={EMAIL_URL}
-          className="inline-flex items-center rounded-full border border-highlight bg-highlight/10 px-4 py-2 text-sm font-medium text-highlight transition-colors hover:bg-highlight/20"
-        >
-          Email me
-        </Link>
-        {whatsappUrl ? (
-          <Link
-            href={whatsappUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="nav-chip inline-flex items-center gap-1.5"
-          >
-            <MessageCircle className="size-3.5" aria-hidden />
-            WhatsApp
-          </Link>
-        ) : null}
-        <Link
-          href={LINKEDIN_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="nav-chip"
-        >
-          LinkedIn
-        </Link>
-      </div>
-
-      <ul className="space-y-5 border-t border-border pt-8">
+      <ul className="border-t border-foreground/80">
         {channels.map((channel) => (
           <li
             key={channel.label}
-            className="grid grid-cols-1 gap-1 sm:grid-cols-[7rem_1fr] sm:items-baseline sm:gap-5"
+            className="grid grid-cols-1 gap-1 border-b border-border py-4 sm:grid-cols-[9rem_1fr] sm:items-baseline"
           >
-            <span className="section-label">{channel.label}</span>
+            <span className="kicker">{channel.label}</span>
             <Link
               href={channel.href}
               {...(channel.external
                 ? { target: '_blank', rel: 'noopener noreferrer' }
                 : {})}
-              className="soft-link w-fit text-[0.95rem]"
+              className="text-link w-fit text-lg"
             >
               {channel.detail}
             </Link>
