@@ -129,4 +129,4 @@ export const defaultExpertise: CmsExpertiseGroup[] = [
 ]
 
 export const cvSummary =
-  'Software Engineering Lead at MTN Nigeria. I set technical direction, engineering standards, and how teams deliver across consumer, enterprise, payments, messaging, connectivity, IoT, and cloud. The platforms in that scope are used by more than a million people a month.'
+  'Software Engineering Lead at MTN Nigeria. I lead engineering across self-service, messaging, connectivity, and payments — products used by more than a million people a month.'
