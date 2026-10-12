@@ -247,6 +247,14 @@ export interface Project {
 export interface Article {
   id: number;
   title: string;
+  /**
+   * Notes are the shorter pieces. Insights are the longer writing.
+   */
+  section: 'note' | 'insight';
+  /**
+   * Filter on the Notes and Insights pages. Existing writing is Technical.
+   */
+  noteType: 'technical' | 'leadership' | 'delivery' | 'architecture' | 'product';
   kind: 'external' | 'full';
   slug?: string | null;
   externalUrl?: string | null;
@@ -450,6 +458,8 @@ export interface ProjectsSelect<T extends boolean = true> {
  */
 export interface ArticlesSelect<T extends boolean = true> {
   title?: T;
+  section?: T;
+  noteType?: T;
   kind?: T;
   slug?: T;
   externalUrl?: T;
@@ -516,7 +526,7 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
 export interface SiteSetting {
   id: number;
   /**
-   * Homepage intro under your name.
+   * Supporting copy for the site. The homepage headline is fixed in the page: “Products that have to stay up.”
    */
   about?: {
     role?: string | null;
