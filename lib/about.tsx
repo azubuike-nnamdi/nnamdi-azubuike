@@ -13,9 +13,8 @@ export const defaultAbout: CmsAbout = {
   role: 'Software Engineering Lead',
   title: 'MTN Nigeria',
   intro:
-    'I set technical direction, engineering standards, and how teams deliver across consumer, enterprise, payments, messaging, and connectivity at MTN Nigeria.',
-  body:
-    'That scope includes myMTN, messaging, Bulk SMS, FibreX, FlyX, IoT, and cloud — platforms used by more than 1 million people a month. I still work in the architecture. The [[work|/projects]] is the record.',
+    "I'm Nnamdi Azubuike. I lead engineering at MTN Nigeria across self-service, messaging, connectivity, and payments. More than a million people use those products in a month, and I stay with the shared code through release.",
+  body: '',
   highlights: ['1 million', 'MTN Nigeria', 'payments'],
 }
 
