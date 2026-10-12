@@ -1,23 +1,28 @@
-import LandingPage from '@/components/landing-page'
-import { getArticles, getProjects, getSiteSettings } from '@/lib/cms'
+import HomeRedesign from '@/components/home-redesign'
+import { getProjects, getSiteSettings } from '@/lib/cms'
+import { projectHref } from '@/lib/project'
 
 export default async function Page() {
-  const [projects, articles, siteSettings] = await Promise.all([
-    getProjects({ featured: true, limit: 4 }),
-    getArticles({ section: 'note', limit: 4 }),
-    getSiteSettings(),
-  ])
+  const [projects, settings] = await Promise.all([getProjects(), getSiteSettings()])
 
-  const featuredProjects =
-    projects.length > 0 ? projects : await getProjects({ limit: 4 })
+  const cardFor = (pattern: RegExp) => {
+    const project = projects.find((item) => pattern.test(item.name))
+    return {
+      href: project ? projectHref(project) : '/projects',
+      image: project?.image?.trim() || '',
+    }
+  }
 
   return (
-    <LandingPage
-      projects={featuredProjects}
-      articles={articles}
-      about={siteSettings.about}
-      experience={siteSettings.experience}
-      whatsappUrl={siteSettings.contact.whatsappUrl}
+    <HomeRedesign
+      resumeUrl={settings.resumeUrl}
+      work={{
+        flyx: cardFor(/flyx/i),
+        numoni: cardFor(/numoni/i),
+        fibrex: cardFor(/fibrex/i),
+        selfService: cardFor(/self-?service/i),
+        platform: { href: '/projects', image: '' },
+      }}
     />
   )
 }
