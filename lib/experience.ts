@@ -156,6 +156,18 @@ export const toolkit: ToolkitGroup[] = [
     items: ['Jest', 'React Testing Library', 'Cypress', 'OpenTelemetry'],
   },
   {
+    label: 'Backend',
+    items: ['Node.js', 'NestJS', 'Prisma', 'PostgreSQL', 'MongoDB', 'Redis'],
+  },
+  {
+    label: 'Mobile',
+    items: ['React Native', 'Expo'],
+  },
+  {
+    label: 'AI',
+    items: ['AI'],
+  },
+  {
     label: 'Earlier',
     items: ['PHP', 'Laravel'],
   },
