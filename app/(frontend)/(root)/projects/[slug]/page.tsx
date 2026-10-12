@@ -50,15 +50,13 @@ export default async function ProjectPage({ params }: PageProps) {
   }
 
   return (
-    <article className="fade-up mx-auto max-w-2xl">
-      <Link href="/projects" className="soft-link text-sm">
-        ← projects
+    <article className="fade-up mx-auto max-w-3xl">
+      <Link href="/projects" className="text-sm text-muted-foreground hover:text-foreground">
+        All work
       </Link>
 
-      <header className="mt-8 mb-10 space-y-3">
-        <h1 className="font-display text-3xl font-bold tracking-tight text-highlight sm:text-5xl">
-          {project.name}
-        </h1>
+      <header className="mt-8 mb-10">
+        <h1 className="page-title">{project.name}</h1>
       </header>
 
       <ProjectCaseStudy project={project} />
