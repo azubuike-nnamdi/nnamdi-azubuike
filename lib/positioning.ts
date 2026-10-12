@@ -5,13 +5,14 @@ import type { CmsAbout } from '@/lib/about'
  * Software Engineering Lead at MTN Nigeria (LinkedIn), scope across
  * myMTN, messaging, Bulk SMS, IoT, cloud, FibreX, and FlyX.
  * The landing headline is a sentence about the work, not a role label.
+ * The role sits on the line above it.
  */
 export const positioning = {
-  headline: 'Products that have to stay up.',
+  eyebrow: 'Software Engineering Lead · MTN Nigeria',
+  headline: 'Engineering on products people use.',
   lede:
-    'I set technical direction, engineering standards, and how teams deliver across consumer, enterprise, payments, messaging, and connectivity at MTN Nigeria.',
-  body:
-    'That scope includes myMTN, messaging, Bulk SMS, FibreX, FlyX, IoT, and cloud — platforms used by more than 1 million people a month. I still work in the architecture. The [[work|/projects]] is the record.',
+    "I'm Nnamdi Azubuike. I lead engineering at MTN Nigeria across self-service, messaging, connectivity, and payments. More than a million people use those products in a month, and I stay with the shared code through release.",
+  body: '',
   highlights: ['1 million', 'MTN Nigeria', 'payments'],
   proof: [
     { value: '1M+', label: 'people a month' },
@@ -39,7 +40,9 @@ export function resolveHeroCopy(about: CmsAbout): {
   const isLegacy =
     legacyHeadlines.has(role) ||
     about.intro.trim().toLowerCase().startsWith('for 6+ years') ||
-    about.intro.trim().toLowerCase().startsWith('technical direction, delivery management')
+    about.intro.trim().toLowerCase().startsWith('technical direction, delivery management') ||
+    about.intro.trim().toLowerCase().startsWith('i set technical direction') ||
+    about.intro.trim().toLowerCase().startsWith('software engineering lead at mtn')
 
   if (isLegacy) {
     return {
