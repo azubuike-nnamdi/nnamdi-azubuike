@@ -1,8 +1,11 @@
-import { ABOUT_URL, CONTACT_URL, EXPERIENCE_URL, INSIGHTS_URL, NOTES_URL } from "@/config/routes";
+"use client";
+
+import { ABOUT_URL, CONTACT_URL, EXPERIENCE_URL, FUN_URL, NOTES_URL } from "@/config/routes";
 import { formatUtcOffset, getCurrentYear } from "@/lib/helper";
 import type { CmsFooterBrand } from "@/lib/cms";
 import type { FooterColumn, FooterLink, PortfolioItem } from "@/lib/definitions";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 type FooterProps = {
   columns: FooterColumn[];
@@ -20,10 +23,10 @@ const routeLabels: Record<string, string> = {
   "/": "Home",
   "/projects": "Work",
   [NOTES_URL]: "Notes",
-  [INSIGHTS_URL]: "Insights",
   [ABOUT_URL]: "About",
   "/articles": "Notes",
   [EXPERIENCE_URL]: "Experience",
+  [FUN_URL]: "Fun projects",
   [CONTACT_URL]: "Contact",
 };
 
@@ -36,17 +39,18 @@ function presentRoutes(links: FooterLink[]): FooterLink[] {
 
   for (const link of links) {
     const url = normalizeRoute(link.url);
+    if (url === "/insights") continue;
     byUrl.set(url, { ...link, url, label: routeLabels[url] ?? link.label });
   }
 
-  const required = [NOTES_URL, INSIGHTS_URL, ABOUT_URL, EXPERIENCE_URL, CONTACT_URL];
+  const required = [NOTES_URL, ABOUT_URL, EXPERIENCE_URL, FUN_URL, CONTACT_URL];
   for (const url of required) {
     if (!byUrl.has(url)) {
       byUrl.set(url, { id: url, label: routeLabels[url], url });
     }
   }
 
-  const preferred = ["/projects", NOTES_URL, INSIGHTS_URL, ABOUT_URL, EXPERIENCE_URL, CONTACT_URL];
+  const preferred = ["/projects", NOTES_URL, ABOUT_URL, EXPERIENCE_URL, FUN_URL, CONTACT_URL];
   const ordered = preferred
     .map((url) => byUrl.get(url))
     .filter((link): link is FooterLink => Boolean(link));
@@ -55,7 +59,19 @@ function presentRoutes(links: FooterLink[]): FooterLink[] {
   return [...ordered, ...extras];
 }
 
+const onePageAnchors: Record<string, string> = {
+  "/": "#top",
+  "/projects": "#work",
+  [NOTES_URL]: "#notes",
+  "/articles": "#notes",
+  [ABOUT_URL]: "#about",
+  [EXPERIENCE_URL]: "#experience",
+  [FUN_URL]: "#fun",
+  [CONTACT_URL]: "#contact",
+};
+
 const Footer = ({ columns, socialLinks = [], brand }: FooterProps) => {
+  const onePage = usePathname().startsWith("/for/");
   const elsewhere =
     socialLinks.length > 0
       ? socialLinks
@@ -94,7 +110,10 @@ const Footer = ({ columns, socialLinks = [], brand }: FooterProps) => {
           <ul className="space-y-2 text-sm">
             {routes.map((link) => (
               <li key={link.id}>
-                <Link href={link.url} className="text-muted-foreground hover:text-foreground">
+                <Link
+                  href={onePage ? (onePageAnchors[link.url] ?? link.url) : link.url}
+                  className="text-muted-foreground hover:text-foreground"
+                >
                   {routeLabels[link.url] ?? link.label}
                 </Link>
               </li>
