@@ -157,7 +157,8 @@ export default async function Page() {
         </ol>
         <p className="mt-6 max-w-2xl text-sm leading-6 text-muted-foreground">
           Working stack: TypeScript, React, Next.js, TanStack Query, Zustand, Nx, Turbo, Jest,
-          OpenTelemetry.
+          OpenTelemetry, and AI. I use AI in the engineering: implementation, review, and the shared
+          code. APIs are Node.js and NestJS. Mobile apps are React Native and Expo.
         </p>
       </section>
 
