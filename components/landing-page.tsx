@@ -39,11 +39,14 @@ export default function LandingPage({
       {/* No fade-up on the hero — opacity:0 blocks LCP (PageSpeed NO_LCP). */}
       <section className="grid gap-12 pt-8 md:grid-cols-[minmax(0,1fr)_16rem] md:items-center md:gap-14 md:pt-16">
         <div>
-          <h1 className="page-title">{hero.headline}</h1>
+          <p className="kicker">{positioning.eyebrow}</p>
+          <h1 className="page-title mt-3">{hero.headline}</h1>
           <p className="mt-6 max-w-xl text-lg leading-8 text-foreground/90">{hero.lede}</p>
-          <p className="mt-4 max-w-xl text-base leading-7 text-muted-foreground">
-            {renderLinkedText(hero.body)}
-          </p>
+          {hero.body ? (
+            <p className="mt-4 max-w-xl text-base leading-7 text-muted-foreground">
+              {renderLinkedText(hero.body)}
+            </p>
+          ) : null}
           <div className="mt-8 flex flex-wrap gap-x-6 gap-y-3 text-sm">
             <Link href={CONTACT_URL} className="text-link">
               Start a conversation
