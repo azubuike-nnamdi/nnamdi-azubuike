@@ -21,7 +21,7 @@ const newsreader = Newsreader({
 });
 
 const siteDescription =
-  "Software Engineering Lead at MTN Nigeria. Technical direction, engineering standards, and delivery across consumer, payments, messaging, and connectivity products used by more than a million people a month.";
+  "Software Engineering Lead at MTN Nigeria. I lead engineering across self-service, messaging, connectivity, and payments — products used by more than a million people a month.";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.nnamdiazubuike.dev"),
