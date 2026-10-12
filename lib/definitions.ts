@@ -44,6 +44,10 @@ type Article = {
   desc?: string
   summary?: string | null
   category: string[]
+  section?: 'note' | 'insight'
+  noteType?: string
+  noteTypeLabel?: string
+  publishedAt?: string
   readMore?: string
   uri?: string
   href?: string
