@@ -3,7 +3,6 @@ import {
   CONTACT_URL,
   EMAIL_URL,
   GITHUB_URL,
-  INSIGHTS_URL,
   LINKEDIN_URL,
   NOTES_URL,
   PROJECT_URL,
@@ -31,11 +30,6 @@ export const NavData: NavLinks[] = [
   },
   {
     id: 3,
-    name: "Insights",
-    href: INSIGHTS_URL,
-  },
-  {
-    id: 4,
     name: "About",
     href: ABOUT_URL,
   },
