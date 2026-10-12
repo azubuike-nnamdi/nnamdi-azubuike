@@ -1,4 +1,6 @@
 import Reveal from '@/components/reveal'
+import { Badge } from '@/components/ui/badge'
+import { Card, CardAction, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { ABOUT_URL, EXPERIENCE_URL, NOTES_URL, PROJECT_URL } from '@/config/routes'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -28,37 +30,42 @@ function Arrow() {
   )
 }
 
-function Ext() {
-  return (
-    <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden>
-      <path d="M7 17 17 7M9 7h8v8" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  )
-}
+const wrap = 'mx-auto w-full max-w-[1160px] px-7 max-[620px]:px-5'
+const reveal = 'rv transition duration-700 ease-out [&.out]:translate-y-[22px] [&.out]:opacity-0 [&.in]:translate-y-0 [&.in]:opacity-100 motion-reduce:!translate-y-0 motion-reduce:!opacity-100'
+const kicker = 'text-[13px] font-bold tracking-[0.12em] text-primary uppercase'
+const rule = 'mt-4 h-1 w-9 rounded bg-primary'
+const title = 'mt-2.5 text-[clamp(30px,3.6vw,44px)] leading-[1.1] font-extrabold tracking-[-0.03em]'
+const button = 'inline-flex items-center gap-2.5 rounded-xl px-[22px] py-3.5 text-[15px] font-semibold transition duration-200 hover:-translate-y-0.5'
+const buttonLine = `${button} border-[1.5px] border-[#111] hover:bg-[#111] hover:text-white`
+const buttonFill = `${button} bg-primary text-white shadow-[0_10px_24px_-12px_#F26B1D]`
+const section = 'py-[110px] max-[620px]:py-20'
+const headingRow = 'mb-[52px] flex items-end justify-between gap-5 max-[620px]:flex-col max-[620px]:items-start'
+const tool = 'flex aspect-square flex-col items-center justify-center gap-2.5 rounded-[18px] border-[1.5px] border-[#eceae6] bg-white text-center text-[13px] font-bold transition duration-200 hover:-translate-y-0.75 hover:border-primary max-[980px]:aspect-auto max-[980px]:px-1 max-[980px]:py-4 max-[980px]:text-[11px]'
+const glyph = 'text-[22px] font-extrabold tracking-[-0.04em] max-[980px]:text-lg'
 
 export default function HomeRedesign({ resumeUrl, work }: HomeRedesignProps) {
   return (
     <Reveal>
       <main id="top">
-        <div className="w hero">
-          <div className="rv">
-            <div className="hi">
-              Hi, I’m<span />
+        <div className={`${wrap} grid grid-cols-1 items-center gap-10 pt-15 pb-10 min-[981px]:grid-cols-2`}>
+          <div className={reveal}>
+            <div className="text-lg font-bold">
+              Hi, I’m<span className="mt-1.5 block h-[3px] w-[34px] rounded-sm bg-primary" />
             </div>
-            <h1>
+            <h1 className="my-[18px] text-[clamp(52px,7vw,92px)] leading-[0.98] font-extrabold tracking-[-0.045em]">
               Nnamdi
               <br />
-              <em>Azubuike</em>
+              <em className="text-primary not-italic">Azubuike</em>
             </h1>
-            <div className="role">Software Engineering Lead · MTN Nigeria</div>
-            <p className="lead">
+            <div className="text-[19px] font-semibold text-[#5f5f66]">Software Engineering Lead · MTN Nigeria</div>
+            <p className="mt-[22px] mb-[34px] max-w-[440px] text-lg text-[#5f5f66]">
               I lead the teams behind MTN’s self-service, payments and connectivity products, used by over a million people a month.
             </p>
-            <div className="cta">
-              <a className="btn btn-o" href="#work">
+            <div className="flex flex-wrap gap-3.5">
+              <a className={buttonFill} href="#work">
                 View my work <Arrow />
               </a>
-              <a className="btn btn-l" href={resumeUrl} target="_blank" rel="noopener noreferrer">
+              <a className={buttonLine} href={resumeUrl} target="_blank" rel="noopener noreferrer">
                 Download CV{' '}
                 <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden>
                   <path d="M12 4v11M7 10l5 5 5-5M5 20h14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
@@ -66,18 +73,18 @@ export default function HomeRedesign({ resumeUrl, work }: HomeRedesignProps) {
               </a>
             </div>
           </div>
-          <div className="art rv">
-            <div className="blob" />
-            <div className="pic">
-              <Image src="/img/portrait.jpg" alt="Nnamdi Azubuike" fill priority sizes="440px" />
+          <div className={`${reveal} relative aspect-square w-full max-w-[520px] justify-self-end max-[980px]:mx-auto max-[980px]:max-w-[440px]`}>
+            <div className="absolute top-[16%] right-[8%] bottom-[6%] left-[14%] rounded-[48%_52%_46%_54%/56%_48%_52%_44%] bg-primary" />
+            <div className="absolute top-[6%] right-[16%] bottom-[6%] left-[22%] overflow-hidden rounded-t-[200px] rounded-b-3xl border-[3px] border-[#111] bg-[#f4f1ec]">
+              <Image src="/img/portrait.jpg" alt="Nnamdi Azubuike" fill priority sizes="440px" className="object-cover object-[center_18%]" />
             </div>
-            <svg className="doodle d1" viewBox="0 0 110 130" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" aria-hidden>
+            <svg className="absolute top-0 left-0 w-[110px] text-[#111]" viewBox="0 0 110 130" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" aria-hidden>
               <path d="M55 0v52" />
               <path d="M25 82c0-17 13-30 30-30s30 13 30 30z" fill="#fff" />
               <path d="M48 92h14" stroke="#F26B1D" />
               <path d="M55 98v6M44 100l-4 6M66 100l4 6" stroke="#F26B1D" />
             </svg>
-            <svg className="doodle d2" viewBox="0 0 120 110" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+            <svg className="absolute top-[4%] -right-1.5 w-[120px] text-[#111]" viewBox="0 0 120 110" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
               <path d="M6 90h108M14 90v8M106 90v8" />
               <rect x="16" y="40" width="10" height="50" fill="#fff" />
               <rect x="28" y="34" width="10" height="56" fill="#fff" />
@@ -85,27 +92,27 @@ export default function HomeRedesign({ resumeUrl, work }: HomeRedesignProps) {
               <path d="M76 70h26l-4 20H80z" fill="#F26B1D" />
               <path d="M89 70V38M89 52c-8-2-13-9-12-18 8 2 12 9 12 18zM89 46c7-3 13-10 12-18-8 2-12 9-12 18z" fill="#fff" />
             </svg>
-            <svg className="doodle d3" viewBox="0 0 110 70" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+            <svg className="absolute bottom-[8%] left-[2%] w-[110px] text-[#111]" viewBox="0 0 110 70" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
               <rect x="4" y="4" width="102" height="62" rx="14" fill="#fff" />
               <path d="M38 22 26 35l12 13M72 22l12 13-12 13" />
               <path d="M60 20 50 50" stroke="#F26B1D" />
             </svg>
-            <div className="chip c1">
-              <b>1M+</b>users a month
+            <div className="absolute right-0 bottom-[16%] flex items-center gap-2.5 rounded-[14px] border-[1.5px] border-[#111] bg-white px-3.5 py-2.5 text-sm font-bold shadow-[4px_4px_0_#111]">
+              <b className="text-xl text-primary">1M+</b>users a month
             </div>
           </div>
         </div>
 
-        <section id="about">
-          <div className="w about">
-            <div className="rv">
-              <div className="k">Who I am</div>
-              <h2>An engineer who stays through release.</h2>
-              <div className="bar" />
-              <p className="big">
+        <section id="about" className={section}>
+          <div className={`${wrap} grid grid-cols-1 items-center gap-[70px] min-[981px]:grid-cols-[0.9fr_1.1fr]`}>
+            <div className={reveal}>
+              <div className={kicker}>Who I am</div>
+              <h2 className={title}>An engineer who stays through release.</h2>
+              <div className={rule} />
+              <p className="mt-[22px] text-[22px] leading-normal text-[#333]">
                 Lagos-based engineering lead. I set technical direction, build shared foundations, and keep products healthy once they are live.
               </p>
-              <div className="traits">
+              <div className="mt-[34px] grid grid-cols-2 gap-x-[18px] gap-y-[22px] min-[621px]:grid-cols-3">
                 <Trait icon="bulb">Systems thinker</Trait>
                 <Trait icon="shield">Security-minded</Trait>
                 <Trait icon="people">Team builder</Trait>
@@ -113,48 +120,48 @@ export default function HomeRedesign({ resumeUrl, work }: HomeRedesignProps) {
                 <Trait icon="card">Payments</Trait>
                 <Trait icon="book">Writer</Trait>
               </div>
-              <div className="more">
-                <Link className="btn btn-l" href={ABOUT_URL}>
+              <div className="mt-7 flex flex-wrap gap-3">
+                <Link className={buttonLine} href={ABOUT_URL}>
                   Read more <Arrow />
                 </Link>
-                <Link className="btn btn-l" href={NOTES_URL}>
+                <Link className={buttonLine} href={NOTES_URL}>
                   Notes <Arrow />
                 </Link>
               </div>
             </div>
-            <div className="facts rv">
-              <div className="fact dark">
-                <b>
-                  1M<i>+</i>
+            <div className={`${reveal} grid grid-cols-2 gap-4`}>
+              <div className="rounded-[20px] border-[1.5px] border-[#111] bg-[#111] p-[26px] text-white transition duration-200 hover:-translate-y-0.75 hover:border-primary">
+                <b className="block text-[44px] leading-none font-extrabold tracking-[-0.04em]">
+                  1M<i className="text-primary not-italic">+</i>
                 </b>
-                <span>People a month on products I lead</span>
+                <span className="mt-2 block text-[15px] font-medium text-[#b9b9c0]">People a month on products I lead</span>
               </div>
-              <div className="fact">
-                <b>7</b>
-                <span>Products in one shared codebase</span>
+              <div className="rounded-[20px] border-[1.5px] border-[#eceae6] p-[26px] transition duration-200 hover:-translate-y-0.75 hover:border-primary">
+                <b className="block text-[44px] leading-none font-extrabold tracking-[-0.04em]">7</b>
+                <span className="mt-2 block text-[15px] font-medium text-[#5f5f66]">Products in one shared codebase</span>
               </div>
-              <div className="fact">
-                <b>2023</b>
-                <span>Leading MTN delivery since</span>
+              <div className="rounded-[20px] border-[1.5px] border-[#eceae6] p-[26px] transition duration-200 hover:-translate-y-0.75 hover:border-primary">
+                <b className="block text-[44px] leading-none font-extrabold tracking-[-0.04em]">2023</b>
+                <span className="mt-2 block text-[15px] font-medium text-[#5f5f66]">Leading MTN delivery since</span>
               </div>
-              <div className="fact">
-                <b>4</b>
-                <span>Streams: self-service, messaging, connectivity, payments</span>
+              <div className="rounded-[20px] border-[1.5px] border-[#eceae6] p-[26px] transition duration-200 hover:-translate-y-0.75 hover:border-primary">
+                <b className="block text-[44px] leading-none font-extrabold tracking-[-0.04em]">4</b>
+                <span className="mt-2 block text-[15px] font-medium text-[#5f5f66]">Streams: self-service, messaging, connectivity, payments</span>
               </div>
             </div>
           </div>
         </section>
 
-        <section id="do" className="soft">
-          <div className="w">
-            <div className="head rv">
+        <section id="do" className={`${section} bg-[#fbf8f5]`}>
+          <div className={wrap}>
+            <div className={`${headingRow} ${reveal}`}>
               <div>
-                <div className="k">What I do</div>
-                <h2>Lead the build, end to end.</h2>
-                <div className="bar" />
+                <div className={kicker}>What I do</div>
+                <h2 className={title}>Lead the build, end to end.</h2>
+                <div className={rule} />
               </div>
             </div>
-            <div className="do">
+            <div className="grid grid-cols-1 gap-[18px] min-[621px]:grid-cols-2 min-[981px]:grid-cols-4">
               <DoCard title="Direction" text="Decide what to build with product and business owners." icon="compass" />
               <DoCard title="Platform" text="Shared auth, payments and design system for every app." icon="layers" />
               <DoCard title="People" text="Structure, review and mentor teams so delivery never stalls." icon="people" />
@@ -163,29 +170,29 @@ export default function HomeRedesign({ resumeUrl, work }: HomeRedesignProps) {
           </div>
         </section>
 
-        <section id="how">
-          <div className="w">
-            <div className="head rv">
+        <section id="how" className={section}>
+          <div className={wrap}>
+            <div className={`${headingRow} ${reveal}`}>
               <div>
-                <div className="k">How I do it</div>
-                <h2>A process built for production.</h2>
-                <div className="bar" />
+                <div className={kicker}>How I do it</div>
+                <h2 className={title}>A process built for production.</h2>
+                <div className={rule} />
               </div>
-              <Link className="btn btn-l" href={EXPERIENCE_URL}>
+              <Link className={buttonLine} href={EXPERIENCE_URL}>
                 View more experience <Arrow />
               </Link>
             </div>
-            <div className="steps rv">
+            <div className={`${reveal} relative mb-20 grid grid-cols-2 gap-y-9 min-[621px]:grid-cols-2 min-[981px]:grid-cols-5 before:absolute before:top-9 before:right-[10%] before:left-[10%] before:border-t-2 before:border-dashed before:border-[#f5c3a2] max-[980px]:before:hidden`}>
               <Step n="01" title="Understand" text="The users, the business and the risk." icon="search" />
               <Step n="02" title="Architect" text="Shared packages before features." icon="blocks" />
               <Step n="03" title="Build" text="In one monorepo, reviewed." icon="code" />
               <Step n="04" title="Harden" text="Sessions, payments, rate limits." icon="lock" />
               <Step n="05" title="Ship & observe" text="SIT, UAT, production, traced." icon="pulse" />
             </div>
-            <div className="tools rv">
-              <div className="tool"><span className="g">Next</span>Next.js</div>
-              <div className="tool"><span className="g">TS</span>TypeScript</div>
-              <div className="tool">
+            <div className={`${reveal} grid grid-cols-4 gap-2.5 min-[981px]:grid-cols-8 min-[981px]:gap-3.5`}>
+              <div className={tool}><span className={glyph}>Next</span>Next.js</div>
+              <div className={tool}><span className={glyph}>TS</span>TypeScript</div>
+              <div className={tool}>
                 <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden>
                   <ellipse cx="12" cy="12" rx="10" ry="4" />
                   <ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(60 12 12)" />
@@ -194,22 +201,22 @@ export default function HomeRedesign({ resumeUrl, work }: HomeRedesignProps) {
                 </svg>
                 React
               </div>
-              <div className="tool"><span className="g">Nx</span>Nx / Turbo</div>
-              <div className="tool">
+              <div className={tool}><span className={glyph}>Nx</span>Nx / Turbo</div>
+              <div className={tool}>
                 <LockIcon size={28} />
                 NextAuth
               </div>
-              <div className="tool">
+              <div className={tool}>
                 <PulseIcon size={28} />
                 OpenTelemetry
               </div>
-              <div className="tool">
+              <div className={tool}>
                 <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
                   <path d="M12 2 3 7v10l9 5 9-5V7z" />
                 </svg>
                 Node.js
               </div>
-              <div className="tool">
+              <div className={tool}>
                 <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" aria-hidden>
                   <circle cx="6" cy="6" r="2.5" />
                   <circle cx="6" cy="18" r="2.5" />
@@ -222,69 +229,66 @@ export default function HomeRedesign({ resumeUrl, work }: HomeRedesignProps) {
           </div>
         </section>
 
-        <section id="work" className="soft">
-          <div className="w">
-            <div className="head rv">
+        <section id="work" className={`${section} bg-[#fbf8f5]`}>
+          <div className={wrap}>
+            <div className={`${headingRow} ${reveal}`}>
               <div>
-                <div className="k">What I’ve done</div>
-                <h2>Problems solved, in production.</h2>
-                <div className="bar" />
+                <div className={kicker}>What I’ve done</div>
+                <h2 className={title}>Problems solved, in production.</h2>
+                <div className={rule} />
               </div>
-              <Link className="btn btn-l" href={PROJECT_URL}>
+              <Link className={buttonLine} href={PROJECT_URL}>
                 All projects <Arrow />
               </Link>
             </div>
 
-            <div className="work">
-              <Case href={work.flyx.href} image={work.flyx.image} title="MTN FlyX" shot={<FlyxShot />} problem="Homes and SMEs outside fibre coverage could not get MTN broadband." solution="A customer and agent portal that onboards them onto wireless broadband." stack={['Next.js', 'TypeScript', 'Payments']} />
-              <Case href={work.numoni.href} image={work.numoni.image} title="nuMoni" shot={<NumoniShot />} problem="Merchants needed loyalty, rewards and payments in one place." solution="A merchant portal and admin platform, both live in production." stack={['Next.js', 'Admin', 'Payments']} />
-              <Case href={work.fibrex.href} image={work.fibrex.image} title="MTN FibreX" shot={<FibrexShot />} problem="Fibre customers needed to choose plans and pay without friction." solution="Self-service plans and payments on the shared payment system." stack={['Next.js', 'Self-service', 'Payments']} />
+            <div className="grid grid-cols-1 gap-[22px] min-[621px]:grid-cols-2 min-[981px]:grid-cols-3">
+              <Case href={work.flyx.href} image={work.flyx.image} title="MTN FlyX" badge="Wireless" shot={<FlyxShot />} solution="A customer and agent portal that onboards homes and SMEs onto wireless broadband." />
+              <Case href={work.numoni.href} image={work.numoni.image} title="nuMoni" badge="Payments" shot={<NumoniShot />} solution="A merchant portal and admin platform for loyalty, rewards and payments." />
+              <Case href={work.fibrex.href} image={work.fibrex.image} title="MTN FibreX" badge="Self-service" shot={<FibrexShot />} solution="Plans and payments on the shared payment system." />
+              <Case href={work.selfService.href} image={work.selfService.image} title="MTN Self-Service" badge="1M+ / month" shot={<SelfShot />} solution="One portal for airtime, data, bills and account, on a shared monorepo." />
+              <Case href={work.platform.href} title="Shared platform" badge="Monorepo" shot={<PlatformShot />} solution="Shared auth, payment guards, rate limits and tracing for every app." />
             </div>
 
-            <div className="work2">
-              <Case href={work.selfService.href} image={work.selfService.image} title="MTN Self-Service" shot={<SelfShot />} problem="A million-plus people a month needed one place for airtime, data, bills and account." solution="One self-service portal on a shared monorepo with common auth and payments." stack={['1M+ users / month', 'Next.js', 'NextAuth']} />
-              <Case href={work.platform.href} title="Shared platform" dark shot={<PlatformShot />} problem="Many teams in one codebase risked drift and payment security gaps." solution="Shared auth helpers, payment guards, rate limits and OpenTelemetry tracing." stack={['Security', 'Observability', 'Monorepo']} />
-            </div>
-
-            <div className="exp">
-              <div className="k rv">Experience</div>
-              <div className="line">
-                <div className="ev rv">
-                  <div className="ring">
+            <div className="mt-[90px]">
+              <div className={`${kicker} ${reveal}`}>Experience</div>
+              <div className="mt-10 grid grid-cols-1 gap-[30px] min-[981px]:grid-cols-3">
+                <div className={`${reveal} flex gap-[18px]`}>
+                  <div className="grid size-16 flex-none place-items-center rounded-full bg-[#fff3ea] text-[#111] shadow-none">
                     <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" aria-hidden>
                       <rect x="3" y="7" width="18" height="13" rx="2" />
                       <path d="M9 7V5h6v2M3 12h18" />
                     </svg>
                   </div>
                   <div>
-                    <small>2023 – Present</small>
-                    <h4>Software Engineering Lead</h4>
-                    <em>Estuary Business Solutions · MTN Nigeria</em>
-                    <p>Leads delivery across the Next.js monorepo.</p>
+                    <small className="text-sm font-extrabold text-primary">2023 – Present</small>
+                    <h4 className="text-[17px] leading-snug font-extrabold">Software Engineering Lead</h4>
+                    <em className="text-sm font-semibold text-primary not-italic">Estuary Business Solutions · MTN Nigeria</em>
+                    <p className="mt-1.5 text-[14.5px] text-[#5f5f66]">Leads delivery across the Next.js monorepo.</p>
                   </div>
                 </div>
-                <div className="ev rv">
-                  <div className="ring">
+                <div className={`${reveal} flex gap-[18px]`}>
+                  <div className="grid size-16 flex-none place-items-center rounded-full bg-[#fff3ea] text-[#111] shadow-none">
                     <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" aria-hidden>
                       <path d="M12 3 3 8l9 5 9-5zM3 13l9 5 9-5" />
                     </svg>
                   </div>
                   <div>
-                    <small>Platform</small>
-                    <h4>Shared packages</h4>
-                    <em>Auth · Payments · Design system</em>
-                    <p>Used by every app in the estate.</p>
+                    <small className="text-sm font-extrabold text-primary">Platform</small>
+                    <h4 className="text-[17px] leading-snug font-extrabold">Shared packages</h4>
+                    <em className="text-sm font-semibold text-primary not-italic">Auth · Payments · Design system</em>
+                    <p className="mt-1.5 text-[14.5px] text-[#5f5f66]">Used by every app in the estate.</p>
                   </div>
                 </div>
-                <div className="ev rv">
-                  <div className="ring">
+                <div className={`${reveal} flex gap-4.5`}>
+                  <div className="grid size-16 flex-none place-items-center rounded-full bg-[#fff3ea] text-[#111] shadow-none">
                     <PulseIcon size={26} />
                   </div>
                   <div>
-                    <small>Reliability</small>
-                    <h4>Production hardening</h4>
-                    <em>SIT · UAT · Production</em>
-                    <p>Sessions, payment guards, tracing.</p>
+                    <small className="text-sm font-extrabold text-primary">Reliability</small>
+                    <h4 className="text-[17px] leading-snug font-extrabold">Production hardening</h4>
+                    <em className="text-sm font-semibold text-primary not-italic">SIT · UAT · Production</em>
+                    <p className="mt-1.5 text-[14.5px] text-[#5f5f66]">Sessions, payment guards, tracing.</p>
                   </div>
                 </div>
               </div>
@@ -301,52 +305,44 @@ function Case({
   title,
   shot,
   image = '',
-  problem,
+  badge,
   solution,
-  stack,
-  dark = false,
 }: {
   href: string
   title: string
   shot: ReactNode
   image?: string
-  problem: string
+  badge: string
   solution: string
-  stack: string[]
-  dark?: boolean
 }) {
   return (
-    <Link className="case rv" href={href}>
-      <div className="shot" style={dark && !image ? { background: '#111' } : undefined}>
-        {image ? <img src={image} alt={`${title} product screenshot`} /> : shot}
-      </div>
-      <div className="body">
-        <h3>
-          {title} <Ext />
-        </h3>
-        <div className="ps">
-          <div className="p">
-            <b>Problem</b>
-            {problem}
-          </div>
-          <div className="s">
-            <b>Solution</b>
-            {solution}
-          </div>
+    <Link className={`${reveal} block h-full text-inherit no-underline`} href={href}>
+      <Card className="h-full gap-4 overflow-hidden py-0 pt-0 shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-[0_26px_46px_-28px_rgba(0,0,0,0.45)]">
+        <div className="relative bg-[#111]">
+          <div className="absolute inset-0 z-10 bg-black/35" />
+          {image ? (
+            <img src={image} alt={`${title} product screenshot`} className="relative aspect-video w-full object-cover brightness-60 grayscale" />
+          ) : (
+            <div className="relative grid aspect-video place-items-center brightness-60 grayscale">{shot}</div>
+          )}
         </div>
-        <div className="stack">
-          {stack.map((item) => (
-            <span key={item}>{item}</span>
-          ))}
-        </div>
-      </div>
+        <CardHeader className="pb-5">
+          <CardAction>
+            <Badge variant="secondary">{badge}</Badge>
+          </CardAction>
+          <CardTitle>
+            <h3 className="text-lg leading-none font-extrabold tracking-[-0.02em]">{title}</h3>
+          </CardTitle>
+          <CardDescription className="line-clamp-2">{solution}</CardDescription>
+        </CardHeader>
+      </Card>
     </Link>
   )
 }
 
 function Trait({ icon, children }: { icon: string; children: string }) {
   return (
-    <div className="trait">
+    <div className="flex items-center gap-2.5 text-[14.5px] font-bold [&_svg]:shrink-0 [&_svg]:text-primary">
       <TraitIcon name={icon} />
       {children}
     </div>
@@ -355,25 +351,25 @@ function Trait({ icon, children }: { icon: string; children: string }) {
 
 function DoCard({ title, text, icon }: { title: string; text: string; icon: string }) {
   return (
-    <div className="card rv">
-      <div className="ic">
+    <div className={`${reveal} rounded-[20px] border-[1.5px] border-[#eceae6] bg-white px-[26px] py-[30px] transition duration-300 hover:-translate-y-1.5 hover:border-[#111] hover:shadow-[0_22px_40px_-26px_rgba(0,0,0,0.35)]`}>
+      <div className="mb-[22px] grid size-14 place-items-center rounded-2xl bg-[#fff3ea] text-primary">
         <TraitIcon name={icon} size={26} />
       </div>
-      <h3>{title}</h3>
-      <p>{text}</p>
+      <h3 className="text-[21px] leading-tight font-extrabold tracking-[-0.02em]">{title}</h3>
+      <p className="mt-2 text-[15px] text-[#5f5f66]">{text}</p>
     </div>
   )
 }
 
 function Step({ n, title, text, icon }: { n: string; title: string; text: string; icon: string }) {
   return (
-    <div className="step">
-      <div className="ring">
+    <div className="group relative text-center">
+      <div className="mx-auto mb-4 grid size-[72px] place-items-center rounded-full border-[1.5px] border-[#111] bg-white shadow-none transition duration-300 group-hover:border-primary group-hover:bg-primary group-hover:text-white">
         <TraitIcon name={icon} size={26} />
       </div>
-      <small>{n}</small>
-      <h4>{title}</h4>
-      <p>{text}</p>
+      <small className="text-sm font-extrabold text-primary">{n}</small>
+      <h4 className="my-0.5 text-[17px] font-extrabold">{title}</h4>
+      <p className="mx-auto max-w-40 text-sm leading-snug text-[#5f5f66]">{text}</p>
     </div>
   )
 }
