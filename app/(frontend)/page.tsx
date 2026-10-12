@@ -4,7 +4,7 @@ import { getArticles, getProjects, getSiteSettings } from '@/lib/cms'
 export default async function Page() {
   const [projects, articles, siteSettings] = await Promise.all([
     getProjects({ featured: true, limit: 4 }),
-    getArticles({ limit: 4 }),
+    getArticles({ section: 'note', limit: 4 }),
     getSiteSettings(),
   ])
 
