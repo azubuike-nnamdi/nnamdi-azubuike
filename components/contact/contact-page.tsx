@@ -76,25 +76,21 @@ export default function ContactPage({
         </header>
       ) : null}
 
-      <ul className="border-t border-foreground/80">
+      <div className="channel-list" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))' }}>
         {channels.map((channel) => (
-          <li
+          <Link
             key={channel.label}
-            className="grid grid-cols-1 gap-1 border-b border-border py-4 sm:grid-cols-[9rem_1fr] sm:items-baseline"
+            href={channel.href}
+            {...(channel.external
+              ? { target: '_blank', rel: 'noopener noreferrer' }
+              : {})}
+            className="card"
           >
-            <span className="kicker">{channel.label}</span>
-            <Link
-              href={channel.href}
-              {...(channel.external
-                ? { target: '_blank', rel: 'noopener noreferrer' }
-                : {})}
-              className="text-link w-fit text-lg"
-            >
-              {channel.detail}
-            </Link>
-          </li>
+            <p className="k">{channel.label}</p>
+            <h3>{channel.detail}</h3>
+          </Link>
         ))}
-      </ul>
+      </div>
     </div>
   )
 }
