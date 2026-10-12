@@ -3,6 +3,7 @@ import {
   cvSummary,
   defaultEducation,
   defaultExpertise,
+  toolkit,
   type CmsExperienceItem,
 } from '@/lib/experience'
 import Link from 'next/link'
@@ -37,6 +38,24 @@ export default function ExperienceLanding({
       </header>
 
       <Experience experience={experience} showHeading={false} />
+
+      <section className="space-y-6">
+        <h2 className="font-display text-3xl font-medium tracking-tight sm:text-4xl">The toolkit</h2>
+        <ul className="grid gap-px border border-foreground/80 bg-foreground/80 sm:grid-cols-2 lg:grid-cols-3">
+          {toolkit.map((group) => (
+            <li key={group.label} className="bg-background p-5">
+              <p className="kicker">{group.label}</p>
+              <ul className="mt-4 space-y-2">
+                {group.items.map((item) => (
+                  <li key={item} className="text-[0.95rem] leading-6 text-foreground">
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </li>
+          ))}
+        </ul>
+      </section>
 
       <section className="space-y-4">
         <h2 className="section-label">scope</h2>

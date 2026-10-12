@@ -526,7 +526,7 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
 export interface SiteSetting {
   id: number;
   /**
-   * Supporting copy for the site. The homepage headline is fixed in the page: “Products that have to stay up.”
+   * Supporting copy for the site. The homepage headline is fixed in the page: “Engineering on products people use.”
    */
   about?: {
     role?: string | null;

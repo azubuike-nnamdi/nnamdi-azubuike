@@ -21,7 +21,7 @@ export const SiteSettings: GlobalConfig = {
       label: 'About',
       admin: {
         description:
-          'Supporting copy for the site. The homepage headline is fixed in the page: “Products that have to stay up.”',
+          'Supporting copy for the site. The homepage headline is fixed in the page: “Engineering on products people use.”',
       },
       fields: [
         {
