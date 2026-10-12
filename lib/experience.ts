@@ -19,6 +19,11 @@ export type CmsExpertiseGroup = {
   items: string
 }
 
+export type ToolkitGroup = {
+  label: string
+  items: string[]
+}
+
 /** Full experience from CV — used on /experience and as CMS defaults. */
 export const defaultExperience: CmsExperienceItem[] = [
   {
@@ -125,6 +130,34 @@ export const defaultExpertise: CmsExpertiseGroup[] = [
   {
     label: 'Operations',
     items: 'SIT, UAT, production support, OpenTelemetry, rate limits',
+  },
+]
+
+/** Tools named on the projects and the about page. Not a copy of anyone else's list. */
+export const toolkit: ToolkitGroup[] = [
+  {
+    label: 'Core',
+    items: ['TypeScript', 'React', 'Next.js', 'Vue and Nuxt', 'Svelte', 'HTML, CSS, and SQL'],
+  },
+  {
+    label: 'State',
+    items: ['TanStack Query', 'Zustand', 'Redux Toolkit', 'React Hook Form and Zod'],
+  },
+  {
+    label: 'Interface',
+    items: ['Tailwind CSS', 'shadcn/ui', 'Material UI', 'Bootstrap', 'Storybook'],
+  },
+  {
+    label: 'Platform',
+    items: ['Nx', 'Turbo', 'NextAuth', 'Design-system packages'],
+  },
+  {
+    label: 'Quality',
+    items: ['Jest', 'React Testing Library', 'Cypress', 'OpenTelemetry'],
+  },
+  {
+    label: 'Earlier',
+    items: ['PHP', 'Laravel'],
   },
 ]
 
