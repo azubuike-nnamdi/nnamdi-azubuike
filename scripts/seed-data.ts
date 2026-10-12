@@ -149,6 +149,7 @@ export const ProjectData: ProjectDataType[] = [
     desc: 'Collaborated with backend teams on maintainable, accessible delivery for high-traffic journeys.',
     action: 'View Project',
     uri: 'https://selfservice.mtn.ng/',
+    imageUrl: '/img/mtn-self-service.jpg',
     technologies: [
       'React',
       'Next.js',
