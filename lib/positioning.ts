@@ -16,8 +16,8 @@ export const positioning = {
   highlights: ['1 million', 'MTN Nigeria', 'payments'],
   proof: [
     { value: '1M+', label: 'people a month' },
-    { value: '7', label: 'products in scope' },
-    { value: 'Lagos', label: 'MTN Nigeria' },
+    { value: '5+', label: 'years in engineering' },
+    { value: '6', label: 'engineers led' },
   ],
 } as const
 
