@@ -111,27 +111,26 @@ export default async function Page() {
       <section id="overview" className="mt-20 max-w-2xl scroll-mt-8">
         <p className="kicker">Overview</p>
         <h2 className="mt-3 font-display text-3xl font-medium tracking-tight sm:text-4xl">
-          The seat, and the path into it.
+          The path into the role.
         </h2>
         <div className="mt-5 space-y-4 text-[0.95rem] leading-7 text-muted-foreground">
           <p>
-            I hold the lead seat on a telco product estate, and I still write the code that seat
-            depends on. The record of the products is on{' '}
+            I lead engineering at MTN Nigeria, and I still write the code. The products are on{' '}
             <Link href={PROJECT_URL} className="text-link">
-              the work
+              Work
             </Link>
             .
           </p>
           <p>
-            The path started as a frontend internship on a gift-card platform, then payments work
-            in PHP and Laravel, then Next.js on products that take real money and real traffic.
-            The MTN role began in that frontend work. It is now the lead seat.
+            I started with a frontend internship on a gift-card platform, then payments in PHP and
+            Laravel, then Next.js on products that take real money and real traffic. At MTN I
+            started on the frontend. I now lead the engineering.
           </p>
           <p>
-            Contract seats have sat beside it. Numoni was the merchant and admin platforms for
-            loyalty, rewards, and payments. Weavii was an artist–fan product, with the UI system
-            and the tests treated as part of the feature. Across those seats the constant is
-            production ownership.
+            Contract work has run alongside that. At Numoni I built the merchant and admin
+            platforms for loyalty, rewards, and payments. At Weavii I built an artist–fan product,
+            and the UI system and the tests were part of the feature. I stay with a product after
+            it is in production.
           </p>
         </div>
       </section>
