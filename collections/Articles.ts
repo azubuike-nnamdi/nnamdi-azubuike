@@ -24,7 +24,7 @@ export const Articles: CollectionConfig = {
       options: [...writingSections],
       admin: {
         position: 'sidebar',
-        description: 'Notes are the shorter pieces. Insights are the longer writing.',
+        description: 'Public writing is a note.',
       },
     },
     {
@@ -36,7 +36,7 @@ export const Articles: CollectionConfig = {
       options: [...noteTypes],
       admin: {
         position: 'sidebar',
-        description: 'Filter on the Notes and Insights pages. Existing writing is Technical.',
+        description: 'Filter on the Notes page. Existing writing is Technical.',
       },
     },
     {
