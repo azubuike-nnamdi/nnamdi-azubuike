@@ -71,6 +71,7 @@ export interface Config {
     media: Media;
     projects: Project;
     articles: Article;
+    'tailored-pages': TailoredPage;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -82,6 +83,7 @@ export interface Config {
     media: MediaSelect<false> | MediaSelect<true>;
     projects: ProjectsSelect<false> | ProjectsSelect<true>;
     articles: ArticlesSelect<false> | ArticlesSelect<true>;
+    'tailored-pages': TailoredPagesSelect<false> | TailoredPagesSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -248,11 +250,11 @@ export interface Article {
   id: number;
   title: string;
   /**
-   * Notes are the shorter pieces. Insights are the longer writing.
+   * Public writing is a note.
    */
   section: 'note' | 'insight';
   /**
-   * Filter on the Notes and Insights pages. Existing writing is Technical.
+   * Filter on the Notes page. Existing writing is Technical.
    */
   noteType: 'technical' | 'leadership' | 'delivery' | 'architecture' | 'product';
   kind: 'external' | 'full';
@@ -295,6 +297,33 @@ export interface Article {
   createdAt: string;
 }
 /**
+ * Unlisted pages prepared for a role. The job description itself is not stored.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "tailored-pages".
+ */
+export interface TailoredPage {
+  id: number;
+  slug: string;
+  /**
+   * The role this page was prepared for. This is not a title held.
+   */
+  audience: string;
+  headline: string;
+  lede: string;
+  /**
+   * Skills the job post and the site already share. The job description is not stored.
+   */
+  skills?: string[] | null;
+  projectSlugs: {
+    slug: string;
+    id?: string | null;
+  }[];
+  experienceCompany?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
@@ -333,6 +362,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'articles';
         value: number | Article;
+      } | null)
+    | ({
+        relationTo: 'tailored-pages';
+        value: number | TailoredPage;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -476,6 +509,26 @@ export interface ArticlesSelect<T extends boolean = true> {
   imageUrl?: T;
   content?: T;
   order?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "tailored-pages_select".
+ */
+export interface TailoredPagesSelect<T extends boolean = true> {
+  slug?: T;
+  audience?: T;
+  headline?: T;
+  lede?: T;
+  skills?: T;
+  projectSlugs?:
+    | T
+    | {
+        slug?: T;
+        id?: T;
+      };
+  experienceCompany?: T;
   updatedAt?: T;
   createdAt?: T;
 }
