@@ -29,11 +29,9 @@ export const HomeArticles = ({ articles }: HomeArticlesProps) => {
   return (
     <div className="fade-up space-y-8">
       <header className="space-y-2">
-        <h1 className="font-display text-3xl font-bold tracking-tight text-highlight sm:text-4xl">
-          Articles
-        </h1>
-        <p className="max-w-xl text-base leading-7 text-muted-foreground">
-          Notes on frontend engineering, tooling, and the things I learn while building.
+        <h1 className="page-title">Notes</h1>
+        <p className="mt-4 max-w-xl text-lg leading-8 text-muted-foreground">
+          Field notes from delivery: systems, teams, and the decisions that had to hold in production.
         </p>
       </header>
 
@@ -56,7 +54,7 @@ export const HomeArticles = ({ articles }: HomeArticlesProps) => {
                   <span className="opacity-40">|</span>
                   <span>{formatShortDate(article.date)}</span>
                 </div>
-                <h2 className="font-display text-lg font-semibold tracking-tight transition-colors group-hover:text-highlight sm:text-xl">
+                <h2 className="font-display text-2xl font-medium tracking-tight group-hover:underline group-hover:decoration-foreground/30 group-hover:underline-offset-4">
                   {article.title}
                 </h2>
                 {article.desc ? (
@@ -81,7 +79,7 @@ export const HomeArticles = ({ articles }: HomeArticlesProps) => {
         <button
           type="button"
           onClick={() => setVisibleCount((count) => count + 6)}
-          className="text-sm text-muted-foreground transition-colors hover:text-highlight"
+          className="text-sm text-muted-foreground hover:text-foreground"
         >
           load more
         </button>
