@@ -37,7 +37,7 @@ export default function LandingPage({
   return (
     <div className="space-y-20 sm:space-y-28">
       {/* No fade-up on the hero — opacity:0 blocks LCP (PageSpeed NO_LCP). */}
-      <section className="grid items-center gap-12 pt-8 md:grid-cols-[minmax(0,1fr)_16rem] md:gap-14 md:pt-16">
+      <section className="grid gap-12 pt-8 md:grid-cols-[minmax(0,1fr)_16rem] md:items-center md:gap-14 md:pt-16">
         <div>
           <h1 className="page-title">{hero.headline}</h1>
           <p className="mt-6 max-w-xl text-lg leading-8 text-foreground/90">{hero.lede}</p>
@@ -58,7 +58,7 @@ export default function LandingPage({
             ) : null}
           </div>
         </div>
-        <div className="flex justify-center md:justify-end">
+        <div className="order-first flex justify-center md:order-none md:justify-end">
           <Portrait />
         </div>
       </section>
