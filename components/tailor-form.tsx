@@ -34,7 +34,7 @@ export default function TailorForm() {
       <button
         type="submit"
         disabled={pending}
-        className="text-sm underline underline-offset-4 disabled:opacity-50"
+        className="btn btn-o disabled:opacity-50"
       >
         {pending ? 'Preparing the page…' : 'Prepare a page'}
       </button>
