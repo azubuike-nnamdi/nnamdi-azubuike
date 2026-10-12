@@ -20,18 +20,20 @@ function formatShortDate(date: string) {
 const Articles = ({ articles }: ArticlesProps) => {
   return (
     <section className="fade-up" style={{ animationDelay: '220ms' }}>
-      <div className="mb-5 flex items-baseline justify-between gap-4">
-        <h2 className="section-label">recent posts</h2>
-        <Link href="/articles" className="text-sm text-muted-foreground transition-colors hover:text-highlight">
-          see all
+      <div className="mb-2 flex items-baseline justify-between gap-4">
+        <h2 className="font-display text-3xl font-medium tracking-tight sm:text-4xl">Notes</h2>
+        <Link href="/notes" className="text-sm text-muted-foreground hover:text-foreground">
+          All notes
         </Link>
       </div>
+      <p className="mb-5 max-w-xl text-sm leading-6 text-muted-foreground">
+        Written from delivery, for people who have to act on it.
+      </p>
 
       <ul className="space-y-7">
         {articles.map((article) => {
           const href = article.href || article.uri || '#'
           const isExternal = article.kind !== 'full'
-          const categories = article.category ?? []
 
           return (
             <li key={article.id}>
@@ -41,13 +43,11 @@ const Articles = ({ articles }: ArticlesProps) => {
                 rel={isExternal ? 'noopener noreferrer' : undefined}
                 className="group block"
               >
-                <div className="mb-1.5 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-muted-foreground">
-                  <span>{article.readTime} min read</span>
-                  <span className="opacity-40">|</span>
-                  <span>{formatShortDate(article.date)}</span>
-                </div>
+                <p className="mb-1.5 text-xs uppercase tracking-[0.16em] text-muted-foreground">
+                  {article.noteTypeLabel || 'Technical'}
+                </p>
 
-                <h3 className="font-display text-lg font-semibold tracking-tight text-foreground transition-colors group-hover:text-highlight sm:text-xl">
+                <h3 className="font-display text-2xl font-medium tracking-tight text-foreground group-hover:underline group-hover:decoration-foreground/30 group-hover:underline-offset-4">
                   {article.title}
                 </h3>
 
@@ -57,13 +57,11 @@ const Articles = ({ articles }: ArticlesProps) => {
                   </p>
                 ) : null}
 
-                {categories.length > 0 ? (
-                  <div className="mt-2 flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-glow/90">
-                    {categories.slice(0, 3).map((category) => (
-                      <span key={category}>#{category.toLowerCase()}</span>
-                    ))}
-                  </div>
-                ) : null}
+                <div className="mt-2 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-muted-foreground">
+                  <span>{formatShortDate(article.publishedAt || article.date)}</span>
+                  <span className="opacity-40">·</span>
+                  <span>{article.readTime} min</span>
+                </div>
               </Link>
             </li>
           )
