@@ -1,5 +1,5 @@
-import Portrait from '@/components/portrait'
 import { presentedRole } from '@/components/experience'
+import Portrait from '@/components/portrait'
 import {
   EMAIL_URL,
   EXPERIENCE_URL,
@@ -103,7 +103,7 @@ export default async function Page() {
             </a>
           </p>
         </div>
-        <div className="order-first flex justify-center md:order-none md:justify-end">
+        <div className="order-first flex justify-center md:order-0 md:justify-end">
           <Portrait />
         </div>
       </header>
