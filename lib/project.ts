@@ -8,6 +8,17 @@ export function slugify(value: string): string {
     .replace(/^-+|-+$/g, '')
 }
 
+/** selfservice.mtn.ng answers with a bot check. The public app is my.mtn.ng. */
+function screenshotTarget(uri: string) {
+  try {
+    const host = new URL(uri).hostname.replace(/^www\./, '')
+    if (host === 'selfservice.mtn.ng') return 'https://my.mtn.ng/'
+  } catch {
+    return uri
+  }
+  return uri
+}
+
 /** Live screenshot of a project URL via Microlink (no stored PNG required). */
 export function projectScreenshotFromUrl(
   uri: string,
@@ -16,14 +27,16 @@ export function projectScreenshotFromUrl(
   const url = uri.trim()
   if (!/^https?:\/\//i.test(url)) return null
 
-  const width = options?.width ?? 1280
-  const height = options?.height ?? 720
+  const width = options?.width ?? 1440
+  const height = options?.height ?? 900
   const params = encode({
-    url,
+    url: screenshotTarget(url),
     screenshot: true,
     meta: false,
     embed: 'screenshot.url',
     colorScheme: 'light',
+    waitUntil: 'load',
+    waitForTimeout: 3000,
     'viewport.width': width,
     'viewport.height': height,
   })

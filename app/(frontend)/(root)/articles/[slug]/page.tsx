@@ -63,7 +63,7 @@ export default async function ArticlePage({ params }: PageProps) {
       </Link>
 
       <header className="mt-8 mb-10 space-y-4">
-        <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs uppercase tracking-[0.16em] text-muted-foreground">
+        <div className="k flex flex-wrap items-center gap-x-3 gap-y-1">
           <span>{article.noteTypeLabel}</span>
           <span>·</span>
           <span>{article.readTime} min read</span>

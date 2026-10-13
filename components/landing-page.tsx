@@ -5,7 +5,6 @@ import FunProjects from './fun-projects'
 import ContactPage from './contact/contact-page'
 import Experience from './experience'
 import FeatureProject from './featured-project'
-import OperatingModel from './operating-model'
 import Portrait from './portrait'
 import PracticeAreas from './practice-areas'
 import { CONTACT_URL, PROJECT_URL } from '@/config/routes'
@@ -57,9 +56,9 @@ export default function LandingPage({
   const workHref = onePage ? '#work' : PROJECT_URL
 
   return (
-    <div id={onePage ? 'top' : undefined} className="space-y-20 sm:space-y-28">
+    <div id={onePage ? 'top' : undefined} className="space-y-14 sm:space-y-20">
       {/* No fade-up on the hero — opacity:0 blocks LCP (PageSpeed NO_LCP). */}
-      <section className="grid gap-12 pt-8 md:grid-cols-[minmax(0,1fr)_16rem] md:items-center md:gap-14 md:pt-16">
+      <section className="grid gap-8 pt-6 sm:grid-cols-[minmax(0,1fr)_13rem] sm:items-center sm:gap-8 sm:pt-8 md:grid-cols-[minmax(0,1fr)_16rem] md:gap-14 md:pt-10">
         <div>
           <p className="kicker">{eyebrow}</p>
           {heroOverride?.skills && heroOverride.skills.length > 0 ? (
@@ -74,21 +73,21 @@ export default function LandingPage({
               {renderLinkedText(hero.body)}
             </p>
           ) : null}
-          <div className="mt-8 flex flex-wrap gap-x-6 gap-y-3 text-sm">
-            <Link href={contactHref} className="text-link">
+          <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3">
+            <Link href={contactHref} className="btn-primary">
               Start a conversation
             </Link>
-            <Link href={workHref} className="text-link">
+            <Link href={workHref} className="text-link text-sm">
               Selected work
             </Link>
             {whatsappUrl ? (
-              <Link href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="text-link">
+              <Link href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="text-link text-sm">
                 WhatsApp
               </Link>
             ) : null}
           </div>
         </div>
-        <div className="order-first flex justify-center md:order-none md:justify-end">
+        <div className="order-first sm:order-none">
           <Portrait />
         </div>
       </section>
@@ -97,7 +96,7 @@ export default function LandingPage({
         {positioning.proof.map((item) => (
           <div key={item.label} className="px-0 py-5 sm:px-4 sm:first:pl-0">
             <dt className="font-display text-3xl font-medium sm:text-4xl">{item.value}</dt>
-            <dd className="mt-1 text-xs uppercase tracking-[0.14em] text-muted-foreground">
+            <dd className="mt-1 text-[0.8125rem] uppercase tracking-[0.14em] text-muted-foreground">
               {item.label}
             </dd>
           </div>
@@ -132,7 +131,6 @@ export default function LandingPage({
         </section>
       ) : null}
 
-      <OperatingModel />
       <PracticeAreas />
       <div id={onePage ? 'work' : undefined} className={onePage ? 'scroll-mt-8' : undefined}>
         <FeatureProject projects={projects} linked={!onePage} />
@@ -154,9 +152,9 @@ export default function LandingPage({
           <FunProjects showHeading={false} />
         </div>
       ) : null}
-      <section id={onePage ? 'contact' : undefined} className="scroll-mt-8 border-t border-foreground/80 pt-12">
+      <section id={onePage ? 'contact' : undefined} className="scroll-mt-8 border-t border-foreground/80 pt-10">
         <h2 className="font-display text-4xl font-medium tracking-tight sm:text-5xl">
-          A portfolio that needs a direction.
+          Have a product that needs direction?
         </h2>
         <p className="mt-4 max-w-xl text-base leading-7 text-muted-foreground sm:text-lg">
           For a product estate, a payments platform, or a team that has to reach production and stay there.
@@ -171,12 +169,12 @@ export default function LandingPage({
             />
           </div>
         ) : (
-          <div className="mt-6 flex flex-wrap gap-x-6 gap-y-3 text-sm">
-            <Link href={CONTACT_URL} className="text-link">
+          <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-3">
+            <Link href={CONTACT_URL} className="btn-primary">
               Start a conversation
             </Link>
             {whatsappUrl ? (
-              <Link href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="text-link">
+              <Link href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="text-link text-sm">
                 WhatsApp
               </Link>
             ) : null}

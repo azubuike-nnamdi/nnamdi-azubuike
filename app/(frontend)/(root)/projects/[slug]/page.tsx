@@ -56,7 +56,9 @@ export default async function ProjectPage({ params }: PageProps) {
       </Link>
 
       <header className="mt-8 mb-10">
-        <h1 className="page-title">{project.name}</h1>
+        <p className="k">Work</p>
+        <h1 className="page-title mt-3">{project.name}</h1>
+        <div className="bar" />
       </header>
 
       <ProjectCaseStudy project={project} />

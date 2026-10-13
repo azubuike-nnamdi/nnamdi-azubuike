@@ -47,11 +47,6 @@ function proofMetric(project: ProjectDataType) {
   return `${metric.value.trim()} ${metric.label.trim().toLowerCase()}`
 }
 
-function stackLine(technologies: string[]) {
-  const distinct = technologies.filter((tech) => !isBaseline(tech))
-  return (distinct.length > 0 ? distinct : technologies).slice(0, 4).join(' · ')
-}
-
 export default function ProjectLanding({ projects }: ProjectLandingProps) {
   const [query, setQuery] = useState('')
   const [filter, setFilter] = useState('all')
@@ -121,8 +116,8 @@ export default function ProjectLanding({ projects }: ProjectLandingProps) {
         Production systems, with the outcome in the line under the name. Search the work, or narrow it by what it was built with.
       </p>
 
-      <div className="mt-10 flex flex-col gap-5 border-b border-border pb-5 sm:flex-row sm:items-end sm:justify-between">
-        <div className="flex flex-wrap gap-x-5 gap-y-2">
+      <div className="mt-8 flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
+        <div className="filter-row" style={{ margin: 0 }}>
           <FilterButton active={filter === 'all'} onClick={() => setFilter('all')}>
             All
           </FilterButton>
@@ -155,60 +150,41 @@ export default function ProjectLanding({ projects }: ProjectLandingProps) {
       {visible.length === 0 ? (
         <p className="mt-10 text-muted-foreground">Nothing matches that search.</p>
       ) : (
-        <ul>
-          {visible.map((project, index) => {
+        <div className="work" style={{ marginTop: 28 }}>
+          {visible.map((project) => {
             const href = projectHref(project)
-            const live = /^https?:\/\//i.test(project.uri.trim()) ? project.uri.trim() : ''
             const metric = proofMetric(project)
-            const stack = stackLine(project.technologies)
             const blurb = listBlurb(project)
+            const tags = project.technologies.filter((tech) => !isBaseline(tech)).slice(0, 3)
 
             return (
-              <li key={project.id} className="border-b border-border py-8">
-                <div className="grid gap-2 sm:grid-cols-[2.75rem_minmax(0,1fr)] sm:gap-x-6">
-                  <span className="pt-2 text-xs tabular-nums text-muted-foreground">
-                    {String(index + 1).padStart(2, '0')}
-                  </span>
-                  <div>
-                    <h2 className="font-display text-2xl font-medium tracking-tight sm:text-3xl">
-                      <Link
-                        href={href}
-                        className="hover:underline hover:decoration-foreground/30 hover:underline-offset-4"
-                      >
-                        {project.name.trim()}
-                      </Link>
-                    </h2>
-                    {blurb ? (
-                      <p className="mt-2 max-w-2xl text-[0.95rem] leading-7 text-muted-foreground">
-                        {blurb}
-                      </p>
-                    ) : null}
-                    <p className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-muted-foreground">
-                      {metric ? <span>{metric}</span> : null}
-                      {stack ? <span>{stack}</span> : null}
-                      <Link
-                        href={href}
-                        className="text-foreground underline decoration-foreground/30 underline-offset-4"
-                      >
-                        Case study
-                      </Link>
-                      {live ? (
-                        <a
-                          href={live}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="underline decoration-foreground/20 underline-offset-4 hover:text-foreground"
-                        >
-                          Live
-                        </a>
-                      ) : null}
-                    </p>
+              <Link key={project.id} className="case" href={href}>
+                {project.image ? (
+                  <div className="shot">
+                    <img src={project.image} alt="" />
                   </div>
+                ) : null}
+                <div className="body">
+                  <h3>
+                    {project.name.trim()}
+                    <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden>
+                      <path d="M7 17 17 7M9 7h8v8" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  </h3>
+                  {blurb ? <p>{blurb}</p> : null}
+                  {metric ? <p className="k">{metric}</p> : null}
+                  {tags.length > 0 ? (
+                    <div className="stack">
+                      {tags.map((tag) => (
+                        <span key={tag}>{tag}</span>
+                      ))}
+                    </div>
+                  ) : null}
                 </div>
-              </li>
+              </Link>
             )
           })}
-        </ul>
+        </div>
       )}
     </div>
   )
@@ -227,11 +203,7 @@ function FilterButton({
     <button
       type="button"
       onClick={onClick}
-      className={`text-sm ${
-        active
-          ? 'text-foreground underline decoration-foreground/40 underline-offset-[6px]'
-          : 'text-muted-foreground hover:text-foreground'
-      }`}
+      className={active ? 'on' : undefined}
     >
       {children}
     </button>

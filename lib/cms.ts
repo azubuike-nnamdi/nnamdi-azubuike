@@ -9,7 +9,7 @@ import {
   buildWhatsAppUrl,
 } from '@/config/routes'
 import { projectScreenshotFromUrl } from '@/lib/project'
-import { asNoteType, noteTypeLabel, writingSection, type NoteType, type WritingSection } from '@/lib/writing'
+import { asNoteType, noteTypeLabel, tidyNoteText, writingSection, type NoteType, type WritingSection } from '@/lib/writing'
 
 export type CmsProject = {
   id: string
@@ -247,15 +247,15 @@ function mapArticle(doc: ArticleDoc): CmsArticle {
 
   return {
     id: String(doc.id),
-    title: doc.title,
+    title: tidyNoteText(doc.title),
     kind: doc.kind,
     slug: doc.slug,
     externalUrl: doc.externalUrl,
     publishedAt: doc.publishedAt,
     date: formatArticleDate(doc.publishedAt),
     readTime: doc.readTime,
-    summary: doc.summary,
-    desc: doc.summary ?? undefined,
+    summary: doc.summary ? tidyNoteText(doc.summary) : doc.summary,
+    desc: doc.summary ? tidyNoteText(doc.summary) : undefined,
     section: writingSection(doc.section),
     noteType: asNoteType(doc.noteType),
     noteTypeLabel: noteTypeLabel(doc.noteType),

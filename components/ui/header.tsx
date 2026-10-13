@@ -99,6 +99,8 @@ function isCurrent(pathname: string, href: string) {
   );
 }
 
+const desktopLinkNames = new Set(["Work", "Notes", "About", "Contact"]);
+
 const Header = ({ navLinks = fallbackNav }: HeaderProps) => {
   const pathname = usePathname();
   const router = useRouter();
@@ -108,6 +110,7 @@ const Header = ({ navLinks = fallbackNav }: HeaderProps) => {
       ? { ...link, href: onePageAnchors[normalizeHref(link.href)] ?? link.href }
       : link,
   );
+  const desktopLinks = links.filter((link) => desktopLinkNames.has(link.name));
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
@@ -127,7 +130,7 @@ const Header = ({ navLinks = fallbackNav }: HeaderProps) => {
 
       <Sheet open={open} onOpenChange={setOpen}>
         <SheetTrigger
-          className="text-foreground md:hidden"
+          className="text-foreground sm:hidden"
           aria-label="Open menu"
         >
           <PanelLeft className="size-5" />
@@ -182,8 +185,8 @@ const Header = ({ navLinks = fallbackNav }: HeaderProps) => {
         </SheetContent>
       </Sheet>
 
-      <nav className="hidden flex-wrap justify-end gap-x-5 gap-y-2 pb-1 md:flex">
-        {links.map((nav) => {
+      <nav className="hidden flex-wrap justify-end gap-x-5 gap-y-2 pb-1 sm:flex">
+        {desktopLinks.map((nav) => {
           const href = nav.href.startsWith("#") || nav.href.startsWith("/") ? nav.href : `/${nav.href}`;
           const isActive = isCurrent(pathname, href);
 

@@ -62,7 +62,7 @@ export default async function Page() {
 
   return (
     <article className="fade-up">
-      <header className="grid gap-10 md:grid-cols-[minmax(0,1fr)_14rem] md:items-end md:gap-14">
+      <header className="grid gap-10 sm:grid-cols-[minmax(0,1fr)_minmax(16rem,22rem)] sm:items-center">
         <div>
           <p className="kicker">Profile</p>
           <h1 className="page-title mt-3">Nnamdi Azubuike</h1>
@@ -103,7 +103,7 @@ export default async function Page() {
             </a>
           </p>
         </div>
-        <div className="order-first flex justify-center md:order-0 md:justify-end">
+        <div className="order-first sm:order-none">
           <Portrait />
         </div>
       </header>

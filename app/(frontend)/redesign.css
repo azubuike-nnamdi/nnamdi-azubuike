@@ -1,0 +1,271 @@
+:root {
+  --o: #f26b1d;
+  --o2: #fff3ea;
+  --ink: #111;
+  --mute: #5f5f66;
+  --line: #eceae6;
+  --bg: #fff;
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font: 400 16px/1.6 "Plus Jakarta Sans", system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.font-display {
+  font-family: inherit;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+
+.page {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 56px 28px 96px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 22px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 15px;
+  transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+.btn-o {
+  background: var(--o);
+  color: #fff;
+  box-shadow: 0 10px 24px -12px var(--o);
+}
+
+.k {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--o);
+}
+
+.page h1.page-title {
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+
+.bar {
+  width: 36px;
+  height: 4px;
+  border-radius: 4px;
+  background: var(--o);
+  margin-top: 16px;
+}
+
+.card {
+  background: #fff;
+  border: 1.5px solid var(--line);
+  border-radius: 20px;
+  padding: 30px 26px;
+  transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 22px 40px -26px rgba(0, 0, 0, 0.35);
+  border-color: var(--ink);
+}
+
+a.card,
+a.case {
+  color: inherit;
+  text-decoration: none;
+}
+
+a.card {
+  display: block;
+}
+
+.card h2,
+.card h3 {
+  font-size: 21px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+
+.card p {
+  color: var(--mute);
+  font-size: 15px;
+  margin-top: 8px;
+}
+
+.card .k {
+  color: var(--o);
+  margin-top: 0;
+}
+
+.work {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+
+.case {
+  border: 1.5px solid var(--line);
+  border-radius: 22px;
+  overflow: hidden;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+
+.case:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 26px 46px -28px rgba(0, 0, 0, 0.4);
+}
+
+.case .shot {
+  position: relative;
+  height: auto;
+  display: block;
+  background: var(--o2);
+  overflow: hidden;
+}
+
+.case .shot img {
+  position: static;
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  object-position: top;
+}
+
+.work .case:nth-child(2) .shot {
+  background: #f3f3f1;
+}
+
+.case .body {
+  padding: 24px 24px 26px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  flex: 1;
+}
+
+.case h3 {
+  font-size: 21px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.case h3 svg {
+  color: var(--o);
+  transition: transform 0.2s;
+}
+
+.case:hover h3 svg {
+  transform: translate(3px, -3px);
+}
+
+.stack {
+  margin-top: auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--mute);
+}
+
+.stack span + span::before {
+  content: "•";
+  color: var(--o);
+  margin-right: 14px;
+}
+
+.filter-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  margin: 28px 0 22px;
+}
+
+.filter-row button,
+.filter-row a {
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--mute);
+}
+
+.filter-row .on {
+  color: var(--o);
+}
+
+.note-grid,
+.channel-list {
+  display: grid;
+  gap: 16px;
+}
+
+.note-grid {
+  grid-template-columns: 1fr 1fr;
+}
+
+.rv {
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.rv.out {
+  opacity: 0;
+  transform: translateY(22px);
+}
+
+.rv.in {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rv.out,
+  .rv.in {
+    opacity: 1;
+    transform: none;
+  }
+
+  * {
+    transition: none !important;
+  }
+}
+
+@media (max-width: 980px) {
+  .work {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .note-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 620px) {
+  .page {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .work {
+    grid-template-columns: 1fr;
+  }
+}
