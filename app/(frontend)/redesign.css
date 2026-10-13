@@ -223,7 +223,27 @@ a.card {
   grid-template-columns: 1fr 1fr;
 }
 
+.rv {
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.rv.out {
+  opacity: 0;
+  transform: translateY(22px);
+}
+
+.rv.in {
+  opacity: 1;
+  transform: none;
+}
+
 @media (prefers-reduced-motion: reduce) {
+  .rv.out,
+  .rv.in {
+    opacity: 1;
+    transform: none;
+  }
+
   * {
     transition: none !important;
   }
