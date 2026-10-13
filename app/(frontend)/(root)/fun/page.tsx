@@ -1,4 +1,5 @@
 import FunProjects from '@/components/fun-projects'
+import { getSiteSettings } from '@/lib/cms'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -7,6 +8,8 @@ export const metadata: Metadata = {
     'Side projects from Nnamdi Azubuike: full-stack apps, React Native, and NestJS APIs.',
 }
 
-export default function FunPage() {
-  return <FunProjects />
+export default async function FunPage() {
+  const { funProjects } = await getSiteSettings()
+
+  return <FunProjects projects={funProjects} />
 }
