@@ -31,7 +31,7 @@ function Arrow() {
 }
 
 const wrap = 'mx-auto w-full max-w-[1160px] px-7 max-[620px]:px-5'
-const reveal = 'rv transition duration-700 ease-out [&.out]:translate-y-[22px] [&.out]:opacity-0 [&.in]:translate-y-0 [&.in]:opacity-100 motion-reduce:!translate-y-0 motion-reduce:!opacity-100'
+const reveal = 'rv'
 const kicker = 'text-[13px] font-bold tracking-[0.12em] text-primary uppercase'
 const rule = 'mt-4 h-1 w-9 rounded bg-primary'
 const title = 'mt-2.5 text-[clamp(30px,3.6vw,44px)] leading-[1.1] font-extrabold tracking-[-0.03em]'
@@ -252,8 +252,8 @@ export default function HomeRedesign({ resumeUrl, work }: HomeRedesignProps) {
 
             <div className="mt-[90px]">
               <div className={`${kicker} ${reveal}`}>Experience</div>
-              <div className="mt-10 grid grid-cols-1 gap-[30px] min-[981px]:grid-cols-3">
-                <div className={`${reveal} flex gap-[18px]`}>
+              <div className="mt-10 grid grid-cols-1 gap-8 lg:grid-cols-3">
+                <div className={`${reveal} flex gap-4.5`}>
                   <div className="grid size-16 flex-none place-items-center rounded-full bg-[#fff3ea] text-[#111] shadow-none">
                     <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" aria-hidden>
                       <rect x="3" y="7" width="18" height="13" rx="2" />
@@ -267,7 +267,7 @@ export default function HomeRedesign({ resumeUrl, work }: HomeRedesignProps) {
                     <p className="mt-1.5 text-[14.5px] text-[#5f5f66]">Leads delivery across the Next.js monorepo.</p>
                   </div>
                 </div>
-                <div className={`${reveal} flex gap-[18px]`}>
+                <div className={`${reveal} flex gap-4.5`}>
                   <div className="grid size-16 flex-none place-items-center rounded-full bg-[#fff3ea] text-[#111] shadow-none">
                     <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" aria-hidden>
                       <path d="M12 3 3 8l9 5 9-5zM3 13l9 5 9-5" />
