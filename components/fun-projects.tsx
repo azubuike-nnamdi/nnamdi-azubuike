@@ -6,7 +6,16 @@ type FunProjectsProps = {
   showHeading?: boolean
 }
 
+function stackNames(stack: string) {
+  return stack
+    .split(',')
+    .map((name) => name.trim())
+    .filter(Boolean)
+}
+
 export default function FunProjects({ projects, showHeading = true }: FunProjectsProps) {
+  const Title = showHeading ? 'h2' : 'h3'
+
   return (
     <section>
       {showHeading ? (
@@ -21,30 +30,53 @@ export default function FunProjects({ projects, showHeading = true }: FunProject
         <h2 className="font-display text-3xl font-medium tracking-tight sm:text-4xl">Fun projects</h2>
       )}
 
-      <div className="note-grid" style={{ marginTop: 36 }}>
-        {projects.map((project) => (
-          <article key={project.name} className="card">
-            <p className="k">{project.kind}</p>
-            {showHeading ? <h2>{project.name}</h2> : <h3>{project.name}</h3>}
-            <p>{project.summary}</p>
-            {project.stack ? <p>{project.stack}</p> : null}
-            {project.href || project.live ? (
-              <p className="flex flex-wrap gap-x-5 gap-y-2">
-                {project.href ? (
-                  <Link href={project.href} target="_blank" rel="noopener noreferrer" className="text-link">
-                    GitHub
-                  </Link>
+      <ul className={showHeading ? 'mt-16' : 'mt-8'}>
+        {projects.map((project) => {
+          const names = project.stack ? stackNames(project.stack) : []
+
+          return (
+            <li key={project.name} className="border-t border-[#eceae6] py-10">
+              <div className="flex flex-wrap items-end justify-between gap-x-8 gap-y-3">
+                <div>
+                  <p className="kicker">{project.kind}</p>
+                  <Title className="mt-2 text-[clamp(28px,3vw,40px)] leading-[1.1] font-extrabold tracking-[-0.03em]">
+                    {project.name}
+                  </Title>
+                </div>
+                {project.href || project.live ? (
+                  <p className="flex flex-wrap gap-x-6 gap-y-2">
+                    {project.href ? (
+                      <Link href={project.href} target="_blank" rel="noopener noreferrer" className="text-link">
+                        GitHub
+                      </Link>
+                    ) : null}
+                    {project.live ? (
+                      <Link href={project.live} target="_blank" rel="noopener noreferrer" className="text-link">
+                        Live
+                      </Link>
+                    ) : null}
+                  </p>
                 ) : null}
-                {project.live ? (
-                  <Link href={project.live} target="_blank" rel="noopener noreferrer" className="text-link">
-                    Live
-                  </Link>
-                ) : null}
-              </p>
-            ) : null}
-          </article>
-        ))}
-      </div>
+              </div>
+              <p className="mt-4 max-w-2xl text-[0.95rem] leading-7 text-[#5f5f66]">{project.summary}</p>
+              {names.length > 0 ? (
+                <p className="mt-3 text-[13px] font-semibold text-[#5f5f66]">
+                  {names.map((name, index) => (
+                    <span key={`${project.name}-${name}`} className="whitespace-nowrap">
+                      {index > 0 ? (
+                        <span aria-hidden className="mx-2 text-primary">
+                          ·
+                        </span>
+                      ) : null}
+                      {name}
+                    </span>
+                  ))}
+                </p>
+              ) : null}
+            </li>
+          )
+        })}
+      </ul>
     </section>
   )
 }
