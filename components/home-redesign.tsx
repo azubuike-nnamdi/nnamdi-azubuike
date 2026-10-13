@@ -45,8 +45,8 @@ const title = 'mt-2.5 text-[clamp(30px,3.6vw,44px)] leading-[1.1] font-extrabold
 const button = 'inline-flex items-center gap-2.5 rounded-xl px-[22px] py-3.5 text-[15px] font-semibold transition duration-200 hover:-translate-y-0.5'
 const buttonLine = `${button} border-[1.5px] border-[#111] hover:bg-[#111] hover:text-white`
 const buttonFill = `${button} bg-primary text-white shadow-[0_10px_24px_-12px_#F26B1D]`
-const section = 'py-[110px] max-[620px]:py-20'
-const headingRow = 'mb-[52px] flex items-end justify-between gap-5 max-[620px]:flex-col max-[620px]:items-start'
+const section = 'scroll-mt-24 py-20 max-[620px]:py-16'
+const headingRow = 'mb-10 flex items-end justify-between gap-5 max-[620px]:flex-col max-[620px]:items-start'
 const tool = 'flex aspect-square flex-col items-center justify-center gap-2.5 rounded-[18px] border-[1.5px] border-[#eceae6] bg-white text-center text-[13px] font-bold transition duration-200 hover:-translate-y-0.75 hover:border-primary max-[980px]:aspect-auto max-[980px]:px-1 max-[980px]:py-4 max-[980px]:text-[11px]'
 const glyph = 'text-[22px] font-extrabold tracking-[-0.04em] max-[980px]:text-lg'
 
@@ -54,18 +54,18 @@ export default function HomeRedesign({ resumeUrl, communityNames, liveApps, work
   return (
     <Reveal>
       <main id="top">
-        <div className={`${wrap} grid grid-cols-1 items-center gap-10 pt-15 pb-10 min-[981px]:grid-cols-2`}>
+        <div className={`${wrap} grid grid-cols-1 items-center gap-12 py-16 min-[981px]:grid-cols-2 min-[981px]:py-20`}>
           <div className={reveal}>
             <div className="text-lg font-bold">
-              Hi, I’m<span className="mt-1.5 block h-[3px] w-[34px] rounded-sm bg-primary" />
+              Hi, I’m<span className="mt-1.5 block h-0.75 w-8.5 rounded-sm bg-primary" />
             </div>
-            <h1 className="my-[18px] text-[clamp(52px,7vw,92px)] leading-[0.98] font-extrabold tracking-[-0.045em]">
+            <h1 className="my-4.5 text-[clamp(52px,7vw,92px)] leading-[0.98] font-extrabold tracking-[-0.045em]">
               Nnamdi
               <br />
               <em className="text-primary not-italic">Azubuike</em>
             </h1>
             <div className="text-[19px] font-semibold text-[#5f5f66]">Software Engineering Lead · MTN Nigeria</div>
-            <p className="mt-[22px] mb-[34px] max-w-[440px] text-lg text-[#5f5f66]">
+            <p className="mt-5.5 mb-8.5 max-w-110 text-lg text-[#5f5f66]">
               I lead the teams behind MTN’s self-service, payments and connectivity products, used by over a million people a month.
             </p>
             <div className="flex flex-wrap gap-3.5">
@@ -80,18 +80,18 @@ export default function HomeRedesign({ resumeUrl, communityNames, liveApps, work
               </a>
             </div>
           </div>
-          <div className={`${reveal} relative aspect-square w-full max-w-[520px] justify-self-end max-[980px]:mx-auto max-[980px]:max-w-[440px]`}>
+          <div className={`${reveal} relative aspect-square w-full max-w-130 justify-self-end max-[980px]:mx-auto max-[980px]:max-w-110`}>
             <div className="absolute top-[16%] right-[8%] bottom-[6%] left-[14%] rounded-[48%_52%_46%_54%/56%_48%_52%_44%] bg-primary" />
             <div className="absolute top-[6%] right-[16%] bottom-[6%] left-[22%] overflow-hidden rounded-t-[200px] rounded-b-3xl border-[3px] border-[#111] bg-[#f4f1ec]">
               <Image src="/img/portrait.jpg" alt="Nnamdi Azubuike" fill priority sizes="440px" className="object-cover object-[center_18%]" />
             </div>
-            <svg className="absolute top-0 left-0 w-[110px] text-[#111]" viewBox="0 0 110 130" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" aria-hidden>
+            <svg className="absolute top-0 left-0 w-27.5 text-[#111]" viewBox="0 0 110 130" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" aria-hidden>
               <path d="M55 0v52" />
               <path d="M25 82c0-17 13-30 30-30s30 13 30 30z" fill="#fff" />
               <path d="M48 92h14" stroke="#F26B1D" />
               <path d="M55 98v6M44 100l-4 6M66 100l4 6" stroke="#F26B1D" />
             </svg>
-            <svg className="absolute top-[4%] -right-1.5 w-[120px] text-[#111]" viewBox="0 0 120 110" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+            <svg className="absolute top-[4%] -right-1.5 w-30 text-[#111]" viewBox="0 0 120 110" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
               <path d="M6 90h108M14 90v8M106 90v8" />
               <rect x="16" y="40" width="10" height="50" fill="#fff" />
               <rect x="28" y="34" width="10" height="56" fill="#fff" />
@@ -99,7 +99,7 @@ export default function HomeRedesign({ resumeUrl, communityNames, liveApps, work
               <path d="M76 70h26l-4 20H80z" fill="#F26B1D" />
               <path d="M89 70V38M89 52c-8-2-13-9-12-18 8 2 12 9 12 18zM89 46c7-3 13-10 12-18-8 2-12 9-12 18z" fill="#fff" />
             </svg>
-            <svg className="absolute bottom-[8%] left-[2%] w-[110px] text-[#111]" viewBox="0 0 110 70" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+            <svg className="absolute bottom-[8%] left-[2%] w-27.5 text-[#111]" viewBox="0 0 110 70" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
               <rect x="4" y="4" width="102" height="62" rx="14" fill="#fff" />
               <path d="M38 22 26 35l12 13M72 22l12 13-12 13" />
               <path d="M60 20 50 50" stroke="#F26B1D" />
@@ -111,15 +111,15 @@ export default function HomeRedesign({ resumeUrl, communityNames, liveApps, work
         </div>
 
         <section id="about" className={section}>
-          <div className={`${wrap} grid grid-cols-1 items-center gap-[70px] min-[981px]:grid-cols-[0.9fr_1.1fr]`}>
+          <div className={`${wrap} grid grid-cols-1 items-center gap-12 min-[981px]:grid-cols-[0.9fr_1.1fr] min-[981px]:gap-16`}>
             <div className={reveal}>
               <div className={kicker}>Who I am</div>
               <h2 className={title}>An engineer who stays through release.</h2>
               <div className={rule} />
-              <p className="mt-[22px] text-[22px] leading-normal text-[#333]">
+              <p className="mt-6 text-[22px] leading-normal text-[#333]">
                 Lagos-based engineering lead. I set technical direction, build shared foundations, and keep products healthy once they are live.
               </p>
-              <div className="mt-[34px] grid grid-cols-2 gap-x-[18px] gap-y-[22px] min-[621px]:grid-cols-3">
+              <div className="mt-8 grid grid-cols-2 gap-x-6 gap-y-4 min-[621px]:grid-cols-3">
                 <Trait icon="bulb">Systems thinker</Trait>
                 <Trait icon="shield">Security-minded</Trait>
                 <Trait icon="people">Team builder</Trait>
@@ -127,7 +127,7 @@ export default function HomeRedesign({ resumeUrl, communityNames, liveApps, work
                 <Trait icon="card">Payments</Trait>
                 <Trait icon="book">Writer</Trait>
               </div>
-              <div className="mt-7 flex flex-wrap gap-3">
+              <div className="mt-8 flex flex-wrap gap-3">
                 <Link className={buttonLine} href={ABOUT_URL}>
                   Read more <Arrow />
                 </Link>
@@ -137,21 +137,21 @@ export default function HomeRedesign({ resumeUrl, communityNames, liveApps, work
               </div>
             </div>
             <div className={`${reveal} grid grid-cols-2 gap-4`}>
-              <div className="rounded-[20px] border-[1.5px] border-[#111] bg-[#111] p-[26px] text-white transition duration-200 hover:-translate-y-0.75 hover:border-primary">
+              <div className="rounded-[20px] border-[1.5px] border-[#111] bg-[#111] p-6 text-white transition duration-200 hover:-translate-y-0.75 hover:border-primary">
                 <b className="block text-[44px] leading-none font-extrabold tracking-[-0.04em]">
                   1M<i className="text-primary not-italic">+</i>
                 </b>
                 <span className="mt-2 block text-[15px] font-medium text-[#b9b9c0]">People a month on products I lead</span>
               </div>
-              <div className="rounded-[20px] border-[1.5px] border-[#eceae6] p-[26px] transition duration-200 hover:-translate-y-0.75 hover:border-primary">
+              <div className="rounded-[20px] border-[1.5px] border-[#eceae6] p-6 transition duration-200 hover:-translate-y-0.75 hover:border-primary">
                 <b className="block text-[44px] leading-none font-extrabold tracking-[-0.04em]">7</b>
                 <span className="mt-2 block text-[15px] font-medium text-[#5f5f66]">Products in one shared codebase</span>
               </div>
-              <div className="rounded-[20px] border-[1.5px] border-[#eceae6] p-[26px] transition duration-200 hover:-translate-y-0.75 hover:border-primary">
+              <div className="rounded-[20px] border-[1.5px] border-[#eceae6] p-6 transition duration-200 hover:-translate-y-0.75 hover:border-primary">
                 <b className="block text-[44px] leading-none font-extrabold tracking-[-0.04em]">2023</b>
                 <span className="mt-2 block text-[15px] font-medium text-[#5f5f66]">Leading MTN delivery since</span>
               </div>
-              <div className="rounded-[20px] border-[1.5px] border-[#eceae6] p-[26px] transition duration-200 hover:-translate-y-0.75 hover:border-primary">
+              <div className="rounded-[20px] border-[1.5px] border-[#eceae6] p-6 transition duration-200 hover:-translate-y-0.75 hover:border-primary">
                 <b className="block text-[44px] leading-none font-extrabold tracking-[-0.04em]">4</b>
                 <span className="mt-2 block text-[15px] font-medium text-[#5f5f66]">Streams: self-service, messaging, connectivity, payments</span>
               </div>
@@ -168,7 +168,7 @@ export default function HomeRedesign({ resumeUrl, communityNames, liveApps, work
                 <div className={rule} />
               </div>
             </div>
-            <div className="grid grid-cols-1 gap-[18px] min-[621px]:grid-cols-2 min-[981px]:grid-cols-4">
+            <div className="grid grid-cols-1 gap-4.5 min-[621px]:grid-cols-2 min-[981px]:grid-cols-4">
               <DoCard title="Direction" text="Decide what to build with product and business owners." icon="compass" />
               <DoCard title="Platform" text="Shared auth, payments and design system for every app." icon="layers" />
               <DoCard title="People" text="Structure, review and mentor teams so delivery never stalls." icon="people" />
@@ -189,7 +189,7 @@ export default function HomeRedesign({ resumeUrl, communityNames, liveApps, work
                 View more experience <Arrow />
               </Link>
             </div>
-            <div className={`${reveal} relative mb-20 grid grid-cols-2 gap-y-9 min-[621px]:grid-cols-2 min-[981px]:grid-cols-5 before:absolute before:top-9 before:right-[10%] before:left-[10%] before:border-t-2 before:border-dashed before:border-[#f5c3a2] max-[980px]:before:hidden`}>
+            <div className={`${reveal} relative mb-12 grid grid-cols-2 gap-y-2 min-[621px]:grid-cols-2 min-[981px]:grid-cols-5 before:absolute before:top-2.25 before:right-[10%] before:left-[10%] before:border-t-2 before:border-dashed before:border-[#f5c3a2] max-[980px]:before:hidden`}>
               <Step n="01" title="Understand" text="The users, the business and the risk." icon="search" />
               <Step n="02" title="Architect" text="Shared packages before features." icon="blocks" />
               <Step n="03" title="Build" text="In one monorepo, reviewed." icon="code" />
@@ -249,7 +249,7 @@ export default function HomeRedesign({ resumeUrl, communityNames, liveApps, work
               </Link>
             </div>
 
-            <div className="grid grid-cols-1 gap-[22px] min-[621px]:grid-cols-2 min-[981px]:grid-cols-3">
+            <div className="grid grid-cols-1 gap-5.5 min-[621px]:grid-cols-2 min-[981px]:grid-cols-3">
               <Case href={work.flyx.href} image={work.flyx.image} title="MTN FlyX" badge="Wireless" shot={<FlyxShot />} solution="A customer and agent portal that onboards homes and SMEs onto wireless broadband." />
               <Case href={work.numoni.href} image={work.numoni.image} title="nuMoni" badge="Payments" shot={<NumoniShot />} solution="A merchant portal and admin platform for loyalty, rewards and payments." />
               <Case href={work.fibrex.href} image={work.fibrex.image} title="MTN FibreX" badge="Self-service" shot={<FibrexShot />} solution="Plans and payments on the shared payment system." />
@@ -276,7 +276,7 @@ export default function HomeRedesign({ resumeUrl, communityNames, liveApps, work
               </p>
             ) : null}
 
-            <div className="mt-[90px]">
+            <div className="mt-16">
               <div className={`${kicker} ${reveal}`}>Experience</div>
               <div className="mt-10 grid grid-cols-1 gap-8 lg:grid-cols-3">
                 <div className={`${reveal} flex gap-4.5`}>
@@ -322,7 +322,7 @@ export default function HomeRedesign({ resumeUrl, communityNames, liveApps, work
           </div>
         </section>
 
-        <section className="py-20 max-[620px]:py-16">
+        <section className={section}>
           <div className={wrap}>
             <div className={`${kicker} ${reveal}`}>Community</div>
             <p className={`${reveal} mt-4 max-w-3xl text-lg text-[#5f5f66]`}>
@@ -392,8 +392,8 @@ function Trait({ icon, children }: { icon: string; children: string }) {
 
 function DoCard({ title, text, icon }: { title: string; text: string; icon: string }) {
   return (
-    <div className={`${reveal} rounded-[20px] border-[1.5px] border-[#eceae6] bg-white px-[26px] py-[30px] transition duration-300 hover:-translate-y-1.5 hover:border-[#111] hover:shadow-[0_22px_40px_-26px_rgba(0,0,0,0.35)]`}>
-      <div className="mb-[22px] grid size-14 place-items-center rounded-2xl bg-[#fff3ea] text-primary">
+    <div className={`${reveal} rounded-[20px] border-[1.5px] border-[#eceae6] bg-white p-7 transition duration-300 hover:-translate-y-1.5 hover:border-[#111] hover:shadow-[0_22px_40px_-26px_rgba(0,0,0,0.35)]`}>
+      <div className="mb-5.5 grid size-14 place-items-center rounded-2xl bg-[#fff3ea] text-primary">
         <TraitIcon name={icon} size={26} />
       </div>
       <h3 className="text-[21px] leading-tight font-extrabold tracking-[-0.02em]">{title}</h3>
@@ -405,7 +405,7 @@ function DoCard({ title, text, icon }: { title: string; text: string; icon: stri
 function Step({ n, title, text, icon }: { n: string; title: string; text: string; icon: string }) {
   return (
     <div className="group relative text-center">
-      <div className="mx-auto mb-4 grid size-[72px] place-items-center rounded-full border-[1.5px] border-[#111] bg-white shadow-none transition duration-300 group-hover:border-primary group-hover:bg-primary group-hover:text-white">
+      <div className="mx-auto mb-10 grid size-18 place-items-center rounded-full border-[1.5px] border-[#111] bg-white shadow-none transition duration-300 group-hover:border-primary group-hover:bg-primary group-hover:text-white">
         <TraitIcon name={icon} size={26} />
       </div>
       <small className="text-sm font-extrabold text-primary">{n}</small>
