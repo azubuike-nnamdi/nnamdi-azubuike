@@ -119,7 +119,7 @@ export default function HomeRedesign({ resumeUrl, communityNames, liveApps, work
               <p className="mt-6 text-[22px] leading-normal text-[#333]">
                 Lagos-based engineering lead. I set technical direction, build shared foundations, and keep products healthy once they are live.
               </p>
-              <div className="mt-8 grid grid-cols-2 gap-x-6 gap-y-4 min-[621px]:grid-cols-3">
+              <div className="mt-8 grid grid-cols-2 gap-x-6 gap-y-4">
                 <Trait icon="bulb">Systems thinker</Trait>
                 <Trait icon="shield">Security-minded</Trait>
                 <Trait icon="people">Team builder</Trait>
@@ -383,7 +383,7 @@ function Case({
 
 function Trait({ icon, children }: { icon: string; children: string }) {
   return (
-    <div className="flex items-center gap-2.5 text-[14.5px] font-bold [&_svg]:shrink-0 [&_svg]:text-primary">
+    <div className="flex items-center gap-2.5 text-[14.5px] font-bold whitespace-nowrap [&_svg]:shrink-0 [&_svg]:text-primary">
       <TraitIcon name={icon} />
       {children}
     </div>
