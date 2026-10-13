@@ -15,7 +15,10 @@ import {
   RESUME_URL,
   TWITTER_URL,
 } from '../config/routes'
-import { defaultExperience } from '../lib/experience'
+import { profileForCms } from '../lib/about'
+import { communityRolesForCms } from '../lib/community'
+import { cvSummary, defaultExperience, educationForCms, expertiseForCms, toolkitForCms } from '../lib/experience'
+import { funProjectsForCms } from '../lib/fun-projects'
 
 function parseLooseDate(value: string): string {
   const normalized = value
@@ -63,6 +66,12 @@ async function seed() {
       resume: {
         url: RESUME_URL,
       },
+      experienceIntro: cvSummary,
+      profile: profileForCms(),
+      education: educationForCms(),
+      expertise: expertiseForCms(),
+      toolkit: toolkitForCms(),
+      funProjects: funProjectsForCms(),
       experience: defaultExperience.map((item) => ({
         company: item.company,
         role: item.role,
@@ -71,6 +80,7 @@ async function seed() {
         summary: item.summary,
         highlights: item.highlights.map((text) => ({ text })),
       })),
+      community: communityRolesForCms(),
       footer: {
         copyrightName: 'NNAMDI AZUBUIKE',
         location: 'LAGOS, NIGERIA',
