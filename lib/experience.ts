@@ -32,7 +32,7 @@ export const defaultExperience: CmsExperienceItem[] = [
     period: 'March 2023 — Present',
     summary: 'MTN Nigeria · Lagos',
     highlights: [
-      'Led systems delivery across MTN Nigeria’s Next.js monorepo (Nx/Turbo) — self-service marketplace, FibreX, Bulk SMS, admin dashboard, cloud, and related apps — platforms used by 1M+ monthly users.',
+      'Led systems delivery across MTN Nigeria’s Next.js monorepo (Nx/Turbo) — self-service marketplace, FibreX, Bulk SMS (https://sms.mtn.ng/), messaging (https://messaging.mtn.ng/), IoT (https://iot.mtn.ng/), cloud (http://cloud.mtn.ng/), dashboard (https://dashboard.mtn.ng/), and Go (http://go.mtn.ng/) — platforms used by 1M+ monthly users.',
       'Built and evolved shared platform packages: NextAuth session helpers, server-to-server auth checks, reusable payment systems, and design-system utilities consumed across apps.',
       'Shipped production hardening — hardened cookies/session config, payment and financial-record guards, replay/rate-limit patterns, and OpenTelemetry instrumentation — with support across SIT, UAT, and production.',
       'Owned high-traffic technical flows (airtime, data, billing, fibre plan/payments, enterprise SMS) and mentored engineers through reviews, pairing, and architecture guidance.',
@@ -40,7 +40,7 @@ export const defaultExperience: CmsExperienceItem[] = [
   },
   {
     company: 'Numoni',
-    role: 'Frontend Engineer',
+    role: 'Senior Frontend Engineer',
     period: 'September 2025 — January 2026',
     summary:
       'Contract · Loyalty, rewards & payments · Merchant portal + Admin platform',
@@ -92,13 +92,14 @@ export const defaultExperience: CmsExperienceItem[] = [
 
 export const defaultEducation: CmsEducationItem[] = [
   {
-    title: 'Master of Science (MSc), Information Technology',
+    title: 'Master of Information Technology (MIT)',
     institution: 'Miva Open University',
-    detail: 'In progress',
+    detail: 'First class · 2026',
   },
   {
     title: 'Bachelor of Science (BSc), Computer Science',
     institution: 'Kwara State University, Malete',
+    detail: 'Second Class Upper Division'
   },
   {
     title: 'Level 2 IVQ Diploma IT Systems Support',
@@ -175,3 +176,25 @@ export const toolkit: ToolkitGroup[] = [
 
 export const cvSummary =
   'Software Engineering Lead at MTN Nigeria. I lead engineering across self-service, messaging, connectivity, and payments — products used by more than a million people a month.'
+
+export function educationForCms(items: CmsEducationItem[] = defaultEducation) {
+  return items.map((item) => ({
+    title: item.title,
+    institution: item.institution,
+    detail: item.detail,
+  }))
+}
+
+export function expertiseForCms(groups: CmsExpertiseGroup[] = defaultExpertise) {
+  return groups.map((group) => ({
+    label: group.label,
+    items: group.items,
+  }))
+}
+
+export function toolkitForCms(groups: ToolkitGroup[] = toolkit) {
+  return groups.map((group) => ({
+    label: group.label,
+    items: group.items.map((name) => ({ name })),
+  }))
+}
