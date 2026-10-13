@@ -52,6 +52,7 @@ export default async function TailoredPortfolioPage({ params }: PageProps) {
       articles={articles}
       about={siteSettings.about}
       experience={experience}
+      funProjects={siteSettings.funProjects}
       whatsappUrl={siteSettings.contact.whatsappUrl}
       whatsappPhone={siteSettings.contact.whatsappPhone}
       resumeUrl={siteSettings.resumeUrl}

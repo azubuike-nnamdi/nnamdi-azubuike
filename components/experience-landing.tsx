@@ -1,20 +1,27 @@
 import Experience from '@/components/experience'
-import {
-  cvSummary,
-  defaultEducation,
-  defaultExpertise,
-  toolkit,
-  type CmsExperienceItem,
+import type {
+  CmsEducationItem,
+  CmsExperienceItem,
+  CmsExpertiseGroup,
+  ToolkitGroup,
 } from '@/lib/experience'
 import Link from 'next/link'
 
 type ExperienceLandingProps = {
   experience: CmsExperienceItem[]
+  intro: string
+  education: CmsEducationItem[]
+  expertise: CmsExpertiseGroup[]
+  toolkit: ToolkitGroup[]
   resumeUrl: string
 }
 
 export default function ExperienceLanding({
   experience,
+  intro,
+  education,
+  expertise,
+  toolkit,
   resumeUrl,
 }: ExperienceLandingProps) {
   return (
@@ -24,7 +31,7 @@ export default function ExperienceLanding({
           Home
         </Link>
         <h1 className="page-title mt-6">Experience</h1>
-        <p className="mt-5 text-lg leading-8 text-muted-foreground">{cvSummary}</p>
+        <p className="mt-5 text-lg leading-8 text-muted-foreground">{intro}</p>
         <p className="mt-4">
           <Link
             href={resumeUrl}
@@ -60,7 +67,7 @@ export default function ExperienceLanding({
       <section className="space-y-4">
         <h2 className="section-label">scope</h2>
         <ul className="space-y-3">
-          {defaultExpertise.map((group) => (
+          {expertise.map((group) => (
             <li
               key={group.label}
               className="grid grid-cols-1 gap-1 sm:grid-cols-[minmax(9rem,13rem)_1fr] sm:items-baseline sm:gap-4"
@@ -77,7 +84,7 @@ export default function ExperienceLanding({
       <section className="space-y-4">
         <h2 className="section-label">education</h2>
         <ul className="space-y-4">
-          {defaultEducation.map((item) => (
+          {education.map((item) => (
             <li key={`${item.title}-${item.institution}`}>
               <p className="text-[0.95rem] font-medium leading-7 text-foreground">
                 {item.title}

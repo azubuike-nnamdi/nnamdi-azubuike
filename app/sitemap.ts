@@ -6,7 +6,7 @@ const siteUrl = 'https://www.nnamdiazubuike.dev'
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const [projects, articles] = await Promise.all([getProjects(), getArticles()])
 
-  const staticRoutes = ['', '/projects', '/notes', '/about', '/experience', '/fun', '/contact']
+  const staticRoutes = ['', '/projects', '/notes', '/about', '/experience', '/community', '/fun', '/contact']
 
   const projectRoutes = projects
     .filter((project) => project.slug)

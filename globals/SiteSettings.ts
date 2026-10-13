@@ -9,8 +9,17 @@ export const SiteSettings: GlobalConfig = {
   hooks: {
     afterChange: [
       async () => {
-        const { revalidatePath } = await import('next/cache')
-        revalidatePath('/', 'layout')
+        try {
+          const { revalidatePath } = await import('next/cache')
+          revalidatePath('/', 'layout')
+        } catch (error) {
+          if (
+            !(error instanceof Error) ||
+            !error.message.includes('static generation store missing')
+          ) {
+            throw error
+          }
+        }
       },
     ],
   },
@@ -118,6 +127,14 @@ export const SiteSettings: GlobalConfig = {
       ],
     },
     {
+      name: 'experienceIntro',
+      type: 'textarea',
+      label: 'Experience intro',
+      admin: {
+        description: 'Opening paragraph on /experience.',
+      },
+    },
+    {
       name: 'experience',
       type: 'array',
       label: 'Experience',
@@ -126,7 +143,7 @@ export const SiteSettings: GlobalConfig = {
         plural: 'Roles',
       },
       admin: {
-        description: 'Selective roles shown on the homepage (impact over job history).',
+        description: 'Roles on /experience and the record on /about. Order here is the order on the page.',
       },
       fields: [
         {
@@ -170,6 +187,209 @@ export const SiteSettings: GlobalConfig = {
           fields: [
             {
               name: 'text',
+              type: 'text',
+              required: true,
+            },
+          ],
+        },
+      ],
+    },
+    {
+      name: 'profile',
+      type: 'group',
+      label: 'About page',
+      admin: {
+        description:
+          'Copy on /about. In a paragraph, write a link as [[Work|/projects]].',
+      },
+      fields: [
+        { name: 'lede', type: 'textarea' },
+        { name: 'meta', type: 'text' },
+        { name: 'overviewHeading', type: 'text', label: 'Overview heading' },
+        {
+          name: 'overview',
+          type: 'array',
+          labels: { singular: 'Paragraph', plural: 'Paragraphs' },
+          fields: [{ name: 'text', type: 'textarea', required: true }],
+        },
+        { name: 'practiceHeading', type: 'text', label: 'Practice heading' },
+        { name: 'practiceIntro', type: 'textarea', label: 'Practice intro' },
+        {
+          name: 'practice',
+          type: 'array',
+          labels: { singular: 'Practice', plural: 'Practice' },
+          fields: [
+            { name: 'title', type: 'text', required: true },
+            { name: 'detail', type: 'textarea', required: true },
+          ],
+        },
+        { name: 'stack', type: 'textarea', label: 'Working stack' },
+      ],
+    },
+    {
+      name: 'education',
+      type: 'array',
+      labels: { singular: 'Credential', plural: 'Education' },
+      admin: {
+        description: 'Shown on /about and /experience.',
+      },
+      fields: [
+        { name: 'title', type: 'text', required: true },
+        { name: 'institution', type: 'text', required: true },
+        { name: 'detail', type: 'text' },
+      ],
+    },
+    {
+      name: 'expertise',
+      type: 'array',
+      label: 'Scope',
+      labels: { singular: 'Scope', plural: 'Scope' },
+      admin: {
+        description: 'Scope list on /experience.',
+      },
+      fields: [
+        { name: 'label', type: 'text', required: true },
+        { name: 'items', type: 'textarea', required: true },
+      ],
+    },
+    {
+      name: 'toolkit',
+      type: 'array',
+      labels: { singular: 'Group', plural: 'Toolkit' },
+      admin: {
+        description: 'Toolkit groups on /experience.',
+      },
+      fields: [
+        { name: 'label', type: 'text', required: true },
+        {
+          name: 'items',
+          type: 'array',
+          labels: { singular: 'Tool', plural: 'Tools' },
+          fields: [{ name: 'name', type: 'text', required: true }],
+        },
+      ],
+    },
+    {
+      name: 'funProjects',
+      type: 'array',
+      label: 'Fun projects',
+      labels: { singular: 'Project', plural: 'Fun projects' },
+      admin: {
+        description: 'Side projects on /fun. Order here is the order on the page.',
+      },
+      fields: [
+        { name: 'name', type: 'text', required: true },
+        { name: 'kind', type: 'text', required: true },
+        { name: 'summary', type: 'textarea', required: true },
+        { name: 'stack', type: 'text' },
+        { name: 'github', type: 'text', label: 'GitHub URL' },
+        { name: 'live', type: 'text', label: 'Live URL' },
+      ],
+    },
+    {
+      name: 'community',
+      type: 'array',
+      label: 'Community',
+      labels: {
+        singular: 'Seat',
+        plural: 'Seats',
+      },
+      admin: {
+        description:
+          'Campus and community seats, earliest first. This is not employment. Order here is the order on the page.',
+      },
+      fields: [
+        {
+          name: 'shortName',
+          type: 'text',
+          admin: {
+            description:
+              'Name on the homepage strip. Repeated names are shown once. Falls back to the organization.',
+          },
+        },
+        {
+          name: 'period',
+          type: 'text',
+          admin: {
+            description: 'e.g. August 2020 – 2021, or 300 level. Leave empty if undated.',
+          },
+        },
+        {
+          name: 'role',
+          type: 'text',
+          required: true,
+        },
+        {
+          name: 'organization',
+          type: 'text',
+          required: true,
+        },
+        {
+          name: 'summary',
+          type: 'textarea',
+          required: true,
+        },
+        {
+          name: 'responsibilities',
+          type: 'array',
+          labels: {
+            singular: 'Responsibility',
+            plural: 'Responsibilities',
+          },
+          fields: [
+            {
+              name: 'text',
+              type: 'text',
+              required: true,
+            },
+          ],
+        },
+        {
+          name: 'logos',
+          type: 'array',
+          labels: {
+            singular: 'Logo',
+            plural: 'Logos',
+          },
+          fields: [
+            {
+              name: 'src',
+              type: 'text',
+              required: true,
+              admin: {
+                description: 'Public path, e.g. /img/community/gdg.png',
+              },
+            },
+            {
+              name: 'alt',
+              type: 'text',
+              required: true,
+            },
+            {
+              name: 'mark',
+              type: 'checkbox',
+              defaultValue: false,
+              admin: {
+                description: 'Square marks render taller than wide wordmarks.',
+              },
+            },
+          ],
+        },
+        {
+          name: 'links',
+          type: 'array',
+          labels: {
+            singular: 'Link',
+            plural: 'Links',
+          },
+          fields: [
+            {
+              name: 'label',
+              type: 'text',
+              required: true,
+            },
+            {
+              name: 'href',
               type: 'text',
               required: true,
             },

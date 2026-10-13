@@ -1,11 +1,12 @@
-import { funProjects } from '@/lib/fun-projects'
+import type { FunProject } from '@/lib/fun-projects'
 import Link from 'next/link'
 
 type FunProjectsProps = {
+  projects: FunProject[]
   showHeading?: boolean
 }
 
-export default function FunProjects({ showHeading = true }: FunProjectsProps) {
+export default function FunProjects({ projects, showHeading = true }: FunProjectsProps) {
   return (
     <section>
       {showHeading ? (
@@ -21,7 +22,7 @@ export default function FunProjects({ showHeading = true }: FunProjectsProps) {
       )}
 
       <div className="note-grid" style={{ marginTop: 36 }}>
-        {funProjects.map((project) => (
+        {projects.map((project) => (
           <article key={project.name} className="card">
             <p className="k">{project.kind}</p>
             {showHeading ? <h2>{project.name}</h2> : <h3>{project.name}</h3>}

@@ -14,6 +14,7 @@ import {
   type CmsAbout,
 } from '@/lib/about'
 import type { CmsExperienceItem } from '@/lib/experience'
+import type { FunProject } from '@/lib/fun-projects'
 import type { Article, ProjectDataType } from '@/lib/definitions'
 import { positioning, resolveHeroCopy } from '@/lib/positioning'
 import Link from 'next/link'
@@ -30,6 +31,7 @@ type LandingPageProps = {
   articles: Article[]
   about?: CmsAbout
   experience?: CmsExperienceItem[]
+  funProjects?: FunProject[]
   whatsappUrl?: string
   whatsappPhone?: string
   resumeUrl?: string
@@ -42,6 +44,7 @@ export default function LandingPage({
   articles,
   about = defaultAbout,
   experience = [],
+  funProjects = [],
   whatsappUrl = '',
   whatsappPhone = '',
   resumeUrl = '',
@@ -149,7 +152,7 @@ export default function LandingPage({
       </div>
       {onePage ? (
         <div id="fun" className="scroll-mt-8">
-          <FunProjects showHeading={false} />
+          <FunProjects projects={funProjects} showHeading={false} />
         </div>
       ) : null}
       <section id={onePage ? 'contact' : undefined} className="scroll-mt-8 border-t border-foreground/80 pt-10">

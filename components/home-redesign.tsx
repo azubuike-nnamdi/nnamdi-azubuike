@@ -1,7 +1,7 @@
 import Reveal from '@/components/reveal'
 import { Badge } from '@/components/ui/badge'
 import { Card, CardAction, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { ABOUT_URL, EXPERIENCE_URL, NOTES_URL, PROJECT_URL } from '@/config/routes'
+import { ABOUT_URL, COMMUNITY_URL, EXPERIENCE_URL, NOTES_URL, PROJECT_URL } from '@/config/routes'
 import Image from 'next/image'
 import Link from 'next/link'
 import type { ReactNode } from 'react'
@@ -11,8 +11,15 @@ type WorkCard = {
   image: string
 }
 
+type LiveApp = {
+  name: string
+  href: string
+}
+
 type HomeRedesignProps = {
   resumeUrl: string
+  communityNames: string[]
+  liveApps: LiveApp[]
   work: {
     flyx: WorkCard
     numoni: WorkCard
@@ -43,7 +50,7 @@ const headingRow = 'mb-[52px] flex items-end justify-between gap-5 max-[620px]:f
 const tool = 'flex aspect-square flex-col items-center justify-center gap-2.5 rounded-[18px] border-[1.5px] border-[#eceae6] bg-white text-center text-[13px] font-bold transition duration-200 hover:-translate-y-0.75 hover:border-primary max-[980px]:aspect-auto max-[980px]:px-1 max-[980px]:py-4 max-[980px]:text-[11px]'
 const glyph = 'text-[22px] font-extrabold tracking-[-0.04em] max-[980px]:text-lg'
 
-export default function HomeRedesign({ resumeUrl, work }: HomeRedesignProps) {
+export default function HomeRedesign({ resumeUrl, communityNames, liveApps, work }: HomeRedesignProps) {
   return (
     <Reveal>
       <main id="top">
@@ -250,6 +257,25 @@ export default function HomeRedesign({ resumeUrl, work }: HomeRedesignProps) {
               <Case href={work.platform.href} title="Shared platform" badge="Monorepo" shot={<PlatformShot />} solution="Shared auth, payment guards, rate limits and tracing for every app." />
             </div>
 
+            {liveApps.length > 0 ? (
+              <p className={`${reveal} mt-8 text-[15px] leading-7 text-[#5f5f66]`}>
+                Also live:{' '}
+                {liveApps.map((app, index) => (
+                  <span key={app.href}>
+                    {index > 0 ? ' · ' : null}
+                    <a
+                      href={app.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-semibold text-[#111] underline-offset-4 hover:underline"
+                    >
+                      {app.name}
+                    </a>
+                  </span>
+                ))}
+              </p>
+            ) : null}
+
             <div className="mt-[90px]">
               <div className={`${kicker} ${reveal}`}>Experience</div>
               <div className="mt-10 grid grid-cols-1 gap-8 lg:grid-cols-3">
@@ -293,6 +319,21 @@ export default function HomeRedesign({ resumeUrl, work }: HomeRedesignProps) {
                 </div>
               </div>
             </div>
+          </div>
+        </section>
+
+        <section className="py-20 max-[620px]:py-16">
+          <div className={wrap}>
+            <div className={`${kicker} ${reveal}`}>Community</div>
+            <p className={`${reveal} mt-4 max-w-3xl text-lg text-[#5f5f66]`}>
+              {communityNames.join(' · ')}
+            </p>
+            <Link
+              className={`${reveal} mt-5 inline-block text-[15px] font-semibold text-primary no-underline underline-offset-4 hover:underline`}
+              href={COMMUNITY_URL}
+            >
+              The record
+            </Link>
           </div>
         </section>
       </main>

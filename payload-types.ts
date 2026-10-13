@@ -625,7 +625,11 @@ export interface SiteSetting {
     url?: string | null;
   };
   /**
-   * Selective roles shown on the homepage (impact over job history).
+   * Opening paragraph on /experience.
+   */
+  experienceIntro?: string | null;
+  /**
+   * Roles on /experience and the record on /about. Order here is the order on the page.
    */
   experience?:
     | {
@@ -646,6 +650,126 @@ export interface SiteSetting {
         highlights?:
           | {
               text: string;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Copy on /about. In a paragraph, write a link as [[Work|/projects]].
+   */
+  profile?: {
+    lede?: string | null;
+    meta?: string | null;
+    overviewHeading?: string | null;
+    overview?:
+      | {
+          text: string;
+          id?: string | null;
+        }[]
+      | null;
+    practiceHeading?: string | null;
+    practiceIntro?: string | null;
+    practice?:
+      | {
+          title: string;
+          detail: string;
+          id?: string | null;
+        }[]
+      | null;
+    stack?: string | null;
+  };
+  /**
+   * Shown on /about and /experience.
+   */
+  education?:
+    | {
+        title: string;
+        institution: string;
+        detail?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Scope list on /experience.
+   */
+  expertise?:
+    | {
+        label: string;
+        items: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Toolkit groups on /experience.
+   */
+  toolkit?:
+    | {
+        label: string;
+        items?:
+          | {
+              name: string;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Side projects on /fun. Order here is the order on the page.
+   */
+  funProjects?:
+    | {
+        name: string;
+        kind: string;
+        summary: string;
+        stack?: string | null;
+        github?: string | null;
+        live?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Campus and community seats, earliest first. This is not employment. Order here is the order on the page.
+   */
+  community?:
+    | {
+        /**
+         * Name on the homepage strip. Repeated names are shown once. Falls back to the organization.
+         */
+        shortName?: string | null;
+        /**
+         * e.g. August 2020 – 2021, or 300 level. Leave empty if undated.
+         */
+        period?: string | null;
+        role: string;
+        organization: string;
+        summary: string;
+        responsibilities?:
+          | {
+              text: string;
+              id?: string | null;
+            }[]
+          | null;
+        logos?:
+          | {
+              /**
+               * Public path, e.g. /img/community/gdg.png
+               */
+              src: string;
+              alt: string;
+              /**
+               * Square marks render taller than wide wordmarks.
+               */
+              mark?: boolean | null;
+              id?: string | null;
+            }[]
+          | null;
+        links?:
+          | {
+              label: string;
+              href: string;
               id?: string | null;
             }[]
           | null;
@@ -727,6 +851,7 @@ export interface SiteSettingsSelect<T extends boolean = true> {
     | {
         url?: T;
       };
+  experienceIntro?: T;
   experience?:
     | T
     | {
@@ -739,6 +864,98 @@ export interface SiteSettingsSelect<T extends boolean = true> {
           | T
           | {
               text?: T;
+              id?: T;
+            };
+        id?: T;
+      };
+  profile?:
+    | T
+    | {
+        lede?: T;
+        meta?: T;
+        overviewHeading?: T;
+        overview?:
+          | T
+          | {
+              text?: T;
+              id?: T;
+            };
+        practiceHeading?: T;
+        practiceIntro?: T;
+        practice?:
+          | T
+          | {
+              title?: T;
+              detail?: T;
+              id?: T;
+            };
+        stack?: T;
+      };
+  education?:
+    | T
+    | {
+        title?: T;
+        institution?: T;
+        detail?: T;
+        id?: T;
+      };
+  expertise?:
+    | T
+    | {
+        label?: T;
+        items?: T;
+        id?: T;
+      };
+  toolkit?:
+    | T
+    | {
+        label?: T;
+        items?:
+          | T
+          | {
+              name?: T;
+              id?: T;
+            };
+        id?: T;
+      };
+  funProjects?:
+    | T
+    | {
+        name?: T;
+        kind?: T;
+        summary?: T;
+        stack?: T;
+        github?: T;
+        live?: T;
+        id?: T;
+      };
+  community?:
+    | T
+    | {
+        shortName?: T;
+        period?: T;
+        role?: T;
+        organization?: T;
+        summary?: T;
+        responsibilities?:
+          | T
+          | {
+              text?: T;
+              id?: T;
+            };
+        logos?:
+          | T
+          | {
+              src?: T;
+              alt?: T;
+              mark?: T;
+              id?: T;
+            };
+        links?:
+          | T
+          | {
+              label?: T;
+              href?: T;
               id?: T;
             };
         id?: T;

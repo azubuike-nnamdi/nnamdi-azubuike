@@ -1,5 +1,13 @@
 'use client'
 
+import { Badge } from '@/components/ui/badge'
+import {
+  Card,
+  CardAction,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card'
 import type { ProjectDataType } from '@/lib/definitions'
 import { projectHref } from '@/lib/project'
 import Link from 'next/link'
@@ -150,37 +158,42 @@ export default function ProjectLanding({ projects }: ProjectLandingProps) {
       {visible.length === 0 ? (
         <p className="mt-10 text-muted-foreground">Nothing matches that search.</p>
       ) : (
-        <div className="work" style={{ marginTop: 28 }}>
+        <div className="mt-7 grid grid-cols-1 gap-[22px] min-[621px]:grid-cols-2 min-[981px]:grid-cols-3">
           {visible.map((project) => {
             const href = projectHref(project)
             const metric = proofMetric(project)
             const blurb = listBlurb(project)
-            const tags = project.technologies.filter((tech) => !isBaseline(tech)).slice(0, 3)
+            const badge = project.featured ? 'Featured' : metric
 
             return (
-              <Link key={project.id} className="case" href={href}>
-                {project.image ? (
-                  <div className="shot">
-                    <img src={project.image} alt="" />
+              <Link key={project.id} href={href} className="block h-full text-inherit no-underline">
+                <Card className="relative h-full w-full gap-4 overflow-hidden pt-0 shadow-sm">
+                  <div className="relative bg-[#111]">
+                    <div className="absolute inset-0 z-10 bg-black/35" />
+                    {project.image ? (
+                      <img
+                        src={project.image}
+                        alt=""
+                        className="relative aspect-video w-full object-cover brightness-60 grayscale dark:brightness-40"
+                      />
+                    ) : (
+                      <div className="aspect-video w-full" />
+                    )}
                   </div>
-                ) : null}
-                <div className="body">
-                  <h3>
-                    {project.name.trim()}
-                    <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden>
-                      <path d="M7 17 17 7M9 7h8v8" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-                  </h3>
-                  {blurb ? <p>{blurb}</p> : null}
-                  {metric ? <p className="k">{metric}</p> : null}
-                  {tags.length > 0 ? (
-                    <div className="stack">
-                      {tags.map((tag) => (
-                        <span key={tag}>{tag}</span>
-                      ))}
-                    </div>
-                  ) : null}
-                </div>
+                  <CardHeader className="pb-5">
+                    {badge ? (
+                      <CardAction>
+                        <Badge variant="secondary">{badge}</Badge>
+                      </CardAction>
+                    ) : null}
+                    <CardTitle className="text-lg leading-none font-semibold">
+                      {project.name.trim()}
+                    </CardTitle>
+                    {blurb ? (
+                      <CardDescription className="line-clamp-3">{blurb}</CardDescription>
+                    ) : null}
+                  </CardHeader>
+                </Card>
               </Link>
             )
           })}

@@ -1,3 +1,4 @@
+import ScrollProgress from "@/components/scroll-progress";
 import SiteFooter from "@/components/site-footer";
 import SiteHeader from "@/components/site-header";
 import { ThemeProvider } from "@/components/ui/theme-provider";
@@ -99,6 +100,7 @@ export default async function RootLayout({
             type="application/ld+json"
             dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd()) }}
           />
+          <ScrollProgress />
           <SiteHeader />
           {children}
           <SiteFooter whatsappUrl={siteSettings.contact.whatsappUrl} />
@@ -106,15 +108,19 @@ export default async function RootLayout({
             {`(function () {
   var header = document.getElementById('hd');
   var nav = header && header.querySelector('.nav');
-  var toggle = header && header.querySelector('.nav-toggle');
   if (header && nav && !header.dataset.bound) {
     header.dataset.bound = '1';
     var onScroll = function () {
       header.classList.toggle('s', window.scrollY > 10);
       var links = nav.querySelectorAll('ul a[data-id]');
       if (location.pathname !== '/') {
+        var pathId = location.pathname === '/about' || location.pathname.indexOf('/about/') === 0 ? 'about'
+          : location.pathname === '/projects' || location.pathname.indexOf('/projects/') === 0 ? 'work'
+          : location.pathname === '/community' || location.pathname.indexOf('/community/') === 0 ? 'community'
+          : location.pathname === '/fun' || location.pathname.indexOf('/fun/') === 0 ? 'fun'
+          : '';
         links.forEach(function (link) {
-          link.classList.toggle('on', link.getAttribute('data-id') === 'fun' && location.pathname === '/fun');
+          link.classList.toggle('on', link.getAttribute('data-id') === pathId);
         });
         return;
       }
@@ -130,14 +136,6 @@ export default async function RootLayout({
     };
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
-    if (toggle) {
-      toggle.addEventListener('click', function () {
-        var open = nav.classList.toggle('open');
-        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-        toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
-        toggle.textContent = open ? 'Close' : 'Menu';
-      });
-    }
   }
 })();`}
           </Script>

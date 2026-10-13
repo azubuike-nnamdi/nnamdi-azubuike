@@ -1,14 +1,14 @@
 import { presentedRole } from '@/components/experience'
 import Portrait from '@/components/portrait'
 import {
+  COMMUNITY_URL,
   EMAIL_URL,
   EXPERIENCE_URL,
   LINKEDIN_URL,
   NOTES_URL,
-  PROJECT_URL,
 } from '@/config/routes'
+import { renderLinkedText } from '@/lib/about'
 import { getSiteSettings } from '@/lib/cms'
-import { defaultEducation } from '@/lib/experience'
 import type { Metadata } from 'next'
 import Link from 'next/link'
 
@@ -39,26 +39,9 @@ const sections = [
   { href: '#study', label: 'Study' },
 ]
 
-const practice = [
-  {
-    title: 'Surfaces',
-    detail:
-      'The journeys a customer has to finish: plan, pay, account, reward, book. React and Next.js, with TanStack Query and Zustand where the cache and the local state have to agree after a mutation.',
-  },
-  {
-    title: 'The shared layer',
-    detail:
-      'Several products in one monorepo. Shared auth, payment pieces, and design-system utilities, so a fix in the library reaches every app that imports it. Nx and Turbo carry the build.',
-  },
-  {
-    title: 'The week after launch',
-    detail:
-      'SIT, UAT, and production stay with the same people who shipped the release. Session hardening, payment guards, rate limits, and OpenTelemetry are part of that week.',
-  },
-]
-
 export default async function Page() {
   const settings = await getSiteSettings()
+  const profile = settings.profile
 
   return (
     <article className="fade-up">
@@ -66,13 +49,8 @@ export default async function Page() {
         <div>
           <p className="kicker">Profile</p>
           <h1 className="page-title mt-3">Nnamdi Azubuike</h1>
-          <p className="mt-5 max-w-xl text-lg leading-8 text-muted-foreground">
-            Software Engineering Lead at MTN Nigeria. I still sit in the code: reviews, shared
-            libraries, and the release after it is live.
-          </p>
-          <p className="mt-4 text-sm text-muted-foreground">
-            Product engineering · Platforms · Production · Lagos · since 2021
-          </p>
+          <p className="mt-5 max-w-xl text-lg leading-8 text-muted-foreground">{profile.lede}</p>
+          <p className="mt-4 text-sm text-muted-foreground">{profile.meta}</p>
           <nav className="mt-8 flex flex-wrap gap-x-5 gap-y-2" aria-label="On this page">
             {sections.map((section) => (
               <a
@@ -103,7 +81,7 @@ export default async function Page() {
             </a>
           </p>
         </div>
-        <div className="order-first sm:order-none">
+        <div className="order-first sm:order-0">
           <Portrait />
         </div>
       </header>
@@ -111,41 +89,25 @@ export default async function Page() {
       <section id="overview" className="mt-20 max-w-2xl scroll-mt-8">
         <p className="kicker">Overview</p>
         <h2 className="mt-3 font-display text-3xl font-medium tracking-tight sm:text-4xl">
-          The path into the role.
+          {profile.overviewHeading}
         </h2>
         <div className="mt-5 space-y-4 text-[0.95rem] leading-7 text-muted-foreground">
-          <p>
-            I lead engineering at MTN Nigeria, and I still write the code. The products are on{' '}
-            <Link href={PROJECT_URL} className="text-link">
-              Work
-            </Link>
-            .
-          </p>
-          <p>
-            I started with a frontend internship on a gift-card platform, then payments in PHP and
-            Laravel, then Next.js on products that take real money and real traffic. At MTN I
-            started on the frontend. I now lead the engineering.
-          </p>
-          <p>
-            Contract work has run alongside that. At Numoni I built the merchant and admin
-            platforms for loyalty, rewards, and payments. At Weavii I built an artist–fan product,
-            and the UI system and the tests were part of the feature. I stay with a product after
-            it is in production.
-          </p>
+          {profile.overview.map((paragraph) => (
+            <p key={paragraph}>{renderLinkedText(paragraph)}</p>
+          ))}
         </div>
       </section>
 
       <section id="practice" className="mt-20 scroll-mt-8">
         <p className="kicker">Practice</p>
         <h2 className="mt-3 max-w-2xl font-display text-3xl font-medium tracking-tight sm:text-4xl">
-          What I still build.
+          {profile.practiceHeading}
         </h2>
         <p className="mt-4 max-w-2xl text-[0.95rem] leading-7 text-muted-foreground">
-          The hands-on part: the surfaces, the shared layer under them, and the week after a
-          release.
+          {profile.practiceIntro}
         </p>
         <ol className="mt-8 max-w-2xl border-t border-foreground/80">
-          {practice.map((item, index) => (
+          {profile.practice.map((item, index) => (
             <li key={item.title} className="border-b border-border py-6">
               <p className="text-xs tabular-nums text-muted-foreground">
                 {String(index + 1).padStart(2, '0')}
@@ -155,11 +117,7 @@ export default async function Page() {
             </li>
           ))}
         </ol>
-        <p className="mt-6 max-w-2xl text-sm leading-6 text-muted-foreground">
-          Working stack: TypeScript, React, Next.js, TanStack Query, Zustand, Nx, Turbo, Jest,
-          OpenTelemetry, and AI. I use AI in the engineering: implementation, review, and the shared
-          code. APIs are Node.js and NestJS. Mobile apps are React Native and Expo.
-        </p>
+        <p className="mt-6 max-w-2xl text-sm leading-6 text-muted-foreground">{profile.stack}</p>
       </section>
 
       <section id="record" className="mt-20 scroll-mt-8">
@@ -199,7 +157,7 @@ export default async function Page() {
           Study, and the rooms around the work.
         </h2>
         <ul className="mt-8 border-t border-foreground/80">
-          {defaultEducation.map((item) => (
+          {settings.education.map((item) => (
             <li key={item.title} className="border-b border-border py-5">
               <p className="text-[0.95rem] text-foreground">{item.title}</p>
               <p className="mt-1 text-sm text-muted-foreground">
@@ -210,33 +168,10 @@ export default async function Page() {
           ))}
         </ul>
         <p className="mt-6 text-sm leading-6 text-muted-foreground">
-          Outside the role I stay close to{' '}
-          <a
-            href="https://gdg.community.dev/gdg-ilorin/"
-            className="text-link"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            GDG Ilorin
-          </a>
-          ,{' '}
-          <a
-            href="https://gdg.community.dev/gdg-ibadan/"
-            className="text-link"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            GDG Ibadan
-          </a>
-          , and{' '}
-          <a
-            href="https://kwarabuild.com/"
-            className="text-link"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Kwarabuild
-          </a>
+          The campus and community seats are on{' '}
+          <Link href={COMMUNITY_URL} className="text-link">
+            Community
+          </Link>
           .
         </p>
       </section>
