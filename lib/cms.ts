@@ -1,8 +1,20 @@
 import { getPayload } from 'payload'
 import config from '@payload-config'
-import { defaultAbout, type CmsAbout } from '@/lib/about'
+import { defaultAbout, defaultAboutProfile, type AboutProfile, type CmsAbout } from '@/lib/about'
 import { tailorPortfolio, tailorSlug } from '@/lib/tailor'
-import { defaultExperience, type CmsExperienceItem } from '@/lib/experience'
+import {
+  cvSummary,
+  defaultEducation,
+  defaultExperience,
+  defaultExpertise,
+  toolkit,
+  type CmsEducationItem,
+  type CmsExperienceItem,
+  type CmsExpertiseGroup,
+  type ToolkitGroup,
+} from '@/lib/experience'
+import { funProjects as defaultFunProjects, type FunProject } from '@/lib/fun-projects'
+import { defaultCommunityRoles, type CommunityRole } from '@/lib/community'
 import {
   DEFAULT_WHATSAPP_MESSAGE,
   RESUME_URL,
@@ -91,6 +103,13 @@ export type CmsSiteSettings = {
   contact: CmsContact
   resumeUrl: string
   experience: CmsExperienceItem[]
+  experienceIntro: string
+  profile: AboutProfile
+  education: CmsEducationItem[]
+  expertise: CmsExpertiseGroup[]
+  toolkit: ToolkitGroup[]
+  funProjects: FunProject[]
+  community: CommunityRole[]
   footer: CmsFooterBrand
   navLinks: Array<{ id: string; name: string; href: string }>
   socialLinks: Array<{ id: string; name: string; uri: string }>
@@ -163,6 +182,54 @@ type SiteSettingsDoc = {
     period?: string | null
     summary?: string | null
     highlights?: Array<{ id?: string | null; text: string }> | null
+  }> | null
+  experienceIntro?: string | null
+  profile?: {
+    lede?: string | null
+    meta?: string | null
+    overviewHeading?: string | null
+    overview?: Array<{ id?: string | null; text: string }> | null
+    practiceHeading?: string | null
+    practiceIntro?: string | null
+    practice?: Array<{ id?: string | null; title: string; detail: string }> | null
+    stack?: string | null
+  } | null
+  education?: Array<{
+    id?: string | null
+    title: string
+    institution: string
+    detail?: string | null
+  }> | null
+  expertise?: Array<{ id?: string | null; label: string; items: string }> | null
+  toolkit?: Array<{
+    id?: string | null
+    label: string
+    items?: Array<{ id?: string | null; name: string }> | null
+  }> | null
+  funProjects?: Array<{
+    id?: string | null
+    name: string
+    kind: string
+    summary: string
+    stack?: string | null
+    github?: string | null
+    live?: string | null
+  }> | null
+  community?: Array<{
+    id?: string | null
+    shortName?: string | null
+    period?: string | null
+    role: string
+    organization: string
+    summary: string
+    responsibilities?: Array<{ id?: string | null; text: string }> | null
+    logos?: Array<{
+      id?: string | null
+      src: string
+      alt: string
+      mark?: boolean | null
+    }> | null
+    links?: Array<{ id?: string | null; label: string; href: string }> | null
   }> | null
   navLinks?: Array<{ id?: string | null; name: string; href: string }> | null
   socialLinks?: Array<{ id?: string | null; name: string; uri: string }> | null
@@ -293,6 +360,81 @@ function mapSiteSettings(doc: SiteSettingsDoc): CmsSiteSettings {
     }))
     .filter((item) => item.company && item.role)
 
+  const communityFromCms = (doc.community ?? [])
+    .map((item) => ({
+      shortName: item.shortName?.trim() || undefined,
+      period: item.period?.trim() || undefined,
+      role: item.role.trim(),
+      organization: item.organization.trim(),
+      summary: item.summary.trim(),
+      responsibilities: (item.responsibilities ?? [])
+        .map((line) => line.text.trim())
+        .filter(Boolean),
+      logos: (item.logos ?? [])
+        .map((logo) => ({
+          src: logo.src.trim(),
+          alt: logo.alt.trim(),
+          mark: Boolean(logo.mark),
+        }))
+        .filter((logo) => logo.src),
+      links: (item.links ?? [])
+        .map((link) => ({
+          label: link.label.trim(),
+          href: link.href.trim(),
+        }))
+        .filter((link) => link.label && link.href),
+    }))
+    .filter((item) => item.role && item.organization && item.summary)
+
+  const community = communityFromCms.length > 0 ? communityFromCms : defaultCommunityRoles
+
+  const overview = (doc.profile?.overview ?? [])
+    .map((item) => item.text.trim())
+    .filter(Boolean)
+  const practice = (doc.profile?.practice ?? [])
+    .map((item) => ({ title: item.title.trim(), detail: item.detail.trim() }))
+    .filter((item) => item.title && item.detail)
+  const profile: AboutProfile = {
+    lede: doc.profile?.lede?.trim() || defaultAboutProfile.lede,
+    meta: doc.profile?.meta?.trim() || defaultAboutProfile.meta,
+    overviewHeading: doc.profile?.overviewHeading?.trim() || defaultAboutProfile.overviewHeading,
+    overview: overview.length > 0 ? overview : defaultAboutProfile.overview,
+    practiceHeading: doc.profile?.practiceHeading?.trim() || defaultAboutProfile.practiceHeading,
+    practiceIntro: doc.profile?.practiceIntro?.trim() || defaultAboutProfile.practiceIntro,
+    practice: practice.length > 0 ? practice : defaultAboutProfile.practice,
+    stack: doc.profile?.stack?.trim() || defaultAboutProfile.stack,
+  }
+
+  const educationFromCms = (doc.education ?? [])
+    .map((item) => ({
+      title: item.title.trim(),
+      institution: item.institution.trim(),
+      detail: item.detail?.trim() || undefined,
+    }))
+    .filter((item) => item.title && item.institution)
+
+  const expertiseFromCms = (doc.expertise ?? [])
+    .map((item) => ({ label: item.label.trim(), items: item.items.trim() }))
+    .filter((item) => item.label && item.items)
+
+  const toolkitFromCms = (doc.toolkit ?? [])
+    .map((group) => ({
+      label: group.label.trim(),
+      items: (group.items ?? []).map((item) => item.name.trim()).filter(Boolean),
+    }))
+    .filter((group) => group.label && group.items.length > 0)
+
+  const funFromCms = (doc.funProjects ?? [])
+    .map((project) => ({
+      name: project.name.trim(),
+      kind: project.kind.trim(),
+      summary: project.summary.trim(),
+      stack: project.stack?.trim() || '',
+      href: project.github?.trim() || undefined,
+      live: project.live?.trim() || undefined,
+    }))
+    .filter((project) => project.name && project.kind && project.summary)
+
   const resumeFromSocial = (doc.socialLinks ?? []).find((link) =>
     /resume|cv/i.test(link.name),
   )?.uri
@@ -313,6 +455,13 @@ function mapSiteSettings(doc: SiteSettingsDoc): CmsSiteSettings {
     },
     resumeUrl,
     experience: experienceFromCms.length > 0 ? experienceFromCms : defaultExperience,
+    experienceIntro: doc.experienceIntro?.trim() || cvSummary,
+    profile,
+    education: educationFromCms.length > 0 ? educationFromCms : defaultEducation,
+    expertise: expertiseFromCms.length > 0 ? expertiseFromCms : defaultExpertise,
+    toolkit: toolkitFromCms.length > 0 ? toolkitFromCms : toolkit,
+    funProjects: funFromCms.length > 0 ? funFromCms : defaultFunProjects,
+    community,
     footer: {
       copyrightName: doc.footer?.copyrightName?.trim() || defaultFooterBrand.copyrightName,
       location: doc.footer?.location?.trim() || defaultFooterBrand.location,
