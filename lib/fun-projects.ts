@@ -58,3 +58,14 @@ export const funProjects: FunProject[] = [
     href: 'https://github.com/azubuike-nnamdi/earnable-backend',
   },
 ]
+
+export function funProjectsForCms(projects: FunProject[] = funProjects) {
+  return projects.map((project) => ({
+    name: project.name,
+    kind: project.kind,
+    summary: project.summary,
+    stack: project.stack,
+    github: project.href,
+    live: project.live,
+  }))
+}
