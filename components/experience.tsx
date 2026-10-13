@@ -1,5 +1,5 @@
-import type { CmsExperienceItem } from '@/lib/experience'
 import { EXPERIENCE_URL } from '@/config/routes'
+import type { CmsExperienceItem } from '@/lib/experience'
 import Link from 'next/link'
 
 type ExperienceProps = {
@@ -24,6 +24,25 @@ export function presentedRole(item: CmsExperienceItem) {
 
   if (atMtn && legacyTitle) return 'Software Engineering Lead'
   return item.role
+}
+
+function HighlightText({ text }: { text: string }) {
+  const parts = text.split(/(https?:\/\/[^\s)]+)/g)
+  return parts.map((part, index) => {
+    if (!/^https?:\/\//.test(part)) return <span key={index}>{part}</span>
+    const label = part.replace(/^https?:\/\//, '').replace(/\/$/, '')
+    return (
+      <a
+        key={index}
+        href={part}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-link"
+      >
+        {label}
+      </a>
+    )
+  })
 }
 
 function visibleBadge(item: CmsExperienceItem, showBadge: boolean) {
@@ -60,7 +79,9 @@ function ExperienceList({
             {highlights.length > 0 ? (
               <ul className="mt-3 space-y-2 text-sm leading-6" style={{ color: 'var(--mute)' }}>
                 {highlights.map((highlight) => (
-                  <li key={highlight}>{highlight}</li>
+                  <li key={highlight}>
+                    <HighlightText text={highlight} />
+                  </li>
                 ))}
               </ul>
             ) : null}
