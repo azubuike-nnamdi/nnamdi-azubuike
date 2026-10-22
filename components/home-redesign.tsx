@@ -83,7 +83,7 @@ export default function HomeRedesign({ resumeUrl, communityNames, liveApps, work
           <div className={`${reveal} relative aspect-square w-full max-w-130 justify-self-end max-[980px]:mx-auto max-[980px]:max-w-110`}>
             <div className="absolute top-[16%] right-[8%] bottom-[6%] left-[14%] rounded-[48%_52%_46%_54%/56%_48%_52%_44%] bg-primary" />
             <div className="absolute top-[6%] right-[16%] bottom-[6%] left-[22%] overflow-hidden rounded-t-[200px] rounded-b-3xl border-[3px] border-[#111] bg-[#f4f1ec]">
-              <Image src="/img/portrait.jpg" alt="Nnamdi Azubuike" fill priority sizes="440px" className="object-cover object-[center_18%]" />
+              <Image src="/img/profile.jpg" alt="Nnamdi Azubuike" fill priority sizes="440px" className="object-cover object-[center_18%]" />
             </div>
             <svg className="absolute top-0 left-0 w-27.5 text-[#111]" viewBox="0 0 110 130" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" aria-hidden>
               <path d="M55 0v52" />
