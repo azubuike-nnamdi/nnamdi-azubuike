@@ -20,7 +20,7 @@ export function personJsonLd() {
           '@type': 'Place',
           name: 'Lagos, Nigeria',
         },
-        image: `${siteUrl}/img/portrait.jpg`,
+        image: `${siteUrl}/img/profile.jpg`,
         sameAs: [LINKEDIN_URL, GITHUB_URL, TWITTER_URL, MEDIUM_URL, HASHNODE_URL],
       },
       {
