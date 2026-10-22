@@ -6,7 +6,7 @@ export default function Portrait() {
       <div className="absolute top-[16%] right-[8%] bottom-[6%] left-[14%] rounded-[48%_52%_46%_54%/56%_48%_52%_44%] bg-primary" />
       <div className="absolute top-[6%] right-[16%] bottom-[6%] left-[22%] overflow-hidden rounded-t-[200px] rounded-b-3xl border-[3px] border-[#111] bg-[#f4f1ec]">
         <Image
-          src="/img/portrait.jpg"
+          src="/img/profile.jpg"
           alt="Portrait of Nnamdi Azubuike"
           fill
           priority
